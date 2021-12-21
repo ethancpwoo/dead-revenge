@@ -8,14 +8,32 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-
+    GreenfootImage grey = new GreenfootImage("grey.png"); 
+    private Scroller Scroller = null; 
+    Actor scrollActor; 
     /**
      * Constructor for objects of class MyWorld.
      * 
      */
     public MyWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(600, 400, 1, false); 
+        Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
+        scrollActor = new zombie(); 
+        addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2); 
+        scroll(); 
+    }
+    public void act()
+    {
+        if(scrollActor != null)
+        {
+            scroll(); 
+        }
+    }
+    private void scroll()
+    {
+        int dsx = scrollActor.getX() - 300/2; 
+        int dsy = scrollActor.getY() - 200/2; 
+        Scroller.scroll(dsx, dsy); 
     }
 }
