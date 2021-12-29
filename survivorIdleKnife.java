@@ -8,10 +8,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class survivorIdleKnife extends Actor
 {
+    GreenfootImage idle = new GreenfootImage("images/Top_Down_Survivor/knife/idle/survivor-idle_knife_3.png");
+    
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public survivorIdleKnife()
+    {
+        
+    }
+    
+    
+    
      public void act() 
     {
         
