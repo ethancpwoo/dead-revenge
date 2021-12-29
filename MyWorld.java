@@ -17,9 +17,9 @@ public class MyWorld extends World
      */
     public MyWorld()
     {    
-        super(600, 400, 1, false); 
+        super(1200, 800, 1, false); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
-        scrollActor = new zombie(); 
+        scrollActor = new survivorIdleKnife(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2); 
         scroll(); 
     }
