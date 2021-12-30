@@ -8,47 +8,46 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class survivorIdleKnife extends Actor
 {
-    GreenfootImage idle = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_3.png");
-    
+    GreenfootImage[] idle = new GreenfootImage[19];
+    GreenfootImage[] attack = new GreenfootImage[14];
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public survivorIdleKnife()
     {
-        setImage(idle); 
-        idle.scale(50,50); 
+        for(int i = 0; i < idle.length; i++)
+        {
+            idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
+            idle[i].scale(100,100); 
+        }
+        
+        for(int i = 0; i < attack.length; i++)
+        {
+            attack[i] = new GreenfootImage("images/Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_" + i + ".png");
+            attack[i].scale(125,125); 
+        }
+        setImage(idle[0]); 
     }
     
-    
-    
-     public void act() 
+    /**
+       Animate the character
+       */
+    int imageIndex = 0;
+    public void animate()
     {
-        
-        MouseInfo m = Greenfoot.getMouseInfo();  
-        if(m != null)
-        {
-            turnTowards(m);
-        }
-        if(Greenfoot.isKeyDown("w"))
-        {
-            this.setLocation(this.getX(), this.getY() - 5); 
-        }
-        if(Greenfoot.isKeyDown("a"))
-        {
-            this.setLocation(this.getX() - 5, this.getY()); 
-        }
-        if(Greenfoot.isKeyDown("s"))
-        {
-            this.setLocation(this.getX(), this.getY() + 5); 
-        }
-        if(Greenfoot.isKeyDown("d"))
-        {
-            this.setLocation(this.getX() + 5, this.getY()); 
-        }
-        
-    }   
+        setImage(idle[imageIndex]); 
+        imageIndex = (imageIndex + 1) % idle.length; 
+    }
     
+    int attackIndex = 0; 
+    public void knifeAttack()
+    {
+       
+            setImage(attack[attackIndex]); 
+            attackIndex = (attackIndex + 1) % attack.length; 
+        
+    }
     
     public void turnTowards (int x, int y)
     {
@@ -62,4 +61,43 @@ public class survivorIdleKnife extends Actor
     {
         turnTowards(mi.getX(), mi.getY());
     }
+    
+     public void act() 
+    {
+        MouseInfo m = Greenfoot.getMouseInfo();  
+        if(m != null)
+        {
+            turnTowards(m);
+            
+            int buttonNumber = m.getButton();
+            if (buttonNumber == 1)
+            {
+                knifeAttack(); 
+            }
+        }
+        
+        if(Greenfoot.isKeyDown("w"))
+        {
+            this.setLocation(this.getX(), this.getY() - 5); 
+            knifeAttack(); 
+        }
+        
+        if(Greenfoot.isKeyDown("a"))
+        {
+            this.setLocation(this.getX() - 5, this.getY()); 
+            animate(); 
+        }
+        
+        if(Greenfoot.isKeyDown("s"))
+        {
+            this.setLocation(this.getX(), this.getY() + 5); 
+            animate(); 
+        }
+        
+        if(Greenfoot.isKeyDown("d"))
+        {
+            this.setLocation(this.getX() + 5, this.getY()); 
+            animate(); 
+        }
+    }   
 }
