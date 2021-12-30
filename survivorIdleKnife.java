@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class survivorIdleKnife extends Actor
 {
+    public static int survivorX, survivorY;
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
     /**
@@ -64,6 +65,8 @@ public class survivorIdleKnife extends Actor
     
      public void act() 
     {
+        survivorX = getX();
+        survivorY = getY();
         MouseInfo m = Greenfoot.getMouseInfo();  
         if(m != null)
         {
@@ -79,7 +82,7 @@ public class survivorIdleKnife extends Actor
         if(Greenfoot.isKeyDown("w"))
         {
             this.setLocation(this.getX(), this.getY() - 5); 
-            knifeAttack(); 
+            animate(); 
         }
         
         if(Greenfoot.isKeyDown("a"))
