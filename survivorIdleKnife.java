@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class survivorIdleKnife extends Actor
 {
-    GreenfootImage idle = new GreenfootImage("images/Top_Down_Survivor/knife/idle/survivor-idle_knife_3.png");
+    GreenfootImage idle = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_3.png");
     
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
@@ -16,7 +16,8 @@ public class survivorIdleKnife extends Actor
      */
     public survivorIdleKnife()
     {
-        
+        setImage(idle); 
+        idle.scale(50,50); 
     }
     
     
