@@ -81,25 +81,40 @@ public class survivorIdleKnife extends Actor
         
         if(Greenfoot.isKeyDown("w"))
         {
-            this.setLocation(this.getX(), this.getY() - 5); 
+            if(this.getY() > 50)
+            {
+                this.setLocation(this.getX(), this.getY() - 5);
+            }
             animate(); 
         }
         
         if(Greenfoot.isKeyDown("a"))
         {
-            this.setLocation(this.getX() - 5, this.getY()); 
+            if(this.getX() > 50)
+            {
+                this.setLocation(this.getX() - 5, this.getY()); 
+            }
+
             animate(); 
         }
         
         if(Greenfoot.isKeyDown("s"))
         {
-            this.setLocation(this.getX(), this.getY() + 5); 
+            if(this.getY() < 750)
+            {
+                this.setLocation(this.getX(), this.getY() + 5);    
+            }
+
             animate(); 
         }
         
         if(Greenfoot.isKeyDown("d"))
         {
-            this.setLocation(this.getX() + 5, this.getY()); 
+            if(this.getX() < 1150)
+            {
+                this.setLocation(this.getX() + 5, this.getY()); 
+            } 
+
             animate(); 
         }
     }   
