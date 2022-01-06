@@ -32,8 +32,28 @@ public class MyWorld extends World
     }
     private void scroll()
     {
-        int dsx = scrollActor.getX() - 300/2; 
-        int dsy = scrollActor.getY() - 200/2; 
+        int loX = 100; 
+        int hiX = 1200 - 100;
+        int loY = 100; 
+        int hiY = 800 - 100; 
+        int dsx = 0;
+        int dsy = 0;
+        if(scrollActor.getX() < loX)
+        {
+            dsx = scrollActor.getX() - loX; 
+        }
+        if(scrollActor.getX() > hiX)
+        {
+            dsx = scrollActor.getX() - hiX; 
+        }
+        if(scrollActor.getY() < loY)
+        {
+            dsy = scrollActor.getY() - loY;
+        }
+        if(scrollActor.getY() > hiY)
+        {
+            dsy = scrollActor.getY() - hiY; 
+        }
         Scroller.scroll(dsx, dsy); 
     }
 }

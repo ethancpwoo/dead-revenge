@@ -94,7 +94,6 @@ public class survivorIdleKnife extends Actor
             {
                 this.setLocation(this.getX() - 5, this.getY()); 
             }
-
             animate(); 
         }
         
@@ -104,7 +103,6 @@ public class survivorIdleKnife extends Actor
             {
                 this.setLocation(this.getX(), this.getY() + 5);    
             }
-
             animate(); 
         }
         
@@ -114,7 +112,6 @@ public class survivorIdleKnife extends Actor
             {
                 this.setLocation(this.getX() + 5, this.getY()); 
             } 
-
             animate(); 
         }
     }   
