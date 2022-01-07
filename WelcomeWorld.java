@@ -9,6 +9,9 @@ public class WelcomeWorld extends World
     //declare objects
     Button play; 
     Button instructions;
+    leftDoor leftdoor = new leftDoor(); 
+    rightDoor rightdoor = new rightDoor();
+    SimpleTimer timer = new SimpleTimer(); 
     public WelcomeWorld()
     {            
         super(1200,800, 1);
@@ -29,17 +32,36 @@ public class WelcomeWorld extends World
         addObject(leftGear, 0, 800);
         addObject(rightGear, 1200, 800); 
         setBackground(background);
+        
     }
     public void act()
     {
         
         if(play.touchingCursor()) 
         {
-            Greenfoot.setWorld(new MyWorld()); //go to choosing difficulty 
+            openGate();
+            Greenfoot.setWorld(new GameWorld()); //go to choosing difficulty 
+            
         }
         if(instructions.touchingCursor()) 
         {
             Greenfoot.setWorld(new InstructionWorld()); //go to the instructions
+        }
+    }
+    private void openGate()
+    {
+        addObject(leftdoor, -600, 400);
+        addObject(rightdoor, 1800, 400); 
+        timer.mark(); 
+        for(int i = 0; i < 120; i++)
+        {
+            if(timer.millisElapsed() > 100)
+            {
+                leftdoor.setLocation(leftdoor.getX() + 5, leftdoor.getY()); 
+                rightdoor.setLocation(rightdoor.getX() - 5, leftdoor.getY());
+                timer.mark(); 
+            }
+            
         }
     }
 }

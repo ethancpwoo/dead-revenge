@@ -75,7 +75,7 @@ public class Scroller
                 for (int y=0; y<high*world.getCellSize(); y+=image.getHeight())
                     scrollImage.drawImage(image, x, y);
             // set initial background image
-            scroll(0, 0);
+            scroll(750, 500);
         }
     }
    
