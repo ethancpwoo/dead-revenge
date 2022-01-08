@@ -9,6 +9,7 @@ import java.util.*;
 public class GameWorld extends World
 {
     GreenfootImage grey = new GreenfootImage("grey.png"); 
+    public static int nZombies; 
     private Scroller Scroller = null; 
     Actor scrollActor; 
     /**
@@ -31,6 +32,10 @@ public class GameWorld extends World
         {
             scroll(); 
         }
+        if(nZombies <= 0)
+            {
+                wave2(); 
+            }
     }
     private void scroll()
     {
@@ -58,18 +63,32 @@ public class GameWorld extends World
         }
         Scroller.scroll(dsx, dsy); 
     }
-    private void wave1()
+    public void wave1()
     {
         int[] positionX = {0, 500, 1000,1500}; 
         int[] positionY = {0, 1000}; 
+        nZombies = 3;
         for(int i = 0; i < 4; i++)
         {
             Zombie zombs = new Zombie(); 
-            addObject(zombs, getRandom(positionX), getRandom(positionY));   
+            addObject(zombs, getRandom(positionX), getRandom(positionY));  
         }
-        if(numberOfObjects() == 1)
+        //im guessing that it doesnt run after the for loop is done... so maybe we have to put this inside of another class? Or make a seperate variable for each wave
+            
+    }
+    public void wave2()
+    {
+        int[] positionX = {0, 500, 1000,1500}; 
+        int[] positionY = {0, 1000}; 
+        nZombies = 5; 
+        for(int i = 0; i < 6; i++)
         {
-             
+            Zombie zombs = new Zombie(); 
+            addObject(zombs, getRandom(positionX), getRandom(positionY)); 
+        }
+        if(nZombies == 0)
+        {
+             //wave2(); 
         }
     }
     public static int getRandom(int[] array) 

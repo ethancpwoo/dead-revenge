@@ -11,7 +11,7 @@ public class Button extends Actor
     boolean touchingImage = false;
     GreenfootImage init = new GreenfootImage("GreySTARTbutton.png"); 
     GreenfootImage after = new GreenfootImage("GreySTARTbuttonon.png");
-    public Button(String str, int x, int y)
+    public Button()
     {        
        init.scale(222, 78);
        after.scale(222, 78); 

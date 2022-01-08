@@ -20,8 +20,8 @@ public class WelcomeWorld extends World
         Text instruct = new Text("INSTRUCTIONS"); 
         Gear leftGear = new Gear(true); 
         Gear rightGear = new Gear(false);
-        play = new Button("Play", 410, 230);
-        instructions = new Button("Instructions", 770, 430); 
+        play = new Button();
+        instructions = new Button(); 
         GreenfootImage background = new GreenfootImage("1808239.jpg"); //the custom background
         //initialize objects and create them 
         //background.drawImage(title, 390, 220); //set the images and background     

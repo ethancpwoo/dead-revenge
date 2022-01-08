@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class survivorIdleKnife extends Actor
 {
-    public static int survivorX, survivorY;
+    public static int survivorX, survivorY, wait, health;
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
     /**
@@ -17,6 +17,8 @@ public class survivorIdleKnife extends Actor
      */
     public survivorIdleKnife()
     {
+        wait = 0; 
+        health = 0; 
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
@@ -63,8 +65,19 @@ public class survivorIdleKnife extends Actor
         turnTowards(mi.getX(), mi.getY());
     }
     
+    private void shoot()
+    {
+        Projectile bullet = new Projectile();
+        if(Greenfoot.isKeyDown("Space") && wait > 11){
+            wait = 0;
+            getWorld().addObject(bullet, getX(),getY());
+            bullet.setRotation(getRotation());
+        }
+    }
+    
      public void act() 
     {
+        wait++; 
         survivorX = getX();
         survivorY = getY();
         MouseInfo m = Greenfoot.getMouseInfo();  
@@ -114,5 +127,7 @@ public class survivorIdleKnife extends Actor
             } 
             animate(); 
         }
-    }   
+        shoot(); 
+    }  
+    
 }
