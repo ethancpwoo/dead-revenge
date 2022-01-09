@@ -46,7 +46,7 @@ public class startingSurvivor extends Actor
     int attackIndex = 0; 
     public void knifeAttack()
     {
-       
+      
             setImage(attack[attackIndex]); 
             attackIndex = (attackIndex + 1) % attack.length; 
         
@@ -60,12 +60,12 @@ public class startingSurvivor extends Actor
         setRotation( (int)angle );
     }
      
-    public void turnTowards (MouseInfo mi)
+    public void mouseData(MouseInfo mi)
     {
         turnTowards(mi.getX(), mi.getY());
     }
     
-    private void shoot()
+    public void shoot()
     {
         Projectile bullet = new Projectile();
         if(Greenfoot.isKeyDown("Space") && wait > 11){
@@ -83,13 +83,18 @@ public class startingSurvivor extends Actor
         MouseInfo m = Greenfoot.getMouseInfo();  
         if(m != null)
         {
-            turnTowards(m);
+            mouseData(m);
             
             int buttonNumber = m.getButton();
             if (buttonNumber == 1)
             {
                 knifeAttack(); 
             }
+        }
+        
+        if(Greenfoot.isKeyDown("f"))
+        {
+            knifeAttack(); 
         }
         
         if(Greenfoot.isKeyDown("w"))
@@ -127,7 +132,6 @@ public class startingSurvivor extends Actor
             } 
             animate(); 
         }
-        shoot(); 
     }  
     
 }

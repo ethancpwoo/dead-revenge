@@ -33,6 +33,50 @@ public class survivorHandgun extends startingSurvivor
     
     public void act()
     {
-        // Add your action code here.
+        wait++; 
+        survivorX = getX();
+        survivorY = getY();
+        MouseInfo m = Greenfoot.getMouseInfo();  
+        if(m != null)
+        {
+            mouseData(m);           
+        }  
+        
+        if(Greenfoot.isKeyDown("w"))
+        {
+            if(this.getY() > 50)
+            {
+                this.setLocation(this.getX(), this.getY() - 5);
+            }
+            animate(); 
+        }
+        
+        if(Greenfoot.isKeyDown("a"))
+        {
+            if(this.getX() > 50)
+            {
+                this.setLocation(this.getX() - 5, this.getY()); 
+            }
+            animate(); 
+        }
+        
+        if(Greenfoot.isKeyDown("s"))
+        {
+            if(this.getY() < 750)
+            {
+                this.setLocation(this.getX(), this.getY() + 5);    
+            }
+            animate(); 
+        }
+        
+        if(Greenfoot.isKeyDown("d"))
+        {
+            if(this.getX() < 1150)
+            {
+                this.setLocation(this.getX() + 5, this.getY()); 
+            } 
+            animate(); 
+        }
+        shoot(); 
     }
 }
