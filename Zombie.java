@@ -44,7 +44,7 @@ public class Zombie extends Actor
     
      public void chasePlayer()
     {
-       turnTowards(survivorIdleKnife.survivorX,survivorIdleKnife.survivorY); 
+       turnTowards(startingSurvivor.survivorX,startingSurvivor.survivorY); 
     }
     
     public void act()

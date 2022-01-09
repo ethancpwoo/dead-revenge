@@ -20,7 +20,7 @@ public class GameWorld extends World
     {    
         super(1200, 800, 1, false); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
-        scrollActor = new survivorIdleKnife(); 
+        scrollActor = new startingSurvivor(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2); 
         scroll(); 
         wave1(); 

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class survivorIdleKnife extends Actor
+public class startingSurvivor extends Actor
 {
     public static int survivorX, survivorY, wait, health;
     GreenfootImage[] idle = new GreenfootImage[19];
@@ -15,7 +15,7 @@ public class survivorIdleKnife extends Actor
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public survivorIdleKnife()
+    public startingSurvivor()
     {
         wait = 0; 
         health = 0; 
