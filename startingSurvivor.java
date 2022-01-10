@@ -84,12 +84,12 @@ public class startingSurvivor extends Actor
         if(m != null)
         {
             mouseData(m);
-            
-            int buttonNumber = m.getButton();
-            if (buttonNumber == 1)
-            {
-                knifeAttack(); 
-            }
+        }
+        
+       
+        if (Greenfoot.isKeyDown("Space"))
+        {
+            knifeAttack(); 
         }
         
         if(Greenfoot.isKeyDown("f"))

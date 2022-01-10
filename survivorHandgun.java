@@ -12,8 +12,12 @@ public class survivorHandgun extends startingSurvivor
      * Act - do whatever the survivorHandgun wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    int handgunAmmo = 2; 
+    int handgunMagazine = 5;
+    //timer for reload 
+    SimpleTimer reloadTimer = new SimpleTimer(); 
     
-     public survivorHandgun()
+    public survivorHandgun()
     {
         wait = 0; 
         health = 0; 
@@ -31,12 +35,36 @@ public class survivorHandgun extends startingSurvivor
         setImage(idle[0]); 
     }
     
+    //methods
+    public void HandgunShoot()
+    {
+        Projectile bullet = new Projectile();
+        if(Greenfoot.isKeyDown("Space") && wait > 11){
+            wait = 0;
+            getWorld().addObject(bullet, getX(),getY());
+            bullet.setRotation(getRotation());
+            GameWorld playerWorld = (GameWorld) getWorld(); 
+            playerWorld.ammoMagazine(); 
+        } 
+    }
+    
+    public void reloadHandgun()
+    {
+        if(reloadTimer.millisElapsed() > 2000 && Greenfoot.isKeyDown("r"))
+        {
+            
+        }
+    }
+    //
+
     public void act()
     {
         wait++; 
         survivorX = getX();
         survivorY = getY();
         MouseInfo m = Greenfoot.getMouseInfo();  
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        
         if(m != null)
         {
             mouseData(m);           
@@ -77,6 +105,30 @@ public class survivorHandgun extends startingSurvivor
             } 
             animate(); 
         }
-        shoot(); 
+       
+        //reload 
+        if(!Greenfoot.isKeyDown("r") && playerWorld.MagazineHandgunAmmo != 0)
+        {
+             HandgunShoot(); 
+        }
+        else
+        {
+            if(reloadTimer.millisElapsed() > 3000){
+                playerWorld.setAmmoMagazineAlert(5); 
+                handgunMagazine = 5;
+                reloadTimer.mark(); 
+            }
+        }
+        
+        /*
+        if(handgunAmmo == 0){
+            
+                if(Greenfoot.isKeyDown("Space"))
+                {
+                    Greenfoot.stop();  
+                }
+        }
+        */
+        
     }
 }

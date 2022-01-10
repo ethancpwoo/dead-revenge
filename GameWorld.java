@@ -12,6 +12,12 @@ public class GameWorld extends World
     public static int nZombies; 
     private Scroller Scroller = null; 
     Actor scrollActor; 
+    
+    Label AmmoCounterMagazine; 
+    Label AmmoCounterTotal; 
+    
+    int MagazineHandgunAmmo = 5; 
+    int TotalHandgunAmmo = 10;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -20,12 +26,36 @@ public class GameWorld extends World
     {    
         super(1200, 800, 1, false); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
-        scrollActor = new survivorHandgun(); 
+        scrollActor = new startingSurvivor(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2); 
         scroll(); 
         wave1(); 
+        
+        //Ammo Labels 
+        AmmoCounterMagazine = new Label( MagazineHandgunAmmo, 80); 
+        addObject(AmmoCounterMagazine, 50, 50); 
+        
+        AmmoCounterTotal = new Label(0, 80); 
+        addObject(AmmoCounterTotal, 150, 50); 
         //start the waves here and continue through those methods
     }
+    
+    public void ammoMagazine()
+    {
+        MagazineHandgunAmmo--; 
+        AmmoCounterMagazine.setValue(MagazineHandgunAmmo); 
+    }
+    
+    public int ammoMagazineAlert()
+    {
+        return MagazineHandgunAmmo; 
+    }
+    
+    public void setAmmoMagazineAlert(int x)
+    {
+        MagazineHandgunAmmo = x; 
+    }
+    
     public void act()
     {
         if(scrollActor != null)

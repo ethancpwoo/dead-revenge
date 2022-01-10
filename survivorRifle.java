@@ -12,6 +12,8 @@ public class survivorRifle extends startingSurvivor
      * Act - do whatever the survivorRifle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    int rifleAmmo = 0; 
+    
     public survivorRifle()
     {
         wait = 0; 
