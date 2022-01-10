@@ -9,6 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class startingSurvivor extends Actor
 {
     public static int survivorX, survivorY, wait, health;
+    public int stamina = 100; 
+    public int movementSpeed = 5; 
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
     /**
@@ -97,20 +99,41 @@ public class startingSurvivor extends Actor
             knifeAttack(); 
         }
         
+        if(Greenfoot.isKeyDown("Shift") && stamina > 0)
+        {
+             movementSpeed = 10;    
+             stamina--; 
+             if(stamina <= 0)
+             {
+                stamina = 0;
+                stamina = stamina + 0;
+             }
+        }
+        else
+        {
+            movementSpeed = 5; 
+            stamina++;
+            if(stamina >= 100){
+                stamina = 100; 
+                stamina = stamina + 0;
+            }
+        }
+        
         if(Greenfoot.isKeyDown("w"))
         {
             if(this.getY() > 50)
             {
-                this.setLocation(this.getX(), this.getY() - 5);
+                this.setLocation(this.getX(), this.getY() - movementSpeed);
             }
             animate(); 
         }
+       
         
         if(Greenfoot.isKeyDown("a"))
         {
             if(this.getX() > 50)
             {
-                this.setLocation(this.getX() - 5, this.getY()); 
+                this.setLocation(this.getX() - movementSpeed, this.getY()); 
             }
             animate(); 
         }
@@ -119,7 +142,7 @@ public class startingSurvivor extends Actor
         {
             if(this.getY() < 750)
             {
-                this.setLocation(this.getX(), this.getY() + 5);    
+                this.setLocation(this.getX(), this.getY() + movementSpeed);    
             }
             animate(); 
         }
@@ -128,7 +151,7 @@ public class startingSurvivor extends Actor
         {
             if(this.getX() < 1150)
             {
-                this.setLocation(this.getX() + 5, this.getY()); 
+                this.setLocation(this.getX() + movementSpeed, this.getY()); 
             } 
             animate(); 
         }
