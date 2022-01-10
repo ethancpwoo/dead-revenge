@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class startingSurvivor extends Actor
 {
     public static int survivorX, survivorY, wait, health;
-    public int stamina = 100; 
+    public double stamina = 100; 
     public int movementSpeed = 5; 
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
@@ -54,6 +54,7 @@ public class startingSurvivor extends Actor
         
     }
     
+    //mouse movement 
     public void turnTowards (int x, int y)
     {
         double dx = x - getX();
@@ -61,12 +62,40 @@ public class startingSurvivor extends Actor
         double angle = Math.atan2(dy,dx)*180.0/Math.PI;
         setRotation( (int)angle );
     }
-     
     public void mouseData(MouseInfo mi)
     {
         turnTowards(mi.getX(), mi.getY());
     }
+    //
     
+    //sprinting method 
+    public void Sprint()
+    {
+        if(Greenfoot.isKeyDown("Shift") && stamina > 1)
+        {
+             movementSpeed = 10;    
+             stamina = stamina - 1; 
+             if(stamina <= 0)
+             {
+                stamina = 0;
+                stamina = stamina + 0;
+             }
+             
+        }
+        else
+        {
+            movementSpeed = 5; 
+            stamina = stamina + 0.1;
+            if(stamina >= 100){
+                stamina = 100; 
+                stamina = stamina + 0;
+            }
+            
+        }
+    }
+    //
+    
+    //shoot
     public void shoot()
     {
         Projectile bullet = new Projectile();
@@ -76,49 +105,11 @@ public class startingSurvivor extends Actor
             bullet.setRotation(getRotation());
         }
     }
+    //
     
-     public void act() 
+    //move
+    public void move()
     {
-        wait++; 
-        survivorX = getX();
-        survivorY = getY();
-        MouseInfo m = Greenfoot.getMouseInfo();  
-        if(m != null)
-        {
-            mouseData(m);
-        }
-        
-       
-        if (Greenfoot.isKeyDown("Space"))
-        {
-            knifeAttack(); 
-        }
-        
-        if(Greenfoot.isKeyDown("f"))
-        {
-            knifeAttack(); 
-        }
-        
-        if(Greenfoot.isKeyDown("Shift") && stamina > 0)
-        {
-             movementSpeed = 10;    
-             stamina--; 
-             if(stamina <= 0)
-             {
-                stamina = 0;
-                stamina = stamina + 0;
-             }
-        }
-        else
-        {
-            movementSpeed = 5; 
-            stamina++;
-            if(stamina >= 100){
-                stamina = 100; 
-                stamina = stamina + 0;
-            }
-        }
-        
         if(Greenfoot.isKeyDown("w"))
         {
             if(this.getY() > 50)
@@ -155,6 +146,37 @@ public class startingSurvivor extends Actor
             } 
             animate(); 
         }
+    }
+    //
+    
+     public void act() 
+    {
+        wait++; 
+        survivorX = getX();
+        survivorY = getY();
+        MouseInfo m = Greenfoot.getMouseInfo();  
+        if(m != null)
+        {
+            mouseData(m);
+        }
+        
+       
+        if (Greenfoot.isKeyDown("Space"))
+        {
+            knifeAttack(); 
+        }
+        
+        if(Greenfoot.isKeyDown("f"))
+        {
+            knifeAttack(); 
+        }
+        
+        //sprint
+        Sprint(); 
+        
+        //move
+        move(); 
+        
     }  
     
 }
