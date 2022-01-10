@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.*; 
+import java.util.*;
 /**
  * Write a description of class MyWorld here.
  * 
@@ -16,6 +16,8 @@ public class GameWorld extends World
     Label AmmoCounterMagazine; 
     Label AmmoCounterTotal; 
     
+    public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
+    
     int MagazineHandgunAmmo = 5; 
     int TotalHandgunAmmo = 10;
     /**
@@ -27,12 +29,13 @@ public class GameWorld extends World
         super(1200, 800, 1, false); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
         scrollActor = new startingSurvivor(); 
-        addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2); 
+        addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
+        moving.add(scrollActor); 
         scroll(); 
         wave1(); 
         
         //Ammo Labels 
-        AmmoCounterMagazine = new Label( MagazineHandgunAmmo, 80); 
+        AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 80); 
         addObject(AmmoCounterMagazine, 50, 50); 
         
         AmmoCounterTotal = new Label(0, 80); 
@@ -101,6 +104,7 @@ public class GameWorld extends World
         for(int i = 0; i < 4; i++)
         {
             Zombie zombs = new Zombie(); 
+            moving.add(zombs); 
             addObject(zombs, getRandom(positionX), getRandom(positionY));  
         }
         //im guessing that it doesnt run after the for loop is done... so maybe we have to put this inside of another class? Or make a seperate variable for each wave
@@ -114,6 +118,7 @@ public class GameWorld extends World
         for(int i = 0; i < 6; i++)
         {
             Zombie zombs = new Zombie(); 
+            moving.add(zombs);
             addObject(zombs, getRandom(positionX), getRandom(positionY)); 
         }
         if(nZombies == 0)

@@ -17,6 +17,10 @@ public class Label extends Actor
     private int fontSize;
     private Color lineColor = Color.BLACK;
     private Color fillColor = Color.WHITE;
+    private int minX; 
+    private int minY; 
+    private int maxX; 
+    private int maxY; 
     
     private static final Color transparent = new Color(0,0,0,0);
 
@@ -38,7 +42,8 @@ public class Label extends Actor
         this.fontSize = fontSize;
         updateImage();
     }
-
+    
+    
     /**
      * Sets the value  as text
      * 
