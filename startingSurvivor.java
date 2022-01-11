@@ -20,7 +20,7 @@ public class startingSurvivor extends Actor
     public startingSurvivor()
     {
         wait = 0; 
-        health = 0; 
+        health = 100; 
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
@@ -166,6 +166,10 @@ public class startingSurvivor extends Actor
             mouseData(m);
         }
         
+        if(this.isTouching(Zombie.class))
+        {
+          health = health - 5; 
+        }
        
         if (Greenfoot.isKeyDown("Space"))
         {

@@ -9,8 +9,8 @@ public class HUD extends Actor
 {
     //variables for sprinting 
     int sprint = 100;
-    int sprintBarWidth = 100; 
-    int sprintBarHeight = 15;
+    int sprintBarWidth, healthBarWidth = 100; 
+    int sprintBarHeight, healthBarHeight = 15;
     int pixelsPerSprintPoint = (int)sprintBarWidth/sprint; 
     /**
      * Act - do whatever the HUD wants to do. This method is called whenever
@@ -20,11 +20,13 @@ public class HUD extends Actor
     public HUD()
     {
         sprintBar(); 
+        //healthBar(); 
     }
     
     public void act()
     {
         sprintBar(); 
+        //healthBar(); 
     }
     
     public void sprintBar()
@@ -35,6 +37,16 @@ public class HUD extends Actor
         myImage.drawRect(0, 0, sprintBarWidth + 1, sprintBarHeight + 1);
         myImage.setColor(Color.BLUE);
         myImage.fillRect(1, 1, sprint*pixelsPerSprintPoint, sprintBarHeight);
+    }
+    
+    public void healthBar()
+    {
+        setImage(new GreenfootImage(healthBarWidth + 2, healthBarHeight + 2));
+        GreenfootImage myImage = getImage();
+        myImage.setColor(Color.WHITE); 
+        myImage.drawRect(0, 30, healthBarWidth + 1, healthBarHeight + 1);
+        myImage.setColor(Color.RED);
+        myImage.fillRect(1, 31, startingSurvivor.health*pixelsPerSprintPoint, healthBarHeight);
     }
     
     public void loseStamina()
