@@ -75,26 +75,30 @@ public class startingSurvivor extends Actor
         
         //sprint bar 
         HUD sprintingBar = playerWorld.sprintBar(); 
-        if(Greenfoot.isKeyDown("Shift") && stamina > 1)
+        if(Greenfoot.isKeyDown("Shift") && stamina > 5)
         {
              movementSpeed = 10;    
              stamina = stamina - 1; 
              sprintingBar.loseStamina(); 
-             if(stamina <= 0)
+             System.out.println(stamina); 
+             if(stamina <= 5)
              {
                 stamina = 0;
                 stamina = stamina + 0;
+                System.out.println(stamina); 
              }
              
         }
         else
         {
             movementSpeed = 5; 
-            stamina = stamina + 0.1;
+            stamina = stamina + 1;
             sprintingBar.gainStamina(); 
+            System.out.println(stamina); 
             if(stamina >= 100){
                 stamina = 100; 
                 stamina = stamina + 0;
+                System.out.println(stamina); 
             }
             
         }

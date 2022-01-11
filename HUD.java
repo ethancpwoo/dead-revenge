@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class HUD extends Actor
 {
     //variables for sprinting 
-    int sprint = 4;
-    int sprintBarWidth = 80; 
+    int sprint = 100;
+    int sprintBarWidth = 100; 
     int sprintBarHeight = 15;
     int pixelsPerSprintPoint = (int)sprintBarWidth/sprint; 
     /**
@@ -40,20 +40,23 @@ public class HUD extends Actor
     public void loseStamina()
     {
         sprint--;
-        if(sprint <= 0)
+        if(sprint <= 5)
         {
             sprint = 0; 
             sprint = sprint - 0; 
         }
     }
-    
     public void gainStamina()
     {
         sprint++; 
-        if(sprint >= 4)
+        if(sprint >= 100)
         {
-            sprint = 4; 
+            sprint = 100; 
             sprint = sprint + 0; 
         }
+    }
+    public int getStamina()
+    {
+        return sprint; 
     }
 }
