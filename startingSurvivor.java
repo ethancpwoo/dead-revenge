@@ -71,10 +71,15 @@ public class startingSurvivor extends Actor
     //sprinting method 
     public void Sprint()
     {
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        
+        //sprint bar 
+        HUD sprintingBar = playerWorld.sprintBar(); 
         if(Greenfoot.isKeyDown("Shift") && stamina > 1)
         {
              movementSpeed = 10;    
              stamina = stamina - 1; 
+             sprintingBar.loseStamina(); 
              if(stamina <= 0)
              {
                 stamina = 0;
@@ -86,6 +91,7 @@ public class startingSurvivor extends Actor
         {
             movementSpeed = 5; 
             stamina = stamina + 0.1;
+            sprintingBar.gainStamina(); 
             if(stamina >= 100){
                 stamina = 100; 
                 stamina = stamina + 0;

@@ -20,6 +20,7 @@ public class GameWorld extends World
     
     int MagazineHandgunAmmo = 5; 
     int TotalHandgunAmmo = 10;
+    HUD hud = new HUD();
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -33,14 +34,20 @@ public class GameWorld extends World
         moving.add(scrollActor); 
         scroll(); 
         wave1(); 
+        addObject(hud,50, 50); 
         
         //Ammo Labels 
-        AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 80); 
-        addObject(AmmoCounterMagazine, 50, 50); 
+        //AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 80); 
+        //addObject(AmmoCounterMagazine, 50, 50); 
         
-        AmmoCounterTotal = new Label(0, 80); 
-        addObject(AmmoCounterTotal, 150, 50); 
+        //AmmoCounterTotal = new Label(0, 80); 
+        //addObject(AmmoCounterTotal, 150, 50); 
         //start the waves here and continue through those methods
+    }
+    
+    public HUD sprintBar()
+    {
+        return hud; 
     }
     
     public void ammoMagazine()
