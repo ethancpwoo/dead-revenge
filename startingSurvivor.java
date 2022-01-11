@@ -80,12 +80,10 @@ public class startingSurvivor extends Actor
              movementSpeed = 10;    
              stamina = stamina - 1; 
              sprintingBar.loseStamina(); 
-             System.out.println(stamina); 
              if(stamina <= 5)
              {
                 stamina = 0;
                 stamina = stamina + 0;
-                System.out.println(stamina); 
              }
              
         }
@@ -94,11 +92,9 @@ public class startingSurvivor extends Actor
             movementSpeed = 5; 
             stamina = stamina + 1;
             sprintingBar.gainStamina(); 
-            System.out.println(stamina); 
             if(stamina >= 100){
                 stamina = 100; 
                 stamina = stamina + 0;
-                System.out.println(stamina); 
             }
             
         }
