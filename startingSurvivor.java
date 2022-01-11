@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -11,6 +12,7 @@ public class startingSurvivor extends Actor
     public static int survivorX, survivorY, wait, health;
     public double stamina = 100; 
     public int movementSpeed = 5; 
+    SimpleTimer timer= new SimpleTimer(); 
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
     /**
@@ -21,6 +23,7 @@ public class startingSurvivor extends Actor
     {
         wait = 0; 
         health = 100; 
+        timer.mark(); 
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
@@ -166,9 +169,13 @@ public class startingSurvivor extends Actor
             mouseData(m);
         }
         
-        if(this.isTouching(Zombie.class))
+        if (timer.millisElapsed() > 500)
         {
-          health = health - 5; 
+            if(this.isTouching(Zombie.class))
+            {
+                health = health - 5; 
+            }
+            timer.mark(); 
         }
        
         if (Greenfoot.isKeyDown("Space"))
