@@ -77,7 +77,7 @@ public class startingSurvivor extends Actor
         GameWorld playerWorld = (GameWorld) getWorld(); 
         
         //sprint bar 
-        HUD sprintingBar = playerWorld.sprintBar(); 
+        HUDsprintBar sprintingBar = playerWorld.sprintBar(); 
         if(Greenfoot.isKeyDown("Shift") && stamina > 5)
         {
              movementSpeed = 10;    

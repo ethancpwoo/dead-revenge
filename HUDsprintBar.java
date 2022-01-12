@@ -1,34 +1,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
 /**
- * Write a description of class HUD here.
+ * Write a description of class HUDsprintBar here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class HUD extends Actor
+public class HUDsprintBar extends Actor
 {
     //variables for sprinting 
     int sprint = 100;
-    int sprintBarWidth, healthBarWidth = 100; 
-    int sprintBarHeight, healthBarHeight = 15;
+    int sprintBarWidth = 100; 
+    int sprintBarHeight = 15;
     int pixelsPerSprintPoint = (int)sprintBarWidth/sprint; 
-    /**
-     * Act - do whatever the HUD wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     
-    public HUD()
+    public HUDsprintBar()
     {
         sprintBar(); 
-        //healthBar(); 
     }
-    
+   
     public void act()
     {
-        sprintBar(); 
-        //healthBar(); 
+       sprintBar(); 
     }
     
+    //sprint bar methods 
     public void sprintBar()
     {
         setImage(new GreenfootImage(sprintBarWidth + 2, sprintBarHeight + 2));
@@ -38,17 +34,6 @@ public class HUD extends Actor
         myImage.setColor(Color.BLUE);
         myImage.fillRect(1, 1, sprint*pixelsPerSprintPoint, sprintBarHeight);
     }
-    
-    public void healthBar()
-    {
-        setImage(new GreenfootImage(healthBarWidth + 2, healthBarHeight + 2));
-        GreenfootImage myImage = getImage();
-        myImage.setColor(Color.WHITE); 
-        myImage.drawRect(0, 30, healthBarWidth + 1, healthBarHeight + 1);
-        myImage.setColor(Color.RED);
-        myImage.fillRect(1, 31, startingSurvivor.health*pixelsPerSprintPoint, healthBarHeight);
-    }
-    
     public void loseStamina()
     {
         sprint--;
@@ -71,4 +56,5 @@ public class HUD extends Actor
     {
         return sprint; 
     }
+    //
 }

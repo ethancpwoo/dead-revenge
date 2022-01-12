@@ -20,7 +20,10 @@ public class GameWorld extends World
     
     int MagazineHandgunAmmo = 5; 
     int TotalHandgunAmmo = 10;
-    HUD hud = new HUD();
+    
+    
+    HUDsprintBar sprintHud = new HUDsprintBar();
+    HUDHealthBar healthHud = new HUDHealthBar();
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -36,7 +39,8 @@ public class GameWorld extends World
         wave1(); 
         
         
-        addObject(hud,100, 50); 
+        addObject(sprintHud,80, 50); 
+        addObject(healthHud, 80,30); 
         
         //Ammo Labels 
         //AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 80); 
@@ -47,9 +51,9 @@ public class GameWorld extends World
         //start the waves here and continue through those methods
     }
     
-    public HUD sprintBar()
+    public HUDsprintBar sprintBar()
     {
-        return hud; 
+        return sprintHud; 
     }
     
     public void ammoMagazine()
