@@ -34,6 +34,8 @@ public class GameWorld extends World
         moving.add(scrollActor); 
         scroll(); 
         wave1(); 
+        
+        
         addObject(hud,100, 50); 
         
         //Ammo Labels 

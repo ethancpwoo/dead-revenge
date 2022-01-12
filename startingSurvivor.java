@@ -192,7 +192,7 @@ public class startingSurvivor extends Actor
         {
             knifeAttack(); 
         }
-        System.out.println(360 - getRotation());
+        //System.out.println(360 - getRotation());
         //sprint
         Sprint(); 
         
