@@ -114,8 +114,10 @@ public class startingSurvivor extends Actor
             //int xDir = (int) (50.0 * Math.cos(angle));
             //int yDir = (int) (50.0 * Math.sin(angle)); 
             bullet.setRotation(getRotation());
-            bullet.move(50); 
+            
             getWorld().addObject(bullet, getX(), getY()); 
+            bullet.move(50); 
+            bullet.setImage(Projectile.bullet); 
             
         }
     }
@@ -192,7 +194,6 @@ public class startingSurvivor extends Actor
         {
             knifeAttack(); 
         }
-        System.out.println(360 - getRotation());
         //sprint
         Sprint(); 
         
