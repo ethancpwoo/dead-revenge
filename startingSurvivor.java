@@ -145,7 +145,7 @@ public class startingSurvivor extends Actor
         
         if(Greenfoot.isKeyDown("s"))
         {
-            if(this.getY() < 750)
+            if(this.getY() < 670)
             {
                 this.setLocation(this.getX(), this.getY() + movementSpeed);    
             }

@@ -59,10 +59,10 @@ public class GameWorld extends World
     }
     private void scroll()
     {
-        int loX = 100; 
-        int hiX = 1200 - 100;
-        int loY = 100; 
-        int hiY = 800 - 100; 
+        int loX = 550; 
+        int hiX = 1200 - 550;
+        int loY = 350; 
+        int hiY = 800 - 350; 
         int dsx = 0;
         int dsy = 0;
         if(scrollActor.getX() < loX)
