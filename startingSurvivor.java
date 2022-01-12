@@ -110,8 +110,13 @@ public class startingSurvivor extends Actor
         Projectile bullet = new Projectile();
         if(Greenfoot.isKeyDown("Space") && wait > 11){
             wait = 0;
-            getWorld().addObject(bullet, getX(),getY());
+            //double angle = 360 - getRotation();
+            //int xDir = (int) (50.0 * Math.cos(angle));
+            //int yDir = (int) (50.0 * Math.sin(angle)); 
             bullet.setRotation(getRotation());
+            bullet.move(50); 
+            getWorld().addObject(bullet, getX(), getY()); 
+            
         }
     }
     //
@@ -163,7 +168,7 @@ public class startingSurvivor extends Actor
         wait++; 
         survivorX = getX();
         survivorY = getY();
-        MouseInfo m = Greenfoot.getMouseInfo();  
+        MouseInfo m = Greenfoot.getMouseInfo();   
         if(m != null)
         {
             mouseData(m);
@@ -180,14 +185,14 @@ public class startingSurvivor extends Actor
        
         if (Greenfoot.isKeyDown("Space"))
         {
-            knifeAttack(); 
+            shoot();  
         }
         
         if(Greenfoot.isKeyDown("f"))
         {
             knifeAttack(); 
         }
-        
+        System.out.println(360 - getRotation());
         //sprint
         Sprint(); 
         

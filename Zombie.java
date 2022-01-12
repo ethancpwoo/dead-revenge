@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -52,15 +53,16 @@ public class Zombie extends Actor
     {
        moveAround();
        chasePlayer();
-      if(this.isTouching(Projectile.class))
-      {
+       if(this.isTouching(Projectile.class))
+       {
           health--; 
           if(health == 0)
           {
               getWorld().removeObject(this);
+              GameWorld.moving.remove(this); 
               GameWorld.nZombies--; 
           }
-      }
+        }
         
     }
 }
