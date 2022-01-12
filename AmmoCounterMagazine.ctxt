@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=AmmoCounterMagazine
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ AmmoCounterMagazine\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=AmmoCounterMagazine()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ ammoMagazine()
+comment4.params=
+comment4.target=int\ ammoMagazineAlert()
+comment5.params=x
+comment5.target=void\ setAmmoMagazineAlert(int)
+numComments=6

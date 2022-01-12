@@ -12,14 +12,9 @@ public class GameWorld extends World
     public static int nZombies; 
     private Scroller Scroller = null; 
     Actor scrollActor; 
-    
-    Label AmmoCounterMagazine; 
-    Label AmmoCounterTotal; 
-    
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
     
-    int MagazineHandgunAmmo = 5; 
-    int TotalHandgunAmmo = 10;
+
     
     
     HUDsprintBar sprintHud = new HUDsprintBar();
@@ -49,27 +44,6 @@ public class GameWorld extends World
         //AmmoCounterTotal = new Label(0, 80); 
         //addObject(AmmoCounterTotal, 150, 50); 
         //start the waves here and continue through those methods
-    }
-    
-    public HUDsprintBar sprintBar()
-    {
-        return sprintHud; 
-    }
-    
-    public void ammoMagazine()
-    {
-        MagazineHandgunAmmo--; 
-        AmmoCounterMagazine.setValue(MagazineHandgunAmmo); 
-    }
-    
-    public int ammoMagazineAlert()
-    {
-        return MagazineHandgunAmmo; 
-    }
-    
-    public void setAmmoMagazineAlert(int x)
-    {
-        MagazineHandgunAmmo = x; 
     }
     
     public void act()
@@ -143,5 +117,10 @@ public class GameWorld extends World
     {
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
+    }
+    
+    public HUDsprintBar sprintBar()
+    {
+        return sprintHud; 
     }
 }

@@ -44,7 +44,6 @@ public class survivorHandgun extends startingSurvivor
             getWorld().addObject(bullet, getX(),getY());
             bullet.setRotation(getRotation());
             GameWorld playerWorld = (GameWorld) getWorld(); 
-            playerWorld.ammoMagazine(); 
         } 
     }
     
@@ -107,6 +106,7 @@ public class survivorHandgun extends startingSurvivor
         }
        
         //reload 
+        /*
         if(!Greenfoot.isKeyDown("r") && playerWorld.MagazineHandgunAmmo != 0)
         {
              HandgunShoot(); 
@@ -119,7 +119,7 @@ public class survivorHandgun extends startingSurvivor
                 reloadTimer.mark(); 
             }
         }
-        
+        */
         /*
         if(handgunAmmo == 0){
             
