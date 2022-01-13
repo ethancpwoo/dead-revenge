@@ -12,9 +12,17 @@ public class startingSurvivor extends Actor
     public static int survivorX, survivorY, wait, health;
     public double stamina = 100; 
     public int movementSpeed = 5; 
-    SimpleTimer timer= new SimpleTimer(); 
+    SimpleTimer timer= new SimpleTimer();
+    SimpleTimer timer1= new SimpleTimer();
+    SimpleTimer timer2= new SimpleTimer();
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
+    private Color lava = new Color(255, 83, 66);
+    private Color lava2 = new Color(255, 129, 57);
+    private Color lava3 = new Color(255, 110, 68); 
+    private Color lightGrass = new Color(47, 129, 54);
+    private Color darkGrass = new Color(0, 67, 55);
+    private Color hole = new Color(0, 0, 0); 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -24,6 +32,8 @@ public class startingSurvivor extends Actor
         wait = 0; 
         health = 100; 
         timer.mark(); 
+        timer1.mark();
+        timer2.mark(); 
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
@@ -114,15 +124,17 @@ public class startingSurvivor extends Actor
             //int xDir = (int) (50.0 * Math.cos(angle));
             //int yDir = (int) (50.0 * Math.sin(angle)); 
             bullet.setRotation(getRotation());
-            bullet.move(50); 
+            
             getWorld().addObject(bullet, getX(), getY()); 
+            bullet.move(50); 
+            bullet.setImage(Projectile.bullet);  
             
         }
     }
     //
     
     //move
-    public void move()
+    public void checkKeys()
     {
         if(Greenfoot.isKeyDown("w"))
         {
@@ -133,7 +145,6 @@ public class startingSurvivor extends Actor
             animate(); 
         }
        
-        
         if(Greenfoot.isKeyDown("a"))
         {
             if(this.getX() > 50)
@@ -160,8 +171,77 @@ public class startingSurvivor extends Actor
             } 
             animate(); 
         }
+        
+        if (Greenfoot.isKeyDown("Space"))
+        {
+            shoot();  
+        }
+        
+        if(Greenfoot.isKeyDown("f"))
+        {
+            knifeAttack(); 
+        }
     }
     //
+    public void worldEffects()
+    {
+        if (timer.millisElapsed() > 250)
+        {
+            if(this.isTouching(Zombie.class))
+            {
+                health = health - 10; 
+            }
+            timer.mark(); 
+        }
+        if(getWorld().getColorAt(getX(), getY()).equals(lava))
+        {
+            if (timer1.millisElapsed() > 250)
+            {
+                health = health - 10; 
+                timer1.mark(); 
+            }
+        }
+        if(getWorld().getColorAt(getX(), getY()).equals(lava2))
+        {
+            if (timer1.millisElapsed() > 250)
+            {
+                health = health - 10; 
+                timer1.mark(); 
+            }
+        }
+        if(getWorld().getColorAt(getX(), getY()).equals(lava3))
+        {
+            if (timer1.millisElapsed() > 250)
+            {
+                health = health - 10; 
+                timer1.mark(); 
+            }
+        }
+        if(getWorld().getColorAt(getX(), getY()).equals(lightGrass))
+        {
+            timer2.mark(); 
+            movementSpeed = 2;
+            if(timer2.millisElapsed() > 1000)
+            {
+                movementSpeed = 5; 
+                timer2.mark(); 
+            }
+        }
+        if(getWorld().getColorAt(getX(), getY()).equals(darkGrass))
+        {
+            timer2.mark(); 
+            movementSpeed = 2;
+            if(timer2.millisElapsed() > 1000)
+            {
+                movementSpeed = 5; 
+                timer2.mark(); 
+            }
+        }
+        if(getWorld().getColorAt(getX(), getY()).equals(hole))
+        {
+            health = 0;
+        }
+    }
     
      public void act() 
     {
@@ -174,30 +254,13 @@ public class startingSurvivor extends Actor
             mouseData(m);
         }
         
-        if (timer.millisElapsed() > 500)
-        {
-            if(this.isTouching(Zombie.class))
-            {
-                health = health - 5; 
-            }
-            timer.mark(); 
-        }
        
-        if (Greenfoot.isKeyDown("Space"))
-        {
-            shoot();  
-        }
-        
-        if(Greenfoot.isKeyDown("f"))
-        {
-            knifeAttack(); 
-        }
         //System.out.println(360 - getRotation());
         //sprint
         Sprint(); 
-        
+        worldEffects(); 
         //move
-        move(); 
+        checkKeys(); 
         
     }  
     

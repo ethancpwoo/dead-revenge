@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class GameWorld extends World
 {
-    GreenfootImage grey = new GreenfootImage("map3.png"); 
+    GreenfootImage grey = new GreenfootImage("map2.png"); 
     public static int nZombies; 
     private Scroller Scroller = null; 
     Actor scrollActor; 
