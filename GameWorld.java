@@ -53,9 +53,13 @@ public class GameWorld extends World
             scroll(); 
         }
         if(nZombies <= 0)
-            {
-                wave2(); 
-            }
+        {
+            wave2(); 
+        }
+        if(startingSurvivor.health <= 0)
+        {
+            Greenfoot.setWorld(new WinWorld()); 
+        }
     }
     private void scroll()
     {
