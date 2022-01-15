@@ -39,8 +39,7 @@ public class WelcomeWorld extends World
         
         if(play.touchingCursor()) 
         {
-            openGate();
-            Greenfoot.setWorld(new GameWorld()); //go to choosing difficulty 
+            Greenfoot.setWorld(new MapWorld()); //go to choosing difficulty 
             
         }
         if(instructions.touchingCursor()) 
