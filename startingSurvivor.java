@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startingSurvivor extends Actor
 {
-    public static int survivorX, survivorY, wait, health;
+    public static int survivorX, survivorY, wait, health, cooldownShooting;
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -31,6 +31,7 @@ public class startingSurvivor extends Actor
     {
         wait = 0; 
         health = 100; 
+        cooldownShooting = 11;
         timer.mark(); 
         timer1.mark();
         timer2.mark(); 
@@ -118,7 +119,7 @@ public class startingSurvivor extends Actor
     public void shoot()
     {
         Projectile bullet = new Projectile();
-        if(Greenfoot.isKeyDown("Space") && wait > 11){
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting){
             wait = 0;
             //double angle = 360 - getRotation();
             //int xDir = (int) (50.0 * Math.cos(angle));
@@ -243,7 +244,36 @@ public class startingSurvivor extends Actor
         }
     }
     
-     public void act() 
+    public void checkPowerUp()
+    {
+        if(this.isTouching(healthUp.class))
+        {
+            health = 100;            
+        }
+        if(this.isTouching(fastfirerate.class))
+        {
+            cooldownShooting = 5;
+        }
+        if(this.isTouching(speedUp.class))
+        {
+            stamina = 1000;
+        }
+        if(this.isTouching(bigBullet.class))
+        {
+            GreenfootImage monkey = new GreenfootImage(5, 5); 
+            Projectile.bullet = monkey; 
+            Projectile.bullet = Projectile.bigBullet; 
+        }
+        if(this.isTouching(Invincible.class))
+        {
+            while(true)
+            {
+                health = 100; 
+            }
+        }
+    }
+    
+    public void act() 
     {
         wait++; 
         survivorX = getX();
@@ -259,6 +289,7 @@ public class startingSurvivor extends Actor
         //sprint
         Sprint(); 
         worldEffects(); 
+        checkPowerUp();
         //move
         checkKeys(); 
         

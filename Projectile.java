@@ -12,11 +12,12 @@ public class Projectile extends Actor
      * Act - do whatever the Projectile wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public static GreenfootImage bullet, blank;
+    public static GreenfootImage bullet, blank, bigBullet;
     private static Color white = new Color (255, 255, 250);
     public Projectile()
     {
        bullet = drawProjectile();
+       bigBullet = drawBigProjectile(); 
        blank = new GreenfootImage(5, 5);
        setImage(blank);
     }
@@ -38,6 +39,13 @@ public class Projectile extends Actor
       GreenfootImage temp = new GreenfootImage(4, 16);
       temp.setColor(white);
       temp.fillRect(0,0,4,16);
+       
+       return temp;
+    }
+    private GreenfootImage drawBigProjectile(){
+      GreenfootImage temp = new GreenfootImage(50, 50);
+      temp.setColor(white);
+      temp.fillRect(0,0,50,50);
        
        return temp;
     }

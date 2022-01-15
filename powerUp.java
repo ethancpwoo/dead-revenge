@@ -24,6 +24,6 @@ public class powerUp extends Actor
     } 
     public void spawnRandom()
     {
-        getWorld().addObject(this, Greenfoot.getRandomNumber(3800) + 100, Greenfoot.getRandomNumber(3800) + 100);
+        
     }
 }

@@ -122,7 +122,15 @@ public class GameWorld extends World
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
-    
+    public void placePowerUp()
+    {
+        int powerUp = Greenfoot.getRandomNumber(6); 
+        HealthUp
+        if(powerUp == 0)
+        {
+            addObject(, Greenfoot.getRandomNumber(3800) + 100, Greenfoot.getRandomNumber(3800) + 100);
+        }
+    }
     public HUDsprintBar sprintBar()
     {
         return sprintHud; 
