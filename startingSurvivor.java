@@ -283,7 +283,6 @@ public class startingSurvivor extends Actor
         {
             mouseData(m);
         }
-        
        
         //System.out.println(360 - getRotation());
         //sprint

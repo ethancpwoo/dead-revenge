@@ -20,6 +20,7 @@ public class healthUp extends powerUp
     {
         if(this.isTouching(startingSurvivor.class))
         {
+            GameWorld.moving.remove(this); 
             getWorld().removeObject(this); 
         }
     }    
