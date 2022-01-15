@@ -124,41 +124,13 @@ public class GameWorld extends World
         return array[rnd];
     }
     public void spawnPowerUp()
-    {
-        int powerUp = Greenfoot.getRandomNumber(5); 
+    { 
         healthUp healthUp = new healthUp(); 
         Invincible invincible = new Invincible(); 
         bigBullet bigbullet = new bigBullet(); 
         speedUp speedUp = new speedUp(); 
         fastfirerate fastfirerate = new fastfirerate(); 
-        int randX, randY; 
-        randX = Greenfoot.getRandomNumber(3800) + 100;
-        randY = Greenfoot.getRandomNumber(3800) + 100;
-        if(powerUp == 0)
-        {
-            addObject(healthUp, randX, randY);
-            moving.add(healthUp); 
-        }
-        if(powerUp == 1)
-        {
-            addObject(invincible, randX, randY);
-            moving.add(invincible);
-        }
-        if(powerUp == 2)
-        {
-            addObject(bigbullet, randX, randY);
-            moving.add(bigbullet);
-        }
-        if(powerUp == 3)
-        {
-            addObject(speedUp, randX, randY);
-            moving.add(speedUp);
-        }
-        if(powerUp == 4)
-        {
-            addObject(fastfirerate, randX, randY);
-            moving.add(fastfirerate);
-        }
+        
         
  
     }

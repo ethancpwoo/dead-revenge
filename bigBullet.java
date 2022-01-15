@@ -18,10 +18,6 @@ public class bigBullet extends powerUp
     }
     public void act() 
     {
-        if(this.isTouching(startingSurvivor.class))
-        {
-            GameWorld.moving.remove(this); 
-            getWorld().removeObject(this); 
-        }
+
     }    
 }

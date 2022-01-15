@@ -182,6 +182,33 @@ public class startingSurvivor extends Actor
         {
             knifeAttack(); 
         }
+        
+        if(Greenfoot.isKeyDown("1"))
+        {
+            health = 100;            
+        }
+        if(Greenfoot.isKeyDown("2"))
+        {
+            cooldownShooting = 5;
+        }
+        if(Greenfoot.isKeyDown("3"))
+        {
+            stamina = 1000;
+        }
+        if(Greenfoot.isKeyDown("4"))
+        {
+            GreenfootImage monkey = new GreenfootImage(5, 5); 
+            Projectile.bullet = monkey; 
+            Projectile.bullet = Projectile.bigBullet; 
+        }
+        if(Greenfoot.isKeyDown("5"))
+        {
+            while(true)
+            {
+                health = 100; 
+            }
+        }
+
     }
     //
     public void worldEffects()
@@ -244,34 +271,7 @@ public class startingSurvivor extends Actor
         }
     }
     
-    public void checkPowerUp()
-    {
-        if(this.isTouching(healthUp.class))
-        {
-            health = 100;            
-        }
-        if(this.isTouching(fastfirerate.class))
-        {
-            cooldownShooting = 5;
-        }
-        if(this.isTouching(speedUp.class))
-        {
-            stamina = 1000;
-        }
-        if(this.isTouching(bigBullet.class))
-        {
-            GreenfootImage monkey = new GreenfootImage(5, 5); 
-            Projectile.bullet = monkey; 
-            Projectile.bullet = Projectile.bigBullet; 
-        }
-        if(this.isTouching(Invincible.class))
-        {
-            while(true)
-            {
-                health = 100; 
-            }
-        }
-    }
+
     
     public void act() 
     {
@@ -288,7 +288,6 @@ public class startingSurvivor extends Actor
         //sprint
         Sprint(); 
         worldEffects(); 
-        checkPowerUp();
         //move
         checkKeys(); 
         
