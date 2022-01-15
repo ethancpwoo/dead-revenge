@@ -40,7 +40,7 @@ public class Zombie extends Actor
     
     public void moveAround()
     {
-      move(1);
+      move(7);
       animate();
     }
     
@@ -60,7 +60,7 @@ public class Zombie extends Actor
           {
               getWorld().removeObject(this);
               GameWorld.moving.remove(this); 
-              GameWorld.nZombies--; 
+              GameWorld.nCurrentZombies--; 
           }
         }
         

@@ -10,11 +10,12 @@ public class GameWorld extends World
 {
     
     GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    public static int nZombies; 
+    public static int nCurrentZombies, nZombies; 
     private Scroller Scroller = null; 
     Actor scrollActor; 
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
-    
+    int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
+    int[] positionY = {0, 4000};
 
     
     
@@ -32,9 +33,10 @@ public class GameWorld extends World
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
         moving.add(scrollActor); 
         scroll(); 
-        wave1(); 
         spawnPowerUp(); 
-        
+        nZombies = 5;
+        nCurrentZombies = 5; 
+        zombieSpawn(nZombies); 
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
         
@@ -53,13 +55,15 @@ public class GameWorld extends World
         {
             scroll(); 
         }
-        if(nZombies <= 0)
-        {
-            wave2(); 
-        }
         if(startingSurvivor.health <= 0)
         {
             Greenfoot.setWorld(new WinWorld()); 
+        }
+        if(nCurrentZombies <= 0)
+        {
+            nZombies++;
+            nCurrentZombies = nZombies; 
+            zombieSpawn(nZombies); 
         }
          
     }
@@ -89,36 +93,18 @@ public class GameWorld extends World
         }
         Scroller.scroll(dsx, dsy); 
     }
-    public void wave1()
-    {
-        int[] positionX = {0, 500, 1000,1500}; 
-        int[] positionY = {0, 1000}; 
-        nZombies = 3;
-        for(int i = 0; i < 4; i++)
+    public void zombieSpawn(int countDown)
+    { 
+        if(countDown <= 0)
         {
-            Zombie zombs = new Zombie(); 
-            moving.add(zombs); 
-            addObject(zombs, getRandom(positionX), getRandom(positionY));  
+            return; 
         }
-        //im guessing that it doesnt run after the for loop is done... so maybe we have to put this inside of another class? Or make a seperate variable for each wave
+        Zombie zombs = new Zombie(); 
+        moving.add(zombs); 
+        addObject(zombs, getRandom(positionX), getRandom(positionY)); 
+        zombieSpawn(countDown - 1); 
+    }
             
-    }
-    public void wave2()
-    {
-        int[] positionX = {0, 500, 1000,1500}; 
-        int[] positionY = {0, 1000}; 
-        nZombies = 5; 
-        for(int i = 0; i < 6; i++)
-        {
-            Zombie zombs = new Zombie(); 
-            moving.add(zombs);
-            addObject(zombs, getRandom(positionX), getRandom(positionY)); 
-        }
-        if(nZombies == 0)
-        {
-             //wave2(); 
-        }
-    }
     public static int getRandom(int[] array) 
     {
         int rnd = new Random().nextInt(array.length);
