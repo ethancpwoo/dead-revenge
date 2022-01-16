@@ -20,7 +20,11 @@ public class survivorHandgun extends startingSurvivor
     public survivorHandgun()
     {
         wait = 0; 
-        health = 0; 
+        health = 100; 
+        cooldownShooting = 11;
+        timer.mark(); 
+        timer1.mark();
+        timer2.mark(); 
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/handgun/move/survivor-move_handgun_" + i + ".png");
@@ -104,7 +108,9 @@ public class survivorHandgun extends startingSurvivor
             } 
             animate(); 
         }
-       
+        
+        
+        shoot(); 
         //reload 
         /*
         if(!Greenfoot.isKeyDown("r") && playerWorld.MagazineHandgunAmmo != 0)

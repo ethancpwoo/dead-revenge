@@ -36,9 +36,9 @@ public class Projectile extends Actor
       move(15);
     }   
     private GreenfootImage drawProjectile(){
-      GreenfootImage temp = new GreenfootImage(4, 16);
+      GreenfootImage temp = new GreenfootImage(16, 1);
       temp.setColor(white);
-      temp.fillRect(0,0,4,16);
+      temp.fillRect(0,0,16,1);
        
        return temp;
     }

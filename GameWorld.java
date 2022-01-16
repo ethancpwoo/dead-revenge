@@ -18,9 +18,10 @@ public class GameWorld extends World
     int[] positionY = {0, 4000};
 
     
-    
+    //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
+    HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -29,7 +30,7 @@ public class GameWorld extends World
     {    
         super(1200, 800, 1, false); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
-        scrollActor = new startingSurvivor(); 
+        scrollActor = new survivorHandgun(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
         moving.add(scrollActor); 
         scroll(); 
@@ -37,11 +38,14 @@ public class GameWorld extends World
         nZombies = 5;
         nCurrentZombies = 5; 
         zombieSpawn(nZombies); 
+        
+        
+        //HUD ELEMENTS
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
-        
+        addObject(totalAmmo, 200, 300); 
         //Ammo Labels 
-        //AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 80); 
+        //Label AmmoCounterMagazine = new Label(3, 80); 
         //addObject(AmmoCounterMagazine, 50, 50); 
         
         //AmmoCounterTotal = new Label(0, 80); 
