@@ -70,6 +70,11 @@ public class GameWorld extends World
             zombieSpawn(nZombies); 
         }
          
+        if(Greenfoot.isKeyDown("1"))
+        {
+            
+        }
+        
     }
     private void scroll()
     {
