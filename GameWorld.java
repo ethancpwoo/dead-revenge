@@ -26,7 +26,7 @@ public class GameWorld extends World
     
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
-    public int TotalHandgunAmmo = 70;
+    public int TotalHandgunAmmo = 14;
     
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
@@ -69,11 +69,30 @@ public class GameWorld extends World
         MagazineHandgunAmmo--; 
         AmmoCounterMagazine.setValue(MagazineHandgunAmmo); 
     }
-    public int ammoMagazineAlert()
+    public void addAmmoMagazine()
+    {
+        TotalHandgunAmmo = TotalHandgunAmmo - (7 - ammoMagazineIndicator());
+        MagazineHandgunAmmo = MagazineHandgunAmmo + (7 - ammoMagazineIndicator());
+        if(TotalHandgunAmmo <= 7)
+        {
+            if((7 - ammoMagazineIndicator()) > TotalHandgunAmmo)
+            {
+                MagazineHandgunAmmo = MagazineHandgunAmmo + TotalHandgunAmmo;
+                TotalHandgunAmmo = 0; 
+            }
+        }
+        AmmoCounterMagazine.setValue(MagazineHandgunAmmo); 
+        AmmoCounterTotal.setValue(TotalHandgunAmmo); 
+    }
+    public int ammoMagazineIndicator()
     {
         return MagazineHandgunAmmo; 
     }
-    
+    public int ammoTotalIndicator()
+    {
+        return TotalHandgunAmmo; 
+    }
+    //
     
     
     

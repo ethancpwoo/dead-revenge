@@ -12,10 +12,6 @@ public class survivorHandgun extends startingSurvivor
      * Act - do whatever the survivorHandgun wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    int handgunAmmo = 2; 
-    int handgunMagazine = 5;
-    //timer for reload 
-    SimpleTimer reloadTimer = new SimpleTimer(); 
     
     public survivorHandgun()
     {
@@ -38,18 +34,7 @@ public class survivorHandgun extends startingSurvivor
         }
         setImage(idle[0]); 
     }
-    
-    //methods
    
-    public void reloadHandgun()
-    {
-        if(reloadTimer.millisElapsed() > 2000 && Greenfoot.isKeyDown("r"))
-        {
-            
-        }
-    }
-    //
-
     public void act()
     {
         wait++; 
@@ -101,6 +86,7 @@ public class survivorHandgun extends startingSurvivor
         
         
         HandgunShoot(); 
+        reloadHandgun(); 
         //reload 
         /*
         if(!Greenfoot.isKeyDown("r") && playerWorld.MagazineHandgunAmmo != 0)

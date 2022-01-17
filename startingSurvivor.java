@@ -17,12 +17,15 @@ public class startingSurvivor extends Actor
     SimpleTimer timer2= new SimpleTimer();
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
-    private Color lava = new Color(255, 83, 66);
-    private Color lava2 = new Color(255, 129, 57);
-    private Color lava3 = new Color(255, 110, 68); 
-    private Color lightGrass = new Color(47, 129, 54);
-    private Color darkGrass = new Color(0, 67, 55);
-    private Color hole = new Color(0, 0, 0); 
+    public Color lava = new Color(255, 83, 66);
+    public Color lava2 = new Color(255, 129, 57);
+    public Color lava3 = new Color(255, 110, 68); 
+    public Color lightGrass = new Color(47, 129, 54);
+    public Color darkGrass = new Color(0, 67, 55);
+    public Color hole = new Color(0, 0, 0); 
+    
+    //timer for reload 
+    SimpleTimer reloadTimer = new SimpleTimer(); 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -115,12 +118,13 @@ public class startingSurvivor extends Actor
     }
     //
     
-    //shoot
+    //shoot & reload
     public void HandgunShoot()
     {
         Projectile bullet = new Projectile();
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting){
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
+        {
             wait = 0;
             //double angle = 360 - getRotation();
             //int xDir = (int) (50.0 * Math.cos(angle));
@@ -133,6 +137,14 @@ public class startingSurvivor extends Actor
             playerWorld.ammoMagazine(); 
             
             
+        }
+    }
+    public void reloadHandgun()
+    {
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        if(playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        {
+            playerWorld.addAmmoMagazine();            
         }
     }
     //
