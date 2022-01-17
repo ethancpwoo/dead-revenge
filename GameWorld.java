@@ -21,12 +21,13 @@ public class GameWorld extends World
     //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
+    HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     Label AmmoCounterMagazine;
     Label AmmoCounterTotal; 
     
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
-    public int TotalHandgunAmmo = 14;
+    public int TotalHandgunAmmo = 70;
     
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
@@ -51,6 +52,7 @@ public class GameWorld extends World
         //HUD ELEMENTS
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
+        addObject(weapon, 1025,750); 
         //addObject(totalAmmo, 200, 300); 
         AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 50); 
         addObject(AmmoCounterMagazine, 1100, 750); 

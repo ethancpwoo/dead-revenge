@@ -20,7 +20,7 @@ public class HUDChoosenWeapon extends Actor
     public HUDChoosenWeapon()
     {
         setImage(pistol); 
-        pistol.scale(75,75); 
+        pistol.scale(75,65); 
     }
     
     public void act()
