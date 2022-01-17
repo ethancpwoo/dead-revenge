@@ -21,7 +21,15 @@ public class GameWorld extends World
     //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
-    HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
+    Label AmmoCounterMagazine;
+    Label AmmoCounterTotal; 
+    
+    //ammo variables - will add to seperate class later 
+    public int MagazineHandgunAmmo = 7; 
+    public int TotalHandgunAmmo = 70;
+    
+    
+    //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -43,15 +51,32 @@ public class GameWorld extends World
         //HUD ELEMENTS
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
-        addObject(totalAmmo, 200, 300); 
-        //Ammo Labels 
-        //Label AmmoCounterMagazine = new Label(3, 80); 
-        //addObject(AmmoCounterMagazine, 50, 50); 
+        //addObject(totalAmmo, 200, 300); 
+        AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 50); 
+        addObject(AmmoCounterMagazine, 1100, 750); 
+        AmmoCounterTotal = new Label(TotalHandgunAmmo, 50); 
+        addObject(AmmoCounterTotal, 1150, 750); 
         
-        //AmmoCounterTotal = new Label(0, 80); 
-        //addObject(AmmoCounterTotal, 150, 50); 
+        
+        
+        
         //start the waves here and continue through those methods
     }
+    
+    //Ammo methods - need to find a way to put them in a class
+    public void ammoMagazine()
+    {
+        MagazineHandgunAmmo--; 
+        AmmoCounterMagazine.setValue(MagazineHandgunAmmo); 
+    }
+    public int ammoMagazineAlert()
+    {
+        return MagazineHandgunAmmo; 
+    }
+    
+    
+    
+    
     
     public void act()
     {
@@ -70,10 +95,14 @@ public class GameWorld extends World
             zombieSpawn(nZombies); 
         }
          
+        /* need fix 
         if(Greenfoot.isKeyDown("1"))
         {
-            
+            scrollActor = new survivorHandgun();        
+            addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
+            moving.add(scrollActor); 
         }
+        */
         
     }
     private void scroll()

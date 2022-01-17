@@ -116,19 +116,22 @@ public class startingSurvivor extends Actor
     //
     
     //shoot
-    public void shoot()
+    public void HandgunShoot()
     {
         Projectile bullet = new Projectile();
+        GameWorld playerWorld = (GameWorld) getWorld(); 
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting){
             wait = 0;
             //double angle = 360 - getRotation();
             //int xDir = (int) (50.0 * Math.cos(angle));
             //int yDir = (int) (50.0 * Math.sin(angle)); 
             bullet.setRotation(getRotation());
-            
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
             bullet.setImage(Projectile.bullet);  
+            
+            playerWorld.ammoMagazine(); 
+            
             
         }
     }
@@ -175,7 +178,7 @@ public class startingSurvivor extends Actor
         
         if (Greenfoot.isKeyDown("Space"))
         {
-            shoot();  
+            HandgunShoot();  
         }
         
         if(Greenfoot.isKeyDown("f"))

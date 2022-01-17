@@ -40,17 +40,7 @@ public class survivorHandgun extends startingSurvivor
     }
     
     //methods
-    public void HandgunShoot()
-    {
-        Projectile bullet = new Projectile();
-        if(Greenfoot.isKeyDown("Space") && wait > 11){
-            wait = 0;
-            getWorld().addObject(bullet, getX(),getY());
-            bullet.setRotation(getRotation());
-            GameWorld playerWorld = (GameWorld) getWorld(); 
-        } 
-    }
-    
+   
     public void reloadHandgun()
     {
         if(reloadTimer.millisElapsed() > 2000 && Greenfoot.isKeyDown("r"))
@@ -110,7 +100,7 @@ public class survivorHandgun extends startingSurvivor
         }
         
         
-        shoot(); 
+        HandgunShoot(); 
         //reload 
         /*
         if(!Greenfoot.isKeyDown("r") && playerWorld.MagazineHandgunAmmo != 0)
