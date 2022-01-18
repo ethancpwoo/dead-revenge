@@ -1,4 +1,5 @@
 
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -9,12 +10,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startingSurvivor extends Actor
 {
-    public static int survivorX, survivorY, wait, health, cooldownShooting;
+    public static int survivorX, survivorY, wait, health, cooldownShooting; 
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
     SimpleTimer timer1= new SimpleTimer();
-    SimpleTimer timer2= new SimpleTimer();
+    SimpleTimer timer2= new SimpleTimer(); 
     GreenfootImage[] idle = new GreenfootImage[19];
     GreenfootImage[] attack = new GreenfootImage[14];
     public Color lava = new Color(255, 83, 66);
@@ -22,7 +23,8 @@ public class startingSurvivor extends Actor
     public Color lava3 = new Color(255, 110, 68); 
     public Color lightGrass = new Color(47, 129, 54);
     public Color darkGrass = new Color(0, 67, 55);
-    public Color hole = new Color(0, 0, 0);  
+    public Color hole = new Color(0, 0, 0);
+    
     //timer for reload 
     SimpleTimer reloadTimer = new SimpleTimer(); 
     /**
@@ -49,7 +51,8 @@ public class startingSurvivor extends Actor
             attack[i] = new GreenfootImage("images/Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_" + i + ".png");
             attack[i].scale(125,125); 
         }
-        setImage(idle[0]); 
+        setImage(idle[0]);
+        
     }
     
     /**
@@ -64,11 +67,9 @@ public class startingSurvivor extends Actor
     
     int attackIndex = 0; 
     public void knifeAttack()
-    {
-      
-            setImage(attack[attackIndex]); 
-            attackIndex = (attackIndex + 1) % attack.length; 
-        
+    {   
+        setImage(attack[attackIndex]); 
+        attackIndex = (attackIndex + 1) % attack.length;   
     }
     
     //mouse movement 
@@ -195,7 +196,12 @@ public class startingSurvivor extends Actor
         
         if(Greenfoot.isKeyDown("f"))
         {
+            hitBox.active = true; 
             knifeAttack(); 
+        }
+        else
+        {
+            hitBox.active = false; 
         }
         
         if(Greenfoot.isKeyDown("1"))
@@ -298,7 +304,6 @@ public class startingSurvivor extends Actor
         {
             mouseData(m);
         }
-
         //System.out.println(360 - getRotation());
         //sprint
         Sprint(); 

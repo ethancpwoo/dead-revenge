@@ -16,7 +16,7 @@ public class GameWorld extends World
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
     int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
     int[] positionY = {0, 4000};
-
+    hitBox hitbox = new hitBox();
     
     //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
@@ -28,7 +28,7 @@ public class GameWorld extends World
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
     public int TotalHandgunAmmo = 70;
-    gun pistol = new gun();
+    public static gun pistol = new gun();
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
@@ -59,7 +59,7 @@ public class GameWorld extends World
         AmmoCounterTotal = new Label(TotalHandgunAmmo, 50); 
         addObject(AmmoCounterTotal, 1150, 750); 
         addObject(pistol, scrollActor.getX(), scrollActor.getY());
-        
+        addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         
         
         
@@ -102,7 +102,10 @@ public class GameWorld extends World
     
     public void act()
     {
-        gunFollow(); 
+        if(pistol != null)
+        {
+            gunFollow(); 
+        }
         if(scrollActor != null)
         {
             scroll(); 
@@ -117,7 +120,17 @@ public class GameWorld extends World
             nCurrentZombies = nZombies; 
             zombieSpawn(nZombies); 
         }
-         
+        if(hitbox.active)
+        {
+            pistol.setImage(gun.blank); 
+        }
+        else
+        {
+            pistol.setImage(gun.pistol); 
+        }
+        hitbox.setRotation(scrollActor.getRotation());
+        double angle = Math.toRadians(360 - scrollActor.getRotation()); 
+        hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
         /* need fix 
         if(Greenfoot.isKeyDown("1"))
         {
