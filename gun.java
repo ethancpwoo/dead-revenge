@@ -14,14 +14,36 @@ public class gun extends Actor
     public static GreenfootImage shotgun = new GreenfootImage("images/Survivor Spine/images/shotgun.png");
     public static GreenfootImage blank = new GreenfootImage(5, 5); 
     public static GreenfootImage weapon; 
-    public gun(String x, int scaleX, int scaleY)
+    public gun()
     {
-        weapon = new GreenfootImage(x);
-        weapon.scale(scaleX, scaleY);
-        setImage(weapon); 
+        knife = new GreenfootImage("images/Survivor Spine/images/knife.png");
+        knife.scale(75, 20);
+        setImage(knife); 
     }
     public void act() 
     {
+        if(Greenfoot.isKeyDown("1"))
+        {
+            setImage(knife); 
+            knife.scale(75,20); 
+        }
         
+         if(Greenfoot.isKeyDown("2"))
+        {
+            setImage(pistol); 
+            pistol.scale(75,20); 
+        }
+        
+         if(Greenfoot.isKeyDown("3"))
+        {
+            setImage(rifle); 
+            rifle.scale(75,20); 
+        }
+        
+        if(Greenfoot.isKeyDown("4"))
+        {
+            setImage(shotgun); 
+            shotgun.scale(75,20); 
+        }
     }    
 }
