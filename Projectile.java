@@ -16,7 +16,8 @@ public class Projectile extends Actor
     private static Color white = new Color (255, 255, 250);
     public Projectile()
     {
-       bullet = drawProjectile();
+       bullet = new GreenfootImage("bullet.png");
+       bullet.scale(9, 9);  
        bigBullet = drawBigProjectile(); 
        blank = new GreenfootImage(5, 5);
        setImage(blank);
@@ -35,13 +36,6 @@ public class Projectile extends Actor
       }
       move(15);
     }   
-    private GreenfootImage drawProjectile(){
-      GreenfootImage temp = new GreenfootImage(16, 1);
-      temp.setColor(white);
-      temp.fillRect(0,0,16,1);
-       
-       return temp;
-    }
     private GreenfootImage drawBigProjectile(){
       GreenfootImage temp = new GreenfootImage(50, 50);
       temp.setColor(white);
