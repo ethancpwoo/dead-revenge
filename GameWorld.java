@@ -17,6 +17,7 @@ public class GameWorld extends World
     int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
     int[] positionY = {0, 4000};
 
+    gun pistol = new gun();
     
     //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
@@ -24,11 +25,18 @@ public class GameWorld extends World
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     Label AmmoCounterMagazine;
     Label AmmoCounterTotal; 
+    Label AmmoCounterMagazineRifle;
+    Label AmmoCounterTotalRifle; 
+    Label AmmoCounterMagazineShotgun;
+    Label AmmoCounterTotalShotgun; 
     
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
     public int TotalHandgunAmmo = 70;
-    gun pistol = new gun();
+    public int MagazineRifleAmmo = 30; 
+    public int TotalRifleAmmo = 300; 
+    public int MagazineShotgunAmmo = 8;
+    public int TotalShotgunAmmo = 80; 
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
@@ -54,15 +62,18 @@ public class GameWorld extends World
         addObject(healthHud, 80,30); 
         addObject(weapon, 1025,750); 
         //addObject(totalAmmo, 200, 300); 
+        //pistol
         AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 50); 
-        addObject(AmmoCounterMagazine, 1100, 750); 
         AmmoCounterTotal = new Label(TotalHandgunAmmo, 50); 
-        addObject(AmmoCounterTotal, 1150, 750); 
+        //rifle
+        AmmoCounterMagazineRifle = new Label(MagazineRifleAmmo, 50); 
+        AmmoCounterTotalRifle = new Label(TotalRifleAmmo, 50); 
+        //shotgun
+        AmmoCounterMagazineShotgun = new Label(MagazineShotgunAmmo, 50); 
+        AmmoCounterTotalShotgun = new Label(TotalShotgunAmmo, 50); 
+        
+        
         addObject(pistol, scrollActor.getX(), scrollActor.getY());
-        
-        
-        
-        
         //start the waves here and continue through those methods
     }
     
@@ -118,14 +129,27 @@ public class GameWorld extends World
             zombieSpawn(nZombies); 
         }
          
-        /* need fix 
+        //rifle 
         if(Greenfoot.isKeyDown("1"))
         {
-            scrollActor = new survivorHandgun();        
-            addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
-            moving.add(scrollActor); 
+            removeObjects(getObjects(Label.class)); 
+            addObject(AmmoCounterMagazineRifle, 1100, 750); 
+            addObject(AmmoCounterTotalRifle, 1150, 750); 
         }
-        */
+        //shotgun
+        if(Greenfoot.isKeyDown("2"))
+        {
+            removeObjects(getObjects(Label.class)); 
+            addObject(AmmoCounterMagazineShotgun, 1100, 750); 
+            addObject(AmmoCounterTotalShotgun, 1150, 750); 
+        }
+        //pistol
+        if(Greenfoot.isKeyDown("3"))
+        {
+            removeObjects(getObjects(Label.class)); 
+            addObject(AmmoCounterMagazine, 1100, 750); 
+             addObject(AmmoCounterTotal, 1150, 750); 
+        }
         
     }
     private void scroll()
