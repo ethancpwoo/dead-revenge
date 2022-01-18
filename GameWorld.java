@@ -9,7 +9,8 @@ import java.util.*;
 public class GameWorld extends World
 {
     
-    GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
+    //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
+    GreenfootImage grey = new GreenfootImage("map.png");
     public static int nCurrentZombies, nZombies, gunDistance; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
@@ -17,8 +18,11 @@ public class GameWorld extends World
     int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
     int[] positionY = {0, 4000};
 
-    gun pistol = new gun();
-    
+    gun pistolWeapon = new gun("images/Survivor Spine/images/pistol.png", 60, 20);
+    gun knifeWeapon = new gun("images/Survivor Spine/images/knife.png", 60, 20);
+    gun shotgunWeapon = new gun("images/Survivor Spine/images/shotgun.png", 60, 20);
+    gun rifleWeapon = new gun("images/Survivor Spine/images/rifle.png", 60, 20);
+
     //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
@@ -29,6 +33,7 @@ public class GameWorld extends World
     Label AmmoCounterTotalRifle; 
     Label AmmoCounterMagazineShotgun;
     Label AmmoCounterTotalShotgun; 
+    Label AmmoCounterKnife; 
     
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
@@ -60,7 +65,7 @@ public class GameWorld extends World
         //HUD ELEMENTS
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
-        addObject(weapon, 1025,750); 
+        addObject(weapon, 950,750); 
         //addObject(totalAmmo, 200, 300); 
         //pistol
         AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 50); 
@@ -71,9 +76,11 @@ public class GameWorld extends World
         //shotgun
         AmmoCounterMagazineShotgun = new Label(MagazineShotgunAmmo, 50); 
         AmmoCounterTotalShotgun = new Label(TotalShotgunAmmo, 50); 
+        //knife
+        AmmoCounterKnife = new Label("INFINITE", 50); 
+        addObject(AmmoCounterKnife, 1100, 750); 
         
-        
-        addObject(pistol, scrollActor.getX(), scrollActor.getY());
+        addObject(knifeWeapon, scrollActor.getX(), scrollActor.getY());
         //start the waves here and continue through those methods
     }
     
@@ -113,7 +120,7 @@ public class GameWorld extends World
     
     public void act()
     {
-        gunFollow(); 
+        knifeFollow(); 
         if(scrollActor != null)
         {
             scroll(); 
@@ -129,27 +136,48 @@ public class GameWorld extends World
             zombieSpawn(nZombies); 
         }
          
-        //rifle 
+        
+        
+        //knife
         if(Greenfoot.isKeyDown("1"))
         {
             removeObjects(getObjects(Label.class)); 
-            addObject(AmmoCounterMagazineRifle, 1100, 750); 
-            addObject(AmmoCounterTotalRifle, 1150, 750); 
+            removeObjects(getObjects(gun.class)); 
+            addObject(AmmoCounterKnife, 1100, 750); 
+            addObject(knifeWeapon, scrollActor.getX(), scrollActor.getY());
         }
-        //shotgun
+        //pistol
         if(Greenfoot.isKeyDown("2"))
         {
             removeObjects(getObjects(Label.class)); 
-            addObject(AmmoCounterMagazineShotgun, 1100, 750); 
-            addObject(AmmoCounterTotalShotgun, 1150, 750); 
+            removeObjects(getObjects(gun.class)); 
+            addObject(AmmoCounterMagazine, 1100, 750); 
+            addObject(AmmoCounterTotal, 1150, 750); 
+            addObject(pistolWeapon, scrollActor.getX(), scrollActor.getY());
+            pistolFollow(); 
         }
-        //pistol
+        //rifle 
         if(Greenfoot.isKeyDown("3"))
         {
             removeObjects(getObjects(Label.class)); 
-            addObject(AmmoCounterMagazine, 1100, 750); 
-             addObject(AmmoCounterTotal, 1150, 750); 
+            removeObjects(getObjects(gun.class)); 
+            addObject(AmmoCounterMagazineRifle, 1075, 750); 
+            addObject(AmmoCounterTotalRifle, 1150, 750);
+            addObject(rifleWeapon, scrollActor.getX(), scrollActor.getY());
+            rifleFollow(); 
         }
+        //shotgun
+        if(Greenfoot.isKeyDown("4"))
+        {
+            removeObjects(getObjects(Label.class)); 
+            removeObjects(getObjects(gun.class)); 
+            addObject(AmmoCounterMagazineShotgun, 1100, 750); 
+            addObject(AmmoCounterTotalShotgun, 1150, 750); 
+            addObject(shotgunWeapon, scrollActor.getX(), scrollActor.getY());
+            shotgunFollow(); 
+        }
+       
+        
         
     }
     private void scroll()
@@ -189,11 +217,29 @@ public class GameWorld extends World
         addObject(zombs, getRandom(positionX), getRandom(positionY)); 
         zombieSpawn(countDown - 1); 
     }
-    public void gunFollow()
+    public void pistolFollow()
     {
-        pistol.setRotation(scrollActor.getRotation());
+        pistolWeapon.setRotation(scrollActor.getRotation());
         double angle = Math.toRadians(360 - scrollActor.getRotation()); 
-        pistol.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
+        pistolWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
+    }
+    public void knifeFollow()
+    {
+        knifeWeapon.setRotation(scrollActor.getRotation());
+        double angle = Math.toRadians(360 - scrollActor.getRotation()); 
+        knifeWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
+    }       
+    public void shotgunFollow()
+    {
+        shotgunWeapon.setRotation(scrollActor.getRotation());
+        double angle = Math.toRadians(360 - scrollActor.getRotation()); 
+        shotgunWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
+    }       
+    public void rifleFollow()
+    {
+        rifleWeapon.setRotation(scrollActor.getRotation());
+        double angle = Math.toRadians(360 - scrollActor.getRotation()); 
+        rifleWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
     }       
     public static int getRandom(int[] array) 
     {

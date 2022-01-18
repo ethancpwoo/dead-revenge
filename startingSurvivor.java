@@ -147,6 +147,64 @@ public class startingSurvivor extends Actor
             playerWorld.addAmmoMagazine();            
         }
     }
+    
+    public void ShotgunShoot()
+    {
+        Projectile bullet = new Projectile();
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
+        {
+            wait = 0;
+            //double angle = 360 - getRotation();
+            //int xDir = (int) (50.0 * Math.cos(angle));
+            //int yDir = (int) (50.0 * Math.sin(angle)); 
+            bullet.setRotation(getRotation());
+            getWorld().addObject(bullet, getX(), getY()); 
+            bullet.move(50); 
+            bullet.setImage(Projectile.bullet);  
+            
+            playerWorld.ammoMagazine(); 
+            
+            
+        }
+    }
+    public void reloadShotgun()
+    {
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        if(playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        {
+            playerWorld.addAmmoMagazine();            
+        }
+    }
+    
+    public void RifleShoot()
+    {
+        Projectile bullet = new Projectile();
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
+        {
+            wait = 0;
+            //double angle = 360 - getRotation();
+            //int xDir = (int) (50.0 * Math.cos(angle));
+            //int yDir = (int) (50.0 * Math.sin(angle)); 
+            bullet.setRotation(getRotation());
+            getWorld().addObject(bullet, getX(), getY()); 
+            bullet.move(50); 
+            bullet.setImage(Projectile.bullet);  
+            
+            playerWorld.ammoMagazine(); 
+            
+            
+        }
+    }
+    public void RifleHandgun()
+    {
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        if(playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        {
+            playerWorld.addAmmoMagazine();            
+        }
+    }
     //
     
     //move
