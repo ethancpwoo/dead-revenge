@@ -125,10 +125,7 @@ public class startingSurvivor extends Actor
         GameWorld playerWorld = (GameWorld) getWorld(); 
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
         {
-            wait = 0;
-            //double angle = 360 - getRotation();
-            //int xDir = (int) (50.0 * Math.cos(angle));
-            //int yDir = (int) (50.0 * Math.sin(angle)); 
+            wait = 0; 
             bullet.setRotation(getRotation());
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
@@ -155,9 +152,6 @@ public class startingSurvivor extends Actor
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
         {
             wait = 0;
-            //double angle = 360 - getRotation();
-            //int xDir = (int) (50.0 * Math.cos(angle));
-            //int yDir = (int) (50.0 * Math.sin(angle)); 
             bullet.setRotation(getRotation());
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
@@ -184,9 +178,6 @@ public class startingSurvivor extends Actor
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
         {
             wait = 0;
-            //double angle = 360 - getRotation();
-            //int xDir = (int) (50.0 * Math.cos(angle));
-            //int yDir = (int) (50.0 * Math.sin(angle)); 
             bullet.setRotation(getRotation());
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 

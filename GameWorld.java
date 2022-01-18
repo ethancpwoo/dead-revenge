@@ -164,7 +164,7 @@ public class GameWorld extends World
             addObject(AmmoCounterMagazineShotgun, 1100, 750); 
             addObject(AmmoCounterTotalShotgun, 1150, 750); 
         }
-        /*
+       
         if(hitbox.active)
         {
             CurrentWeapon.setImage(gun.blank); 
@@ -173,7 +173,7 @@ public class GameWorld extends World
         {
             CurrentWeapon.setImage(gun.weapon); 
         }
-        */
+        
         hitbox.setRotation(scrollActor.getRotation());
         double angle = Math.toRadians(360 - scrollActor.getRotation()); 
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
@@ -221,7 +221,7 @@ public class GameWorld extends World
     {
         CurrentWeapon.setRotation(scrollActor.getRotation());
         double angle = Math.toRadians(360 - scrollActor.getRotation()); 
-        CurrentWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
+        CurrentWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * gun.dsGun), scrollActor.getY() - (int)(Math.sin(angle) * gun.dsGun)); 
     }
     
     public static int getRandom(int[] array) 
