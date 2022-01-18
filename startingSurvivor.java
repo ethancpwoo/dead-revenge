@@ -22,8 +22,7 @@ public class startingSurvivor extends Actor
     public Color lava3 = new Color(255, 110, 68); 
     public Color lightGrass = new Color(47, 129, 54);
     public Color darkGrass = new Color(0, 67, 55);
-    public Color hole = new Color(0, 0, 0); 
-    
+    public Color hole = new Color(0, 0, 0);  
     //timer for reload 
     SimpleTimer reloadTimer = new SimpleTimer(); 
     /**
@@ -37,7 +36,8 @@ public class startingSurvivor extends Actor
         cooldownShooting = 11;
         timer.mark(); 
         timer1.mark();
-        timer2.mark(); 
+        timer2.mark();
+         
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
@@ -286,7 +286,7 @@ public class startingSurvivor extends Actor
         }
     }
     
-
+    
     
     public void act() 
     {
@@ -298,14 +298,15 @@ public class startingSurvivor extends Actor
         {
             mouseData(m);
         }
-       
+
         //System.out.println(360 - getRotation());
         //sprint
         Sprint(); 
-        worldEffects(); 
+        worldEffects();
+        HandgunShoot(); 
+        reloadHandgun(); 
         //move
         checkKeys(); 
-        
     }  
     
 }

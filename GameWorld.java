@@ -10,9 +10,9 @@ public class GameWorld extends World
 {
     
     GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    public static int nCurrentZombies, nZombies; 
+    public static int nCurrentZombies, nZombies, gunDistance; 
     private Scroller Scroller = null; 
-    Actor scrollActor; 
+    public static Actor scrollActor; 
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
     int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
     int[] positionY = {0, 4000};
@@ -28,7 +28,7 @@ public class GameWorld extends World
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
     public int TotalHandgunAmmo = 70;
-    
+    gun pistol = new gun();
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
@@ -39,7 +39,7 @@ public class GameWorld extends World
     {    
         super(1200, 800, 1, false); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
-        scrollActor = new survivorHandgun(); 
+        scrollActor = new startingSurvivor(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
         moving.add(scrollActor); 
         scroll(); 
@@ -58,6 +58,7 @@ public class GameWorld extends World
         addObject(AmmoCounterMagazine, 1100, 750); 
         AmmoCounterTotal = new Label(TotalHandgunAmmo, 50); 
         addObject(AmmoCounterTotal, 1150, 750); 
+        addObject(pistol, scrollActor.getX(), scrollActor.getY());
         
         
         
@@ -101,6 +102,7 @@ public class GameWorld extends World
     
     public void act()
     {
+        gunFollow(); 
         if(scrollActor != null)
         {
             scroll(); 
@@ -163,7 +165,12 @@ public class GameWorld extends World
         addObject(zombs, getRandom(positionX), getRandom(positionY)); 
         zombieSpawn(countDown - 1); 
     }
-            
+    public void gunFollow()
+    {
+        pistol.setRotation(scrollActor.getRotation());
+        double angle = Math.toRadians(360 - scrollActor.getRotation()); 
+        pistol.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
+    }       
     public static int getRandom(int[] array) 
     {
         int rnd = new Random().nextInt(array.length);
