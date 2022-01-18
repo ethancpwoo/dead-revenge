@@ -253,7 +253,12 @@ public class startingSurvivor extends Actor
         
         if(Greenfoot.isKeyDown("f"))
         {
+            hitBox.active = true; 
             knifeAttack(); 
+        }
+        else
+        {
+            hitBox.active = false; 
         }
         
         if(Greenfoot.isKeyDown("1"))

@@ -8,13 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class gun extends Actor
 {
-    GreenfootImage pistol = new GreenfootImage("images/Survivor Spine/images/pistol.png"); 
-    GreenfootImage rifle = new GreenfootImage("images/Survivor Spine/images/rifle.png");
-    GreenfootImage knife = new GreenfootImage("images/Survivor Spine/images/knife.png"); 
-    GreenfootImage shotgun = new GreenfootImage("images/Survivor Spine/images/shotgun.png"); 
+    public static GreenfootImage pistol = new GreenfootImage("images/Survivor Spine/images/pistol.png"); 
+    public static GreenfootImage rifle = new GreenfootImage("images/Survivor Spine/images/rifle.png");
+    public static GreenfootImage knife = new GreenfootImage("images/Survivor Spine/images/knife.png"); 
+    public static GreenfootImage shotgun = new GreenfootImage("images/Survivor Spine/images/shotgun.png");
+    public static GreenfootImage blank = new GreenfootImage(5, 5); 
+    public static GreenfootImage weapon; 
     public gun(String x, int scaleX, int scaleY)
     {
-        GreenfootImage weapon = new GreenfootImage(x);
+        weapon = new GreenfootImage(x);
         weapon.scale(scaleX, scaleY);
         setImage(weapon); 
     }

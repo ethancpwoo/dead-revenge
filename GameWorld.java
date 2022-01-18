@@ -22,6 +22,7 @@ public class GameWorld extends World
     gun knifeWeapon = new gun("images/Survivor Spine/images/knife.png", 60, 20);
     gun shotgunWeapon = new gun("images/Survivor Spine/images/shotgun.png", 60, 20);
     gun rifleWeapon = new gun("images/Survivor Spine/images/rifle.png", 60, 20);
+    hitBox hitbox = new hitBox(); 
 
     //HUD CLASSES
     HUDsprintBar sprintHud = new HUDsprintBar();
@@ -79,7 +80,7 @@ public class GameWorld extends World
         //knife
         AmmoCounterKnife = new Label("INFINITE", 50); 
         addObject(AmmoCounterKnife, 1100, 750); 
-        
+        addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         addObject(knifeWeapon, scrollActor.getX(), scrollActor.getY());
         //start the waves here and continue through those methods
     }
@@ -176,7 +177,17 @@ public class GameWorld extends World
             addObject(shotgunWeapon, scrollActor.getX(), scrollActor.getY());
             shotgunFollow(); 
         }
-       
+        if(hitbox.active)
+        {
+            pistolWeapon.setImage(gun.blank); 
+        }
+        else
+        {
+            pistolWeapon.setImage(gun.weapon); 
+        }
+        hitbox.setRotation(scrollActor.getRotation());
+        double angle = Math.toRadians(360 - scrollActor.getRotation()); 
+        hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
         
         
     }
