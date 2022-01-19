@@ -26,7 +26,7 @@ public class GameWorld extends World
     HUDHealthBar healthHud = new HUDHealthBar();
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     HUDPowerUps invincible = new HUDPowerUps("satr.png", 50, 50);
-    HUDPowerUps bigBullet = new HUDPowerUps("largebullet.png", 80, 50);
+    HUDPowerUps bigBullet = new HUDPowerUps("largebullet.png", 60, 30);
     HUDPowerUps fastFireRate = new HUDPowerUps("fastfirerate.png", 50, 50);
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
@@ -36,6 +36,8 @@ public class GameWorld extends World
     int pos3 = 2;
     int pos4 = 3;
     int pos5 = 4;
+    private boolean eDown; 
+    private boolean qDown; 
     Label AmmoCounterMagazine;
     Label AmmoCounterTotal; 
     Label AmmoCounterMagazineRifle;
@@ -43,6 +45,7 @@ public class GameWorld extends World
     Label AmmoCounterMagazineShotgun;
     Label AmmoCounterTotalShotgun; 
     Label AmmoCounterKnife; 
+    
     
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
@@ -69,7 +72,6 @@ public class GameWorld extends World
         nZombies = 5;
         nCurrentZombies = 5; 
         zombieSpawn(nZombies); 
-        
         
         //HUD ELEMENTS
         addObject(sprintHud,80, 50); 
@@ -136,6 +138,66 @@ public class GameWorld extends World
     {
         return TotalHandgunAmmo; 
     }
+    
+    //shotgun
+    public void ammoMagazineShotgun()
+    {
+        MagazineShotgunAmmo--; 
+        AmmoCounterMagazineShotgun.setValue(MagazineShotgunAmmo); 
+    }
+    public void addAmmoMagazineShotgun()
+    {
+        TotalShotgunAmmo = TotalShotgunAmmo - (8 - ammoMagazineIndicatorShotgun());
+        MagazineShotgunAmmo = MagazineShotgunAmmo + (8 - ammoMagazineIndicatorShotgun());
+        if(TotalShotgunAmmo <= 8)
+        {
+            if((8 - ammoMagazineIndicatorShotgun()) > TotalShotgunAmmo)
+            {
+                MagazineShotgunAmmo = MagazineShotgunAmmo + TotalShotgunAmmo;
+                TotalShotgunAmmo = 0; 
+            }
+        }
+        AmmoCounterMagazineShotgun.setValue(MagazineShotgunAmmo); 
+        AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo); 
+    }
+    public int ammoMagazineIndicatorShotgun()
+    {
+        return MagazineShotgunAmmo; 
+    }
+    public int ammoTotalIndicatorShotgun()
+    {
+        return TotalShotgunAmmo; 
+    }
+    
+    //rifle
+    public void ammoMagazineRifle()
+    {
+        MagazineRifleAmmo--; 
+        AmmoCounterMagazineRifle.setValue(MagazineRifleAmmo); 
+    }
+    public void addAmmoMagazineRifle()
+    {
+        TotalRifleAmmo = TotalRifleAmmo - (30 - ammoMagazineIndicatorRifle());
+        MagazineRifleAmmo = MagazineRifleAmmo + (30 - ammoMagazineIndicatorRifle());
+        if(TotalRifleAmmo <= 30)
+        {
+            if((30 - ammoMagazineIndicatorRifle()) > TotalRifleAmmo)
+            {
+                MagazineRifleAmmo = MagazineRifleAmmo + TotalRifleAmmo;
+                TotalRifleAmmo = 0; 
+            }
+        }
+        AmmoCounterMagazineRifle.setValue(MagazineRifleAmmo); 
+        AmmoCounterTotalRifle.setValue(TotalRifleAmmo); 
+    }
+    public int ammoMagazineIndicatorRifle()
+    {
+        return MagazineRifleAmmo; 
+    }
+    public int ammoTotalIndicatorRifle()
+    {
+        return TotalRifleAmmo; 
+    }
     //
     
     
@@ -160,9 +222,9 @@ public class GameWorld extends World
         }
          
         //powerUp switching 
-        /*
-        if("e".equals(Greenfoot.getKey()))
+        if(!eDown && Greenfoot.isKeyDown("e"))
         {
+            eDown = true;
             removeObjects(getObjects(HUDPowerUps.class)); 
             pos1++;
             pos2++;
@@ -195,9 +257,13 @@ public class GameWorld extends World
             addObject(powerUpsTracker.get(pos4), 250,725);
             addObject(powerUpsTracker.get(pos5), 150,725);  
         }
-        */
-        if("q".equals(Greenfoot.getKey()))
+        if(eDown && !Greenfoot.isKeyDown("e"))
         {
+            eDown = false; 
+        }
+        if(!qDown && Greenfoot.isKeyDown("q"))
+        {
+            qDown = true;
             removeObjects(getObjects(HUDPowerUps.class)); 
             pos1--;
             pos2--;
@@ -230,7 +296,10 @@ public class GameWorld extends World
             addObject(powerUpsTracker.get(pos4), 250,725);
             addObject(powerUpsTracker.get(pos5), 150,725);  
         }
-        
+        if(qDown && !Greenfoot.isKeyDown("q"))
+        {
+            qDown = false; 
+        }
         //
         
         //knife

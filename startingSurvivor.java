@@ -122,11 +122,12 @@ public class startingSurvivor extends Actor
     public void HandgunShoot()
     {
         Projectile bullet = new Projectile();
+      
         GameWorld playerWorld = (GameWorld) getWorld(); 
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
         {
             wait = 0; 
-            bullet.setRotation(getRotation());
+            bullet.setRotation(getRotation()+20);
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
             bullet.setImage(Projectile.bullet);  
@@ -147,17 +148,30 @@ public class startingSurvivor extends Actor
     
     public void ShotgunShoot()
     {
-        Projectile bullet = new Projectile();
+         Projectile bullet = new Projectile();
+        Projectile bullet2 = new Projectile();
+        Projectile bullet3 = new Projectile();
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicatorShotgun() != 0)
         {
             wait = 0;
-            bullet.setRotation(getRotation());
+            
+            bullet.setRotation(getRotation()+20);
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
             bullet.setImage(Projectile.bullet);  
             
-            playerWorld.ammoMagazine(); 
+            bullet2.setRotation(getRotation());
+            getWorld().addObject(bullet2, getX(), getY()); 
+            bullet2.move(50); 
+            bullet2.setImage(Projectile.bullet);  
+            
+            bullet3.setRotation(getRotation()-20);
+            getWorld().addObject(bullet3, getX(), getY()); 
+            bullet3.move(50); 
+            bullet3.setImage(Projectile.bullet);  
+            
+            playerWorld.ammoMagazineShotgun(); 
             
             
         }
@@ -165,9 +179,9 @@ public class startingSurvivor extends Actor
     public void reloadShotgun()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        if(playerWorld.ammoMagazineIndicatorShotgun() != 8 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorShotgun() > 0)
         {
-            playerWorld.addAmmoMagazine();            
+            playerWorld.addAmmoMagazineShotgun();            
         }
     }
     
@@ -175,7 +189,7 @@ public class startingSurvivor extends Actor
     {
         Projectile bullet = new Projectile();
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicatorRifle() != 0)
         {
             wait = 0;
             bullet.setRotation(getRotation());
@@ -183,17 +197,17 @@ public class startingSurvivor extends Actor
             bullet.move(50); 
             bullet.setImage(Projectile.bullet);  
             
-            playerWorld.ammoMagazine(); 
+            playerWorld.ammoMagazineRifle(); 
             
             
         }
     }
-    public void RifleHandgun()
+    public void reloadRifle()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        if(playerWorld.ammoMagazineIndicatorRifle() != 30 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorRifle() > 0)
         {
-            playerWorld.addAmmoMagazine();            
+            playerWorld.addAmmoMagazineRifle();            
         }
     }
     //
@@ -357,8 +371,10 @@ public class startingSurvivor extends Actor
         //sprint
         Sprint(); 
         worldEffects();
-        HandgunShoot(); 
-        reloadHandgun(); 
+        ShotgunShoot(); 
+        reloadShotgun(); 
+        
+              
         //move
         checkKeys(); 
     }  
