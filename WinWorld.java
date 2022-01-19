@@ -26,7 +26,9 @@ public class WinWorld extends World
         background.setColor(Color.WHITE); 
         background.fillRect(101, 101, 999, 599);
         background.setColor(Color.BLACK); //white rectangle with black outline
-        background.drawString("Time's Up!", 475, 250);
+        background.drawString("Game Over!", 475, 250);
+        background.drawString("Play Again", 750, 400); 
+        background.drawString("Quit", 300, 400); 
         addObject(playAgain, 850, 520);
         addObject(quit, 375, 520); 
         setBackground(background); //set background

@@ -11,7 +11,7 @@ public class Zombie extends Actor
 {
     GreenfootImage[] move = new GreenfootImage[16];
     public int health; 
-    
+    public int size = 100; 
     /**
      * Act - do whatever the Zombie wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -22,7 +22,7 @@ public class Zombie extends Actor
         for(int i = 0; i < move.length; i++)
         {
             move[i] = new GreenfootImage("images/export/skeleton-move_"+ i + ".png");
-            move[i].scale(100,100); 
+            move[i].scale(size, size); 
         }
         setImage(move[0]); 
         health = 3;  

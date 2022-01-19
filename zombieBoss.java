@@ -10,23 +10,25 @@ public class zombieBoss extends Zombie
 {
     GreenfootImage[] move = new GreenfootImage[16];
     public int health;
-    
+    public int size = 200; 
     public zombieBoss()
     {
        for(int i = 0; i < move.length; i++)
         {
             move[i] = new GreenfootImage("images/export/skeleton-move_"+ i + ".png");
-            move[i].scale(300,300); 
-            move[i].setColor(Color.RED); 
-            move[i].fill(); 
-            move[i].setTransparency(55); 
-        } 
-       setImage(move[0]); 
-        health = 40;
+            move[i].scale(size, size); 
+        }
+        setImage(move[0]); 
+        health = 40;  
+    }
+    public void animate()
+    {
+        setImage(move[imageIndex]); 
+        imageIndex = (imageIndex + 1) % move.length; 
     }
     public void moveAround()
     {
-      move(4);
+      move(1);
       animate();
     }
     public void act()

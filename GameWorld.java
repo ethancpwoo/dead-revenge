@@ -10,7 +10,7 @@ public class GameWorld extends World
 {
     
     //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    GreenfootImage grey = new GreenfootImage("map.png");
+    GreenfootImage grey = new GreenfootImage("map2.png");
     public static int nCurrentZombies, nZombies, gunDistance; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
@@ -45,6 +45,8 @@ public class GameWorld extends World
     Label AmmoCounterMagazineShotgun;
     Label AmmoCounterTotalShotgun; 
     Label AmmoCounterKnife; 
+    Label generalTime; 
+    SimpleTimer generalTimer = new SimpleTimer(); 
     
     
     //ammo variables - will add to seperate class later 
@@ -54,6 +56,7 @@ public class GameWorld extends World
     public int TotalRifleAmmo = 300; 
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 80; 
+    public int seconds = 0; 
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
@@ -68,7 +71,8 @@ public class GameWorld extends World
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
         moving.add(scrollActor); 
         scroll(); 
-        spawnPowerUp(); 
+        spawnPowerUp();
+        generalTimer.mark(); 
         nZombies = 5;
         nCurrentZombies = 5; 
         zombieSpawn(nZombies); 
@@ -101,14 +105,23 @@ public class GameWorld extends World
         AmmoCounterKnife = new Label("INFINITE", 50); 
         addObject(AmmoCounterKnife, 1100, 750); 
         
-        
+        generalTime = new Label(seconds, 50); 
         
         
         addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         addObject(CurrentWeapon, scrollActor.getX(), scrollActor.getY());
+        addObject(generalTime, 1000, 100); 
         //start the waves here and continue through those methods
     }
-    
+    public void updateTimer()
+    {
+        if(generalTimer.millisElapsed() > 1000)
+        {
+            seconds++; 
+            generalTime.setValue(seconds); 
+            generalTimer.mark(); 
+        }
+    }
     //Ammo methods - need to find a way to put them in a class; turn into interface?
     public void ammoMagazine()
     {
@@ -342,7 +355,7 @@ public class GameWorld extends World
         hitbox.setRotation(scrollActor.getRotation());
         double angle = Math.toRadians(360 - scrollActor.getRotation()); 
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
-        
+        updateTimer(); 
         
     }
     private void scroll()

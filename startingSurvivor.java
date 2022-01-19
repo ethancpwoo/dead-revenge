@@ -10,6 +10,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class startingSurvivor extends Actor
 {
     public static int survivorX, survivorY, wait, health, cooldownShooting;
+    public boolean dead; 
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -306,7 +307,7 @@ public class startingSurvivor extends Actor
         }
         if(getWorld().getColorAt(getX(), getY()).equals(lava))
         {
-            if (timer1.millisElapsed() > 250)
+            if (timer1.millisElapsed() > 750)
             {
                 health = health - 10; 
                 timer1.mark(); 
@@ -314,7 +315,7 @@ public class startingSurvivor extends Actor
         }
         if(getWorld().getColorAt(getX(), getY()).equals(lava2))
         {
-            if (timer1.millisElapsed() > 250)
+            if (timer1.millisElapsed() > 750)
             {
                 health = health - 10; 
                 timer1.mark(); 
@@ -322,7 +323,7 @@ public class startingSurvivor extends Actor
         }
         if(getWorld().getColorAt(getX(), getY()).equals(lava3))
         {
-            if (timer1.millisElapsed() > 250)
+            if (timer1.millisElapsed() > 750)
             {
                 health = health - 10; 
                 timer1.mark(); 
@@ -350,7 +351,14 @@ public class startingSurvivor extends Actor
         }
         if(getWorld().getColorAt(getX(), getY()).equals(hole))
         {
-            health = 0;
+            dead = true;
+            timer.mark(); 
+            this.getImage().scale(80, 80);
+            
+            if(timer.millisElapsed() > 3000)
+            {
+                health = 0;
+            }
         }
     }
     
@@ -366,17 +374,16 @@ public class startingSurvivor extends Actor
         {
             mouseData(m);
         }
-
+        worldEffects();
         //System.out.println(360 - getRotation());
         //sprint
-        Sprint(); 
-        worldEffects();
-        ShotgunShoot(); 
-        reloadShotgun(); 
-        
-              
-        //move
-        checkKeys(); 
+        if(dead == false)
+        {
+            Sprint(); 
+            ShotgunShoot(); 
+            reloadShotgun();
+            checkKeys(); //move 
+        }
     }  
     
 }
