@@ -25,6 +25,17 @@ public class GameWorld extends World
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
+    HUDPowerUps invincible = new HUDPowerUps("satr.png", 50, 50);
+    HUDPowerUps bigBullet = new HUDPowerUps("largebullet.png", 80, 50);
+    HUDPowerUps fastFireRate = new HUDPowerUps("fastfirerate.png", 50, 50);
+    HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
+    HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
+    ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
+    int pos1 = 0; 
+    int pos2 = 1;
+    int pos3 = 2;
+    int pos4 = 3;
+    int pos5 = 4;
     Label AmmoCounterMagazine;
     Label AmmoCounterTotal; 
     Label AmmoCounterMagazineRifle;
@@ -64,7 +75,17 @@ public class GameWorld extends World
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
         addObject(weapon, 950,750); 
-        //addObject(totalAmmo, 200, 300); 
+        //powerUps
+        powerUpsTracker.add(invincible);
+        powerUpsTracker.add(bigBullet); 
+        powerUpsTracker.add(fastFireRate); 
+        powerUpsTracker.add(healthUp); 
+        powerUpsTracker.add(speedUp); 
+        addObject(powerUpsTracker.get(pos1),125, 650); 
+        addObject(powerUpsTracker.get(pos2), 200,600); 
+        addObject(powerUpsTracker.get(pos3), 280,650); 
+        addObject(powerUpsTracker.get(pos4), 250,725);
+        addObject(powerUpsTracker.get(pos5), 150,725);  
         //pistol
         AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 50); 
         AmmoCounterTotal = new Label(TotalHandgunAmmo, 50); 
@@ -78,12 +99,15 @@ public class GameWorld extends World
         AmmoCounterKnife = new Label("INFINITE", 50); 
         addObject(AmmoCounterKnife, 1100, 750); 
         
+        
+        
+        
         addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         addObject(CurrentWeapon, scrollActor.getX(), scrollActor.getY());
         //start the waves here and continue through those methods
     }
     
-    //Ammo methods - need to find a way to put them in a class
+    //Ammo methods - need to find a way to put them in a class; turn into interface?
     public void ammoMagazine()
     {
         MagazineHandgunAmmo--; 
@@ -135,7 +159,79 @@ public class GameWorld extends World
             zombieSpawn(nZombies); 
         }
          
+        //powerUp switching 
+        /*
+        if("e".equals(Greenfoot.getKey()))
+        {
+            removeObjects(getObjects(HUDPowerUps.class)); 
+            pos1++;
+            pos2++;
+            pos3++;
+            pos4++;
+            pos5++;
+            if(pos1 > 4)
+            {
+                pos1 = 0; 
+            }
+            if(pos2 > 4)
+            {
+                pos2 = 0; 
+            }
+            if(pos3 > 4)
+            {
+                pos3 = 0; 
+            }
+            if(pos4 > 4)
+            {
+                pos4 = 0; 
+            }
+            if(pos5 > 4)
+            {
+                pos5 = 0; 
+            }
+            addObject(powerUpsTracker.get(pos1),125, 650); 
+            addObject(powerUpsTracker.get(pos2), 200,600); 
+            addObject(powerUpsTracker.get(pos3), 280,650); 
+            addObject(powerUpsTracker.get(pos4), 250,725);
+            addObject(powerUpsTracker.get(pos5), 150,725);  
+        }
+        */
+        if("q".equals(Greenfoot.getKey()))
+        {
+            removeObjects(getObjects(HUDPowerUps.class)); 
+            pos1--;
+            pos2--;
+            pos3--;
+            pos4--;
+            pos5--;
+            if(pos1 < 0)
+            {
+                pos1 = 4; 
+            }
+            if(pos2 < 0)
+            {
+                pos2 = 4; 
+            }
+            if(pos3 < 0)
+            {
+                pos3 = 4; 
+            }
+            if(pos4 < 0)
+            {
+                pos4 = 4; 
+            }
+            if(pos5 < 0)
+            {
+                pos5 = 4; 
+            }
+            addObject(powerUpsTracker.get(pos1),125, 650); 
+            addObject(powerUpsTracker.get(pos2), 200,600); 
+            addObject(powerUpsTracker.get(pos3), 280,650); 
+            addObject(powerUpsTracker.get(pos4), 250,725);
+            addObject(powerUpsTracker.get(pos5), 150,725);  
+        }
         
+        //
         
         //knife
         if(Greenfoot.isKeyDown("1"))
