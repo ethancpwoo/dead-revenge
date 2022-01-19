@@ -10,7 +10,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class startingSurvivor extends Actor
 {
     public static int survivorX, survivorY, wait, health, cooldownShooting;
-    public boolean dead; 
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -342,7 +341,12 @@ public class startingSurvivor extends Actor
         if(getWorld().getColorAt(getX(), getY()).equals(darkGrass))
         {
             timer2.mark(); 
-            movementSpeed = 2;
+            movementSpeed = 3;
+            if (timer1.millisElapsed() > 750)
+            {
+                health = health - 5; 
+                timer1.mark(); 
+            }
             if(timer2.millisElapsed() > 1000)
             {
                 movementSpeed = 5; 
@@ -351,13 +355,12 @@ public class startingSurvivor extends Actor
         }
         if(getWorld().getColorAt(getX(), getY()).equals(hole))
         {
-            dead = true;
-            timer.mark(); 
-            this.getImage().scale(80, 80);
-            
-            if(timer.millisElapsed() > 3000)
+            timer2.mark(); 
+            movementSpeed = 2;
+            if(timer2.millisElapsed() > 1000)
             {
-                health = 0;
+                movementSpeed = 5; 
+                timer2.mark(); 
             }
         }
     }
@@ -374,16 +377,17 @@ public class startingSurvivor extends Actor
         {
             mouseData(m);
         }
-        worldEffects();
+        
         //System.out.println(360 - getRotation());
-        //sprint
-        if(dead == false)
-        {
-            Sprint(); 
-            ShotgunShoot(); 
-            reloadShotgun();
-            checkKeys(); //move 
-        }
+        //sprint 
+        Sprint();
+        worldEffects();
+        ShotgunShoot(); 
+        reloadShotgun();
+        checkKeys(); //move 
+
     }  
     
 }
+
+
