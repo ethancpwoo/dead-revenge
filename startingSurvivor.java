@@ -148,7 +148,7 @@ public class startingSurvivor extends Actor
     
     public void ShotgunShoot()
     {
-         Projectile bullet = new Projectile();
+        Projectile bullet = new Projectile();
         Projectile bullet2 = new Projectile();
         Projectile bullet3 = new Projectile();
         GameWorld playerWorld = (GameWorld) getWorld(); 
