@@ -233,7 +233,12 @@ public class GameWorld extends World
             nCurrentZombies = nZombies; 
             zombieSpawn(nZombies); 
         }
-         
+        if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % 40 == 0)
+        {
+            zombieBoss zombieboss = new zombieBoss();
+            addObject(zombieboss, 0, 0); 
+            moving.add(zombieboss); 
+        }
         //powerUp switching 
         if(!eDown && Greenfoot.isKeyDown("e"))
         {
@@ -319,7 +324,8 @@ public class GameWorld extends World
         if(Greenfoot.isKeyDown("1"))
         {
             removeObjects(getObjects(Label.class)); 
-            addObject(AmmoCounterKnife, 1100, 750); 
+            addObject(AmmoCounterKnife, 1100, 750);
+            addObject(generalTime, 1000, 100);
         }
         //pistol
         if(Greenfoot.isKeyDown("2"))
@@ -327,6 +333,7 @@ public class GameWorld extends World
             removeObjects(getObjects(Label.class)); 
             addObject(AmmoCounterMagazine, 1100, 750); 
             addObject(AmmoCounterTotal, 1150, 750); 
+            addObject(generalTime, 1000, 100);
         }
         //rifle 
         if(Greenfoot.isKeyDown("3"))
@@ -334,6 +341,7 @@ public class GameWorld extends World
             removeObjects(getObjects(Label.class)); 
             addObject(AmmoCounterMagazineRifle, 1075, 750); 
             addObject(AmmoCounterTotalRifle, 1150, 750);
+            addObject(generalTime, 1000, 100);
         }
         //shotgun
         if(Greenfoot.isKeyDown("4"))
@@ -341,6 +349,7 @@ public class GameWorld extends World
             removeObjects(getObjects(Label.class)); 
             addObject(AmmoCounterMagazineShotgun, 1100, 750); 
             addObject(AmmoCounterTotalShotgun, 1150, 750); 
+            addObject(generalTime, 1000, 100);
         }
        
         if(hitbox.active)
