@@ -31,7 +31,8 @@ public class GameWorld extends World
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
-    int pos1 = 0; 
+    HUDPowerUpsDetail powerUpsDetail = new HUDPowerUpsDetail(); 
+    int pos1 = 0;
     int pos2 = 1;
     int pos3 = 2;
     int pos4 = 3;
@@ -81,6 +82,7 @@ public class GameWorld extends World
         zombieSpawn(nZombies); 
         
         //HUD ELEMENTS
+        addObject(powerUpsDetail, 600, 400); 
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
         addObject(weapon, 950,750); 
