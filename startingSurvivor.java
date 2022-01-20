@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startingSurvivor extends Actor
 {
-    public static int survivorX, survivorY, wait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
+    public static int survivorX, survivorY, wait, reloadWait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -155,8 +155,9 @@ public class startingSurvivor extends Actor
     public void reloadHandgun()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        if(reloadWait > 50 && playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
         {
+            reloadWait = 0;
             playerWorld.addAmmoMagazine();            
         }
     }
@@ -200,8 +201,9 @@ public class startingSurvivor extends Actor
     public void reloadShotgun()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(playerWorld.ammoMagazineIndicatorShotgun() != 8 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorShotgun() > 0)
+        if(reloadWait > 50 && playerWorld.ammoMagazineIndicatorShotgun() != 8 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorShotgun() > 0)
         {
+            reloadWait = 0; 
             shotgunReloadTimer.mark(); 
             if(shotgunReloadTimer.millisElapsed() > 3000)
             {
@@ -231,9 +233,9 @@ public class startingSurvivor extends Actor
     public void reloadRifle()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(playerWorld.ammoMagazineIndicatorRifle() != 30 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorRifle() > 0)
+        if(reloadWait > 50 && playerWorld.ammoMagazineIndicatorRifle() != 30 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorRifle() > 0)
         {
-            
+            reloadWait = 0;
             playerWorld.addAmmoMagazineRifle();            
         }
     }
@@ -418,7 +420,8 @@ public class startingSurvivor extends Actor
     
     public void act() 
     {
-        wait++; 
+        wait++;
+        reloadWait++; 
         survivorX = getX();
         survivorY = getY();
         MouseInfo m = Greenfoot.getMouseInfo();   
@@ -431,7 +434,7 @@ public class startingSurvivor extends Actor
         Sprint();   //sprint 
         worldEffects();
         
-        
+        System.out.println(reloadWait); 
         if(pistolSelected == true)
         {
             HandgunShoot(); 
