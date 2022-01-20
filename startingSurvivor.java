@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startingSurvivor extends Actor
 {
-    public static int survivorX, survivorY, wait, health, cooldownShooting;
+    public static int survivorX, survivorY, wait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -23,8 +23,14 @@ public class startingSurvivor extends Actor
     public Color lightGrass = new Color(47, 129, 54);
     public Color darkGrass = new Color(0, 67, 55);
     public Color hole = new Color(0, 0, 0);  
+    
     //timer for reload 
-    SimpleTimer reloadTimer = new SimpleTimer(); 
+    SimpleTimer shotgunReloadTimer = new SimpleTimer(); 
+    int reloadWait = 0; 
+    
+    //Shotgun
+    SimpleTimer shotgunShot = new SimpleTimer(); 
+    
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -33,7 +39,8 @@ public class startingSurvivor extends Actor
     {
         wait = 0; 
         health = 100; 
-        cooldownShooting = 11;
+        cooldownShootingHandgun = 11;
+        cooldownShootingShotgun = 95; 
         timer.mark(); 
         timer1.mark();
         timer2.mark();
@@ -124,10 +131,10 @@ public class startingSurvivor extends Actor
         Projectile bullet = new Projectile();
       
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicator() != 0)
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShootingHandgun && playerWorld.ammoMagazineIndicator() != 0)
         {
             wait = 0; 
-            bullet.setRotation(getRotation()+20);
+            bullet.setRotation(getRotation());
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
             bullet.setImage(Projectile.bullet);  
@@ -152,9 +159,13 @@ public class startingSurvivor extends Actor
         Projectile bullet2 = new Projectile();
         Projectile bullet3 = new Projectile();
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicatorShotgun() != 0)
+        GreenfootSound shotgunShotSound = new GreenfootSound("pump shotgun shot.mp3"); 
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShootingShotgun && playerWorld.ammoMagazineIndicatorShotgun() != 0)
         {
-            wait = 0;
+            shotgunShotSound.setVolume(50);
+            shotgunShotSound.play(); 
+            
+            wait = 0; 
             
             bullet.setRotation(getRotation()+20);
             getWorld().addObject(bullet, getX(), getY()); 
@@ -171,6 +182,8 @@ public class startingSurvivor extends Actor
             bullet3.move(50); 
             bullet3.setImage(Projectile.bullet);  
             
+            shotgunShot.mark();
+            
             playerWorld.ammoMagazineShotgun(); 
             
             
@@ -181,7 +194,12 @@ public class startingSurvivor extends Actor
         GameWorld playerWorld = (GameWorld) getWorld(); 
         if(playerWorld.ammoMagazineIndicatorShotgun() != 8 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorShotgun() > 0)
         {
-            playerWorld.addAmmoMagazineShotgun();            
+            shotgunReloadTimer.mark(); 
+            if(shotgunReloadTimer.millisElapsed() > 3000)
+            {
+                playerWorld.addAmmoMagazineShotgun();  
+            }
+                      
         }
     }
     
@@ -189,7 +207,7 @@ public class startingSurvivor extends Actor
     {
         Projectile bullet = new Projectile();
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(Greenfoot.isKeyDown("Space") && wait > cooldownShooting && playerWorld.ammoMagazineIndicatorRifle() != 0)
+        if(Greenfoot.isKeyDown("Space") && wait > cooldownShootingHandgun && playerWorld.ammoMagazineIndicatorRifle() != 0)
         {
             wait = 0;
             bullet.setRotation(getRotation());
@@ -207,6 +225,7 @@ public class startingSurvivor extends Actor
         GameWorld playerWorld = (GameWorld) getWorld(); 
         if(playerWorld.ammoMagazineIndicatorRifle() != 30 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorRifle() > 0)
         {
+            
             playerWorld.addAmmoMagazineRifle();            
         }
     }
@@ -251,11 +270,6 @@ public class startingSurvivor extends Actor
             animate(); 
         }
         
-        if (Greenfoot.isKeyDown("Space"))
-        {
-            HandgunShoot();  
-        }
-        
         if(Greenfoot.isKeyDown("f"))
         {
             hitBox.active = true; 
@@ -266,13 +280,14 @@ public class startingSurvivor extends Actor
             hitBox.active = false; 
         }
         
+        /*
         if(Greenfoot.isKeyDown("1"))
         {
             health = 100;            
         }
         if(Greenfoot.isKeyDown("2"))
         {
-            cooldownShooting = 5;
+            cooldownShootingHandgun = 5;
         }
         if(Greenfoot.isKeyDown("3"))
         {
@@ -291,8 +306,9 @@ public class startingSurvivor extends Actor
                 health = 100; 
             }
         }
-
+         */
     }
+   
     //
     public void worldEffects()
     {
@@ -378,9 +394,8 @@ public class startingSurvivor extends Actor
             mouseData(m);
         }
         
-        //System.out.println(360 - getRotation());
-        //sprint 
-        Sprint();
+
+        Sprint();   //sprint 
         worldEffects();
         ShotgunShoot(); 
         reloadShotgun();
