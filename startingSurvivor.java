@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startingSurvivor extends Actor
 {
-    public static int survivorX, survivorY, wait, reloadWait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
+    public static int survivorX, survivorY, wait, reloadWait, knifeWait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -41,7 +41,9 @@ public class startingSurvivor extends Actor
      */
     public startingSurvivor()
     {
-        wait = 0; 
+        wait = 0;
+        reloadWait = 0; 
+        knifeWait = 0; 
         health = 100; 
         cooldownShootingHandgun = 11;
         cooldownShootingShotgun = 95; 
@@ -280,10 +282,11 @@ public class startingSurvivor extends Actor
             animate(); 
         }
         
-        if(Greenfoot.isKeyDown("f"))
-        {
+        if(Greenfoot.isKeyDown("f") && knifeWait < 20)
+        {   
             hitBox.active = true; 
-            knifeAttack(); 
+            knifeAttack();
+            
         }
         else
         {
@@ -422,6 +425,8 @@ public class startingSurvivor extends Actor
     {
         wait++;
         reloadWait++; 
+        knifeWait++;
+        System.out.println(knifeWait); 
         survivorX = getX();
         survivorY = getY();
         MouseInfo m = Greenfoot.getMouseInfo();   
@@ -429,12 +434,14 @@ public class startingSurvivor extends Actor
         {
             mouseData(m);
         }
-        
+        if(knifeWait > 40)
+        {
+            knifeWait = 0; 
+        }
 
         Sprint();   //sprint 
         worldEffects();
-        
-        System.out.println(reloadWait); 
+         
         if(pistolSelected == true)
         {
             HandgunShoot(); 
@@ -450,7 +457,7 @@ public class startingSurvivor extends Actor
             ShotgunShoot(); 
             reloadShotgun();
         }
-       
+        
         checkKeys(); //move 
 
     }  
