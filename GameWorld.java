@@ -11,7 +11,7 @@ public class GameWorld extends World
     
     //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
     GreenfootImage grey = new GreenfootImage("map2.png");
-    public static int nCurrentZombies, nZombies, gunDistance; 
+    public static int nCurrentZombies, nZombies, gunDistance, killCounter; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
@@ -46,6 +46,7 @@ public class GameWorld extends World
     Label AmmoCounterTotalShotgun; 
     Label AmmoCounterKnife; 
     Label generalTime; 
+    Label countKills; 
     SimpleTimer generalTimer = new SimpleTimer(); 
     
     
@@ -57,6 +58,7 @@ public class GameWorld extends World
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 80; 
     public int seconds = 0; 
+    public static int kills; 
     
     //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
     /**
@@ -75,6 +77,7 @@ public class GameWorld extends World
         generalTimer.mark(); 
         nZombies = 5;
         nCurrentZombies = 5; 
+        kills = 0; 
         zombieSpawn(nZombies); 
         
         //HUD ELEMENTS
@@ -106,11 +109,12 @@ public class GameWorld extends World
         addObject(AmmoCounterKnife, 1100, 750); 
         
         generalTime = new Label(seconds, 50); 
-        
+        countKills = new Label(kills, 50); 
         
         addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         addObject(CurrentWeapon, scrollActor.getX(), scrollActor.getY());
         addObject(generalTime, 1000, 100); 
+        addObject(countKills, 900, 100); 
         //start the waves here and continue through those methods
     }
     public void updateTimer()
@@ -121,6 +125,7 @@ public class GameWorld extends World
             generalTime.setValue(seconds); 
             generalTimer.mark(); 
         }
+        countKills.setValue(kills); 
     }
     //Ammo methods - need to find a way to put them in a class; turn into interface?
     public void ammoMagazine()
