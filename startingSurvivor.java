@@ -26,11 +26,15 @@ public class startingSurvivor extends Actor
     
     //timer for reload 
     SimpleTimer shotgunReloadTimer = new SimpleTimer(); 
-    int reloadWait = 0; 
+   
     
     //Shotgun
     SimpleTimer shotgunShot = new SimpleTimer(); 
     
+    //variable to keep track which gun is selected 
+    public boolean pistolSelected = false; 
+    public boolean rifleSelected = false; 
+    public boolean shotgunSelected = false; 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -129,10 +133,14 @@ public class startingSurvivor extends Actor
     public void HandgunShoot()
     {
         Projectile bullet = new Projectile();
-      
+        GreenfootSound HandgunShotSound = new GreenfootSound("handgun shot.mp3"); 
         GameWorld playerWorld = (GameWorld) getWorld(); 
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShootingHandgun && playerWorld.ammoMagazineIndicator() != 0)
         {
+            HandgunShotSound.setVolume(50); 
+            HandgunShotSound.play(); 
+            
+            
             wait = 0; 
             bullet.setRotation(getRotation());
             getWorld().addObject(bullet, getX(), getY()); 
@@ -279,6 +287,31 @@ public class startingSurvivor extends Actor
         {
             hitBox.active = false; 
         }
+    
+        if(Greenfoot.isKeyDown("1"))
+        {
+            pistolSelected = false; 
+            rifleSelected = false; 
+            shotgunSelected = false; 
+        }        
+        if(Greenfoot.isKeyDown("2"))
+        {
+            pistolSelected = true; 
+            rifleSelected = false; 
+            shotgunSelected = false; 
+        }
+        if(Greenfoot.isKeyDown("3"))
+        {
+            pistolSelected = false; 
+            rifleSelected = true; 
+            shotgunSelected = false; 
+        }
+        if(Greenfoot.isKeyDown("4"))
+        {
+            pistolSelected = false; 
+            rifleSelected = false; 
+            shotgunSelected = true; 
+        }
         
         /*
         if(Greenfoot.isKeyDown("1"))
@@ -397,8 +430,24 @@ public class startingSurvivor extends Actor
 
         Sprint();   //sprint 
         worldEffects();
-        ShotgunShoot(); 
-        reloadShotgun();
+        
+        
+        if(pistolSelected == true)
+        {
+            HandgunShoot(); 
+            reloadHandgun(); 
+        }
+        if(rifleSelected == true)
+        {
+            RifleShoot(); 
+            reloadRifle();
+        }
+        if(shotgunSelected == true)
+        {
+            ShotgunShoot(); 
+            reloadShotgun();
+        }
+       
         checkKeys(); //move 
 
     }  

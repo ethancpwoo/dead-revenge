@@ -32,6 +32,19 @@ public class GameWorld extends World
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
     HUDPowerUpsDetail powerUpsDetail = new HUDPowerUpsDetail(); 
+    //temporary, just here to easily update
+    ArrayList<HUDPowerUpsLabelTEMPORARY> powerUpsTrackerLabel = new ArrayList<HUDPowerUpsLabelTEMPORARY>(); 
+    HUDPowerUpsLabelTEMPORARY invincibleLabel = new HUDPowerUpsLabelTEMPORARY(50, 25); 
+    HUDPowerUpsLabelTEMPORARY bigBulletLabel = new HUDPowerUpsLabelTEMPORARY(25, 25); 
+    HUDPowerUpsLabelTEMPORARY fastFireRateLabel = new HUDPowerUpsLabelTEMPORARY(15, 25); 
+    HUDPowerUpsLabelTEMPORARY healthUpLabel = new HUDPowerUpsLabelTEMPORARY(35, 25); 
+    HUDPowerUpsLabelTEMPORARY speedUpLabel = new HUDPowerUpsLabelTEMPORARY(15, 25); 
+    int pos1Label = 0; 
+    int pos2Label = 1; 
+    int pos3Label = 2; 
+    int pos4Label = 3; 
+    int pos5Label = 4; 
+    //
     int pos1 = 0;
     int pos2 = 1;
     int pos3 = 2;
@@ -39,13 +52,13 @@ public class GameWorld extends World
     int pos5 = 4;
     private boolean eDown; 
     private boolean qDown; 
-    Label AmmoCounterMagazine;
-    Label AmmoCounterTotal; 
-    Label AmmoCounterMagazineRifle;
-    Label AmmoCounterTotalRifle; 
-    Label AmmoCounterMagazineShotgun;
-    Label AmmoCounterTotalShotgun; 
-    Label AmmoCounterKnife; 
+    HUDAmmoLabels AmmoCounterMagazine;
+    HUDAmmoLabels AmmoCounterTotal; 
+    HUDAmmoLabels AmmoCounterMagazineRifle;
+    HUDAmmoLabels AmmoCounterTotalRifle; 
+    HUDAmmoLabels AmmoCounterMagazineShotgun;
+    HUDAmmoLabels AmmoCounterTotalShotgun; 
+    HUDAmmoLabels AmmoCounterKnife; 
     Label generalTime; 
     Label countKills; 
     SimpleTimer generalTimer = new SimpleTimer(); 
@@ -93,21 +106,35 @@ public class GameWorld extends World
         powerUpsTracker.add(healthUp); 
         powerUpsTracker.add(speedUp); 
         addObject(powerUpsTracker.get(pos1),125, 650); 
-        addObject(powerUpsTracker.get(pos2), 200,600); 
+        addObject(powerUpsTracker.get(pos2), 200,550); 
         addObject(powerUpsTracker.get(pos3), 280,650); 
         addObject(powerUpsTracker.get(pos4), 250,725);
         addObject(powerUpsTracker.get(pos5), 150,725);  
+        
+        //temporary
+        powerUpsTrackerLabel.add(invincibleLabel);
+        powerUpsTrackerLabel.add(bigBulletLabel); 
+        powerUpsTrackerLabel.add(fastFireRateLabel); 
+        powerUpsTrackerLabel.add(healthUpLabel); 
+        powerUpsTrackerLabel.add(speedUpLabel); 
+        addObject(powerUpsTrackerLabel.get(pos1Label), 125,650); 
+        addObject(powerUpsTrackerLabel.get(pos2Label), 200,550); 
+        addObject(powerUpsTrackerLabel.get(pos3Label), 280,650); 
+        addObject(powerUpsTrackerLabel.get(pos4Label), 250,725); 
+        addObject(powerUpsTrackerLabel.get(pos5Label), 150,725); 
+        //
+        
         //pistol
-        AmmoCounterMagazine = new Label(MagazineHandgunAmmo, 50); 
-        AmmoCounterTotal = new Label(TotalHandgunAmmo, 50); 
+        AmmoCounterMagazine = new HUDAmmoLabels(MagazineHandgunAmmo, 50); 
+        AmmoCounterTotal = new HUDAmmoLabels(TotalHandgunAmmo, 50); 
         //rifle
-        AmmoCounterMagazineRifle = new Label(MagazineRifleAmmo, 50); 
-        AmmoCounterTotalRifle = new Label(TotalRifleAmmo, 50); 
+        AmmoCounterMagazineRifle = new HUDAmmoLabels(MagazineRifleAmmo, 50); 
+        AmmoCounterTotalRifle = new HUDAmmoLabels(TotalRifleAmmo, 50); 
         //shotgun
-        AmmoCounterMagazineShotgun = new Label(MagazineShotgunAmmo, 50); 
-        AmmoCounterTotalShotgun = new Label(TotalShotgunAmmo, 50); 
+        AmmoCounterMagazineShotgun = new HUDAmmoLabels(MagazineShotgunAmmo, 50); 
+        AmmoCounterTotalShotgun = new HUDAmmoLabels(TotalShotgunAmmo, 50); 
         //knife
-        AmmoCounterKnife = new Label("INFINITE", 50); 
+        AmmoCounterKnife = new HUDAmmoLabels("INFINITE", 50); 
         addObject(AmmoCounterKnife, 1100, 750); 
         
         generalTime = new Label(seconds, 50); 
@@ -330,14 +357,14 @@ public class GameWorld extends World
         //knife
         if(Greenfoot.isKeyDown("1"))
         {
-            removeObjects(getObjects(Label.class)); 
+            removeObjects(getObjects(HUDAmmoLabels.class)); 
             addObject(AmmoCounterKnife, 1100, 750);
             addObject(generalTime, 1000, 100);
         }
         //pistol
         if(Greenfoot.isKeyDown("2"))
         {
-            removeObjects(getObjects(Label.class)); 
+            removeObjects(getObjects(HUDAmmoLabels.class)); 
             addObject(AmmoCounterMagazine, 1100, 750); 
             addObject(AmmoCounterTotal, 1150, 750); 
             addObject(generalTime, 1000, 100);
@@ -345,7 +372,7 @@ public class GameWorld extends World
         //rifle 
         if(Greenfoot.isKeyDown("3"))
         {
-            removeObjects(getObjects(Label.class)); 
+            removeObjects(getObjects(HUDAmmoLabels.class)); 
             addObject(AmmoCounterMagazineRifle, 1075, 750); 
             addObject(AmmoCounterTotalRifle, 1150, 750);
             addObject(generalTime, 1000, 100);
@@ -353,7 +380,7 @@ public class GameWorld extends World
         //shotgun
         if(Greenfoot.isKeyDown("4"))
         {
-            removeObjects(getObjects(Label.class)); 
+            removeObjects(getObjects(HUDAmmoLabels.class)); 
             addObject(AmmoCounterMagazineShotgun, 1100, 750); 
             addObject(AmmoCounterTotalShotgun, 1150, 750); 
             addObject(generalTime, 1000, 100);
