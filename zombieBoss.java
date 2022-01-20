@@ -40,6 +40,7 @@ public class zombieBoss extends Zombie
           health--; 
           if(health == 0)
           {
+              GameWorld.kills++;
               getWorld().removeObject(this);
               GameWorld.moving.remove(this); 
           }

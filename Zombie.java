@@ -66,6 +66,7 @@ public class Zombie extends Actor
           {
               getWorld().removeObject(this);
               GameWorld.moving.remove(this); 
+              GameWorld.kills++; 
               GameWorld.nCurrentZombies--; 
           }
         
