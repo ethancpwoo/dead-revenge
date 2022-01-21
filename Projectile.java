@@ -29,7 +29,7 @@ public class Projectile extends Actor
            getWorld().removeObject(this);
            return;
       } 
-      if(this.isTouching(Zombie.class) && !getWorld().getObjects(Projectile.class).isEmpty())
+      if(this.isTouching(Zombie.class) || this.isTouching(zombieBoss.class))
       {
           getWorld().removeObject(this);
           return;

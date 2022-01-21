@@ -1,5 +1,5 @@
 import greenfoot.*;
-public class zombieBoss extends Zombie
+public class zombieBoss extends Actor
 {
     GreenfootImage[] move = new GreenfootImage[16];
     public int health; 
@@ -19,11 +19,15 @@ public class zombieBoss extends Zombie
         }
         setImage(move[0]); 
         health = 40;
-        //zombieHealthBar = new StatBar(health, health, this, 40, 8, -60);
-        //GameWorld.moving.add(zombieHealthBar);
+        zombieHealthBar = new StatBar(health, health, this, 40, 8, -80);
+        GameWorld.moving.add(zombieHealthBar);
     }
     
-    
+    public void addedToWorld (World w)
+    {
+        w.addObject (zombieHealthBar, getX(), getY());
+        zombieHealthBar.update(health);
+    }
     public int getHealth()
     {
         return health; 
@@ -54,7 +58,7 @@ public class zombieBoss extends Zombie
     {
        moveAround();
        chasePlayer();
-       //zombieHealthBar.update(health); 
+       zombieHealthBar.update(health); 
        if(this.isTouching(Projectile.class) && startingSurvivor.pistolSelected)
        {
            health--;  
@@ -77,6 +81,5 @@ public class zombieBoss extends Zombie
            GameWorld.moving.remove(this);  
            GameWorld.kills++; 
        }
-        
     }
 }
