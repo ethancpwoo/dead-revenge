@@ -64,6 +64,8 @@ public class GameWorld extends World
     Label countKills; 
     SimpleTimer generalTimer = new SimpleTimer(); 
     
+    //sound effects - need to trim clip 
+    GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
     
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 7; 
@@ -277,6 +279,7 @@ public class GameWorld extends World
         //powerUp switching 
         if(!eDown && Greenfoot.isKeyDown("e"))
         {
+            //powerUpsSwitchSoundEffect.play(); 
             eDown = true;
             removeObjects(getObjects(HUDPowerUps.class)); 
             pos1++;
@@ -351,6 +354,7 @@ public class GameWorld extends World
         }
         if(!qDown && Greenfoot.isKeyDown("q"))
         {
+            //powerUpsSwitchSoundEffect.play(); 
             qDown = true;
             removeObjects(getObjects(HUDPowerUps.class)); 
             pos1--;

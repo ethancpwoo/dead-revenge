@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startingSurvivor extends Actor
 {
-    public static int survivorX, survivorY, wait, reloadWait, knifeWait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
+    public static int survivorX, survivorY, wait, knifeWait, health, cooldownShootingHandgun, cooldownShootingShotgun, cooldownShootingRifle;
     public double stamina = 100; 
     public int movementSpeed = 5; 
     SimpleTimer timer= new SimpleTimer();
@@ -24,6 +24,9 @@ public class startingSurvivor extends Actor
     public Color darkGrass = new Color(0, 67, 55);
     public Color hole = new Color(0, 0, 0);  
     
+    //reload
+    public boolean canReload;
+    private boolean rDown; 
        
     //variable to keep track which gun is selected 
     public boolean pistolSelected = false; 
@@ -35,8 +38,7 @@ public class startingSurvivor extends Actor
      */
     public startingSurvivor()
     {
-        wait = 0;
-        reloadWait = 0; 
+        wait = 0; 
         knifeWait = 0; 
         health = 100; 
         cooldownShootingHandgun = 11;
@@ -159,10 +161,30 @@ public class startingSurvivor extends Actor
     public void reloadHandgun()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(reloadWait > 50 && playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
+        GreenfootSound handgunReloadSound = new GreenfootSound("handgun reload.mp3"); 
+        if(!rDown && playerWorld.ammoMagazineIndicator() != 7 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicator() > 0)
         {
-            reloadWait = 0;
-            playerWorld.addAmmoMagazine();            
+            rDown = true; 
+            handgunReloadSound.setVolume(30); 
+            handgunReloadSound.play(); 
+            /*
+            while(handgunReloadSound.isPlaying())
+            {
+               canReload = false;  
+            }
+            /*
+            canReload = true;
+        
+            if(canReload)
+            {
+                playerWorld.addAmmoMagazine();  
+            } 
+            */
+            playerWorld.addAmmoMagazine();  
+        }
+        if(rDown && !Greenfoot.isKeyDown("r"))
+        {
+            rDown = false; 
         }
     }
     
@@ -210,11 +232,30 @@ public class startingSurvivor extends Actor
     }
     public void reloadShotgun()
     {
-        GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(reloadWait > 50 && playerWorld.ammoMagazineIndicatorShotgun() != 8 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorShotgun() > 0)
+        GameWorld playerWorld = (GameWorld) getWorld();
+        GreenfootSound shotgunReloadSound = new GreenfootSound("shotgun reload.mp3"); 
+        if(!rDown && playerWorld.ammoMagazineIndicatorShotgun() != 8 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorShotgun() > 0)
         {
-            reloadWait = 0; 
-            playerWorld.addAmmoMagazineShotgun();         
+            rDown = true; 
+            shotgunReloadSound.setVolume(30); 
+            shotgunReloadSound.play(); 
+            /*
+            while(shotgunReloadSound.isPlaying())
+            {
+               canReload = false;  
+            }
+            canReload = true;
+        
+            if(canReload)
+            {
+                playerWorld.addAmmoMagazineShotgun();     
+            }
+            */
+           playerWorld.addAmmoMagazineShotgun();   
+        }
+        if(rDown && !Greenfoot.isKeyDown("r"))
+        {
+            rDown = false; 
         }
     }
     
@@ -226,7 +267,7 @@ public class startingSurvivor extends Actor
         GreenfootSound EmptyRifleShotSound = new GreenfootSound("rifle dry fire.mp3");
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShootingRifle && playerWorld.ammoMagazineIndicatorRifle() != 0)
         {
-            //RifleShotSound.setVolume(50);
+            RifleShotSound.setVolume(30);
             RifleShotSound.play(); 
                         
             wait = 0;
@@ -249,10 +290,28 @@ public class startingSurvivor extends Actor
     public void reloadRifle()
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
-        if(reloadWait > 50 && playerWorld.ammoMagazineIndicatorRifle() != 30 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorRifle() > 0)
+        GreenfootSound rifleReloadSound = new GreenfootSound("rifle reload.mp3"); 
+        if(!rDown && playerWorld.ammoMagazineIndicatorRifle() != 30 && Greenfoot.isKeyDown("r") && playerWorld.ammoTotalIndicatorRifle() > 0)
         {
-            reloadWait = 0;
-            playerWorld.addAmmoMagazineRifle();            
+            rifleReloadSound.setVolume(30); 
+            rifleReloadSound.play(); 
+            /*
+            while(rifleReloadSound.isPlaying())
+            {
+               canReload = false;  
+            }
+            canReload = true;
+        
+            if(canReload)
+            {
+                playerWorld.addAmmoMagazineRifle();       
+            }
+            */
+            playerWorld.addAmmoMagazineRifle();    
+        }
+        if(rDown && !Greenfoot.isKeyDown("r"))
+        {
+            rDown = false; 
         }
     }
     //
@@ -440,8 +499,7 @@ public class startingSurvivor extends Actor
     
     public void act() 
     {
-        wait++;
-        reloadWait++; 
+        wait++; 
         knifeWait++;
         survivorX = getX();
         survivorY = getY();
