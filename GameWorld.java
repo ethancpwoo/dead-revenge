@@ -148,6 +148,7 @@ public class GameWorld extends World
         addObject(generalTime, 1000, 100); 
         addObject(countKills, 900, 100); 
         //start the waves here and continue through those methods
+        
     }
     public void updateTimer()
     {
@@ -270,12 +271,7 @@ public class GameWorld extends World
             nCurrentZombies = nZombies; 
             zombieSpawn(nZombies); 
         }
-        if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % 40 == 0)
-        {
-            zombieBoss zombieboss = new zombieBoss();
-            addObject(zombieboss, 0, 0); 
-            moving.add(zombieboss); 
-        }
+        
         //powerUp switching 
         if(!eDown && Greenfoot.isKeyDown("e"))
         {
@@ -498,7 +494,12 @@ public class GameWorld extends World
         {
             controlDown = false; 
         }
-        
+        if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % 10 == 0)
+        {
+            zombieBoss zombieboss = new zombieBoss();
+            moving.add(zombieboss); 
+            addObject(zombieboss, 0, 0);
+        }
         if(hitbox.active)
         {
             CurrentWeapon.setImage(gun.blank); 

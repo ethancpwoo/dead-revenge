@@ -11,7 +11,8 @@ public class Zombie extends Actor
 {
     GreenfootImage[] move = new GreenfootImage[16];
     public int health; 
-    public int size = 100; 
+    public int size = 100;
+    StatBar zombieHealthBar; 
     /**
      * Act - do whatever the Zombie wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -25,7 +26,21 @@ public class Zombie extends Actor
             move[i].scale(size, size); 
         }
         setImage(move[0]); 
-        health = 3;  
+        health = 3;
+        zombieHealthBar = new StatBar(health, health, this, 40, 8, -40);
+         
+        GameWorld.moving.add(zombieHealthBar);
+    }
+    
+    public void addedToWorld (World w)
+    {
+        w.addObject (zombieHealthBar, getX(), getY());
+        zombieHealthBar.update(health);
+    }
+    
+    public int getHealth()
+    {
+        return health; 
     }
     
     /**
@@ -53,6 +68,7 @@ public class Zombie extends Actor
     {
        moveAround();
        chasePlayer();
+       zombieHealthBar.update(health); 
        if(this.isTouching(Projectile.class) && startingSurvivor.pistolSelected)
        {
            health--;  
@@ -72,7 +88,7 @@ public class Zombie extends Actor
        if(health <= 0)
        {
            getWorld().removeObject(this);
-           GameWorld.moving.remove(this); 
+           GameWorld.moving.remove(this);  
            GameWorld.kills++; 
            GameWorld.nCurrentZombies--; 
        }

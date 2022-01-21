@@ -355,7 +355,7 @@ public class startingSurvivor extends Actor
             animate(); 
         }
         
-        if(Greenfoot.isKeyDown("f") && knifeWait < 20)
+        if(Greenfoot.isKeyDown("f") && knifeWait < 15)
         {   
             hitBox.active = true; 
             knifeAttack();
