@@ -53,22 +53,29 @@ public class Zombie extends Actor
     {
        moveAround();
        chasePlayer();
-        if(this.isTouching(Projectile.class))
-        {
-          health--; 
-          
-        }
-        if(this.isTouching(hitBox.class) && hitBox.active == true)
-        {
-            health--; 
-        }
-        if(health == 0)
-          {
-              getWorld().removeObject(this);
-              GameWorld.moving.remove(this); 
-              GameWorld.kills++; 
-              GameWorld.nCurrentZombies--; 
-          }
+       if(this.isTouching(Projectile.class) && startingSurvivor.pistolSelected)
+       {
+           health--;  
+       }
+       if(this.isTouching(Projectile.class) && startingSurvivor.shotgunSelected)
+       {
+           health = health - 3;  
+       }
+       if(this.isTouching(Projectile.class) && startingSurvivor.rifleSelected)
+       {
+           health = health - 2;  
+       }
+       if(this.isTouching(hitBox.class) && hitBox.active == true)
+       {
+           health--; 
+       }
+       if(health <= 0)
+       {
+           getWorld().removeObject(this);
+           GameWorld.moving.remove(this); 
+           GameWorld.kills++; 
+           GameWorld.nCurrentZombies--; 
+       }
         
     }
 }

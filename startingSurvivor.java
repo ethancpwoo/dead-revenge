@@ -29,9 +29,9 @@ public class startingSurvivor extends Actor
     private boolean rDown; 
        
     //variable to keep track which gun is selected 
-    public boolean pistolSelected = false; 
-    public boolean rifleSelected = false; 
-    public boolean shotgunSelected = false; 
+    public static boolean pistolSelected = false; 
+    public static boolean rifleSelected = false; 
+    public static boolean shotgunSelected = false; 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
