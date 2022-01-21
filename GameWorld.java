@@ -52,6 +52,7 @@ public class GameWorld extends World
     int pos5 = 4;
     private boolean eDown; 
     private boolean qDown; 
+    private boolean controlDown; 
     HUDAmmoLabels AmmoCounterMagazine;
     HUDAmmoLabels AmmoCounterTotal; 
     HUDAmmoLabels AmmoCounterMagazineRifle;
@@ -72,9 +73,9 @@ public class GameWorld extends World
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 80; 
     public int seconds = 0; 
-    public static int kills; 
     
-    //HUDAmmoCounterTotal totalAmmo = new HUDAmmoCounterTotal(8, 100); 
+    
+    public static int kills; 
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -454,7 +455,46 @@ public class GameWorld extends World
             addObject(AmmoCounterTotalShotgun, 1150, 750); 
             addObject(generalTime, 1000, 100);
         }
-       
+        
+        if(!controlDown && Greenfoot.isKeyDown("control"))
+        {
+            controlDown = true; 
+            //bullet 
+            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(bigBullet) && kills >= 25)
+            {
+                System.out.println("bigBullet");
+                kills = kills - 25; 
+            }
+            //invincibility 
+            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            {
+                System.out.println("invincible");
+                kills = kills - 50; 
+            }
+            //healthUp
+            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(healthUp) && kills >= 35)
+            {
+                System.out.println("healthUp");
+                kills = kills - 35; 
+            }
+            //speedUp
+            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 15)
+            {
+                System.out.println("speedUp");
+                kills = kills - 15; 
+            }
+            //fastFireRate
+            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(fastFireRate) && kills >= 15)
+            {
+                System.out.println("fastFireRate");
+                kills = kills - 15; 
+            }
+        }
+        if(controlDown && !Greenfoot.isKeyDown("control"))
+        {
+            controlDown = false; 
+        }
+        
         if(hitbox.active)
         {
             CurrentWeapon.setImage(gun.blank); 
