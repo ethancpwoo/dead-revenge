@@ -31,7 +31,7 @@ public class GameWorld extends World
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
-    HUDPowerUpsDetail powerUpsDetail = new HUDPowerUpsDetail(); 
+    HUDExtraDetails powerUpsDetail = new   HUDExtraDetails("powerUps Hud.png", 1200, 800); 
     //temporary, just here to easily update
     ArrayList<HUDPowerUpsLabelTEMPORARY> powerUpsTrackerLabel = new ArrayList<HUDPowerUpsLabelTEMPORARY>(); 
     HUDPowerUpsLabelTEMPORARY invincibleLabel = new HUDPowerUpsLabelTEMPORARY(50, 25); 
@@ -145,8 +145,8 @@ public class GameWorld extends World
         
         addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         addObject(CurrentWeapon, scrollActor.getX(), scrollActor.getY());
-        addObject(generalTime, 1000, 100); 
-        addObject(countKills, 900, 100); 
+        addObject(generalTime, 600, 50); 
+        addObject(countKills, 1100, 130); 
         //start the waves here and continue through those methods
         
     }

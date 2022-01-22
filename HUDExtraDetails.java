@@ -6,17 +6,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class HUDPowerUpsDetail extends Actor
+public class HUDExtraDetails extends Actor
 {
     /**
      * Act - do whatever the HUDPowerUpsDetail wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-     public HUDPowerUpsDetail()
+     public HUDExtraDetails(String x, int scaleX, int scaleY )
     {
-        GreenfootImage  HUDPowerUpsDetail = new GreenfootImage("powerUps Hud.png");
-        setImage( HUDPowerUpsDetail); 
-         HUDPowerUpsDetail.scale(1200,800);
+        GreenfootImage HUDExtraDetail = new GreenfootImage(x);
+        setImage( HUDExtraDetail); 
+        HUDExtraDetail.scale(scaleX,scaleY);
     }
     
     public void act()
