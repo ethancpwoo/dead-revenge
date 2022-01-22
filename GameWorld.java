@@ -26,7 +26,7 @@ public class GameWorld extends World
     HUDHealthBar healthHud = new HUDHealthBar();
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     HUDPowerUps invincible = new HUDPowerUps("satr.png", 50, 50);
-    HUDPowerUps bigBullet = new HUDPowerUps("largebullet.png", 60, 30);
+    HUDPowerUps moreAmmo = new HUDPowerUps("ammoUp.png", 110, 70);
     HUDPowerUps fastFireRate = new HUDPowerUps("fastfirerate.png", 50, 50);
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
@@ -35,7 +35,7 @@ public class GameWorld extends World
     //temporary, just here to easily update
     ArrayList<HUDPowerUpsLabelTEMPORARY> powerUpsTrackerLabel = new ArrayList<HUDPowerUpsLabelTEMPORARY>(); 
     HUDPowerUpsLabelTEMPORARY invincibleLabel = new HUDPowerUpsLabelTEMPORARY(50, 25); 
-    HUDPowerUpsLabelTEMPORARY bigBulletLabel = new HUDPowerUpsLabelTEMPORARY(25, 25); 
+    HUDPowerUpsLabelTEMPORARY moreAmmoLabel = new HUDPowerUpsLabelTEMPORARY(25, 25); 
     HUDPowerUpsLabelTEMPORARY fastFireRateLabel = new HUDPowerUpsLabelTEMPORARY(15, 25); 
     HUDPowerUpsLabelTEMPORARY healthUpLabel = new HUDPowerUpsLabelTEMPORARY(35, 25); 
     HUDPowerUpsLabelTEMPORARY speedUpLabel = new HUDPowerUpsLabelTEMPORARY(15, 25); 
@@ -104,7 +104,7 @@ public class GameWorld extends World
         addObject(weapon, 950,750); 
         //powerUps
         powerUpsTracker.add(invincible);
-        powerUpsTracker.add(bigBullet); 
+        powerUpsTracker.add(moreAmmo); 
         powerUpsTracker.add(fastFireRate); 
         powerUpsTracker.add(healthUp); 
         powerUpsTracker.add(speedUp); 
@@ -116,7 +116,7 @@ public class GameWorld extends World
         
         //temporary
         powerUpsTrackerLabel.add(invincibleLabel);
-        powerUpsTrackerLabel.add(bigBulletLabel); 
+        powerUpsTrackerLabel.add(moreAmmoLabel); 
         powerUpsTrackerLabel.add(fastFireRateLabel); 
         powerUpsTrackerLabel.add(healthUpLabel); 
         powerUpsTrackerLabel.add(speedUpLabel); 
@@ -460,7 +460,7 @@ public class GameWorld extends World
         {
             controlDown = true; 
             //bullet 
-            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(bigBullet) && kills >= 25)
+            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(moreAmmo) && kills >= 25)
             {
                 System.out.println("bigBullet");
                 kills = kills - 25; 
@@ -568,7 +568,7 @@ public class GameWorld extends World
     { 
         healthUp healthUp = new healthUp(); 
         Invincible invincible = new Invincible(); 
-        bigBullet bigbullet = new bigBullet(); 
+        moreAmmo moreAmmo = new moreAmmo(); 
         speedUp speedUp = new speedUp(); 
         fastfirerate fastfirerate = new fastfirerate(); 
         

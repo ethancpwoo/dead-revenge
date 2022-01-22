@@ -137,7 +137,7 @@ public class startingSurvivor extends Actor
         GameWorld playerWorld = (GameWorld) getWorld(); 
         if(Greenfoot.isKeyDown("Space") && wait > cooldownShootingHandgun && playerWorld.ammoMagazineIndicator() != 0)
         {
-            HandgunShotSound.setVolume(50); 
+            HandgunShotSound.setVolume(30); 
             HandgunShotSound.play(); 
             
             
@@ -203,7 +203,7 @@ public class startingSurvivor extends Actor
             
             wait = 0; 
             
-            bullet.setRotation(getRotation()+20);
+            bullet.setRotation(getRotation()+5);
             getWorld().addObject(bullet, getX(), getY()); 
             bullet.move(50); 
             bullet.setImage(Projectile.bullet);  
@@ -213,7 +213,7 @@ public class startingSurvivor extends Actor
             bullet2.move(50); 
             bullet2.setImage(Projectile.bullet);  
             
-            bullet3.setRotation(getRotation()-20);
+            bullet3.setRotation(getRotation()-5);
             getWorld().addObject(bullet3, getX(), getY()); 
             bullet3.move(50); 
             bullet3.setImage(Projectile.bullet);  

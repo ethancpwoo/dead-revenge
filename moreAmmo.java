@@ -6,12 +6,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class bigBullet extends powerUp
+public class moreAmmo extends powerUp
 {
-    public bigBullet()
+    public moreAmmo()
     {
         super(); 
-        GreenfootImage health = new GreenfootImage("largebullet.png");
+        GreenfootImage health = new GreenfootImage("ammoUp.png");
         health.scale(50, 50);
         setImage(health); 
          
