@@ -31,7 +31,8 @@ public class GameWorld extends World
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
-    HUDExtraDetails powerUpsDetail = new   HUDExtraDetails("powerUps Hud.png", 1200, 800); 
+    HUDExtraDetails powerUpsDetail = new HUDExtraDetails("powerUps Hud.png", 1200, 800); 
+    HUDExtraDetails skull = new HUDExtraDetails("zombieKills.png", 30,40);
     //temporary, just here to easily update
     ArrayList<HUDPowerUpsLabelTEMPORARY> powerUpsTrackerLabel = new ArrayList<HUDPowerUpsLabelTEMPORARY>(); 
     HUDPowerUpsLabelTEMPORARY invincibleLabel = new HUDPowerUpsLabelTEMPORARY(50, 25); 
@@ -99,6 +100,7 @@ public class GameWorld extends World
         
         //HUD ELEMENTS
         addObject(powerUpsDetail, 600, 400); 
+        addObject(skull, 1150, 130); 
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
         addObject(weapon, 950,750); 
