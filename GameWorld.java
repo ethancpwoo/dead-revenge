@@ -33,6 +33,7 @@ public class GameWorld extends World
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
     HUDExtraDetails powerUpsDetail = new HUDExtraDetails("powerUps Hud.png", 1200, 800); 
     HUDExtraDetails skull = new HUDExtraDetails("zombieKills.png", 30,40);
+    HUDExtraDetails timeLeft = new HUDExtraDetails("timeLeft.png", 75, 40); 
     //temporary, just here to easily update
     ArrayList<HUDPowerUpsLabelTEMPORARY> powerUpsTrackerLabel = new ArrayList<HUDPowerUpsLabelTEMPORARY>(); 
     HUDPowerUpsLabelTEMPORARY invincibleLabel = new HUDPowerUpsLabelTEMPORARY(50, 25); 
@@ -63,6 +64,7 @@ public class GameWorld extends World
     HUDAmmoLabels AmmoCounterKnife; 
     Label generalTime; 
     Label countKills; 
+    Label scoreCounter; 
     SimpleTimer generalTimer = new SimpleTimer(); 
     
     //sound effects - need to trim clip 
@@ -76,6 +78,7 @@ public class GameWorld extends World
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 80; 
     public int seconds = 0; 
+    public int score = 0; 
     
     
     public static int kills; 
@@ -101,6 +104,7 @@ public class GameWorld extends World
         //HUD ELEMENTS
         addObject(powerUpsDetail, 600, 400); 
         addObject(skull, 1150, 130); 
+        addObject(timeLeft, 670, 50); 
         addObject(sprintHud,80, 50); 
         addObject(healthHud, 80,30); 
         addObject(weapon, 950,750); 
@@ -144,11 +148,13 @@ public class GameWorld extends World
         
         generalTime = new Label(seconds, 50); 
         countKills = new Label(kills, 50); 
+        scoreCounter = new Label(score, 50); 
         
         addObject(hitbox, scrollActor.getX(), scrollActor.getY());
         addObject(CurrentWeapon, scrollActor.getX(), scrollActor.getY());
         addObject(generalTime, 600, 50); 
         addObject(countKills, 1100, 130); 
+        addObject(scoreCounter, 1100, 50); 
         //start the waves here and continue through those methods
         
     }
