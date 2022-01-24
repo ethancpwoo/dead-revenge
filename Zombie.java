@@ -26,7 +26,7 @@ public class Zombie extends Actor
             move[i].scale(size, size); 
         }
         setImage(move[0]); 
-        health = 3;
+        health = 5;
         zombieHealthBar = new StatBar(health, health, this, 40, 8, -40);
          
         GameWorld.moving.add(zombieHealthBar);
@@ -75,7 +75,7 @@ public class Zombie extends Actor
        }
        if(this.isTouching(Projectile.class) && startingSurvivor.shotgunSelected)
        {
-           health = health - 3;  
+           health = health - 5;  
        }
        if(this.isTouching(Projectile.class) && startingSurvivor.rifleSelected)
        {

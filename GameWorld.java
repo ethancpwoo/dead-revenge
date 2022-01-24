@@ -11,7 +11,7 @@ public class GameWorld extends World
     
     //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
     GreenfootImage grey = new GreenfootImage("map2.png");
-    public static int nCurrentZombies, nZombies, gunDistance, killCounter; 
+    public static int nCurrentZombies, nZombies, gunDistance, killCounter, zombieSpawnInterval; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
@@ -71,12 +71,12 @@ public class GameWorld extends World
     GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
     
     //ammo variables - will add to seperate class later 
-    public int MagazineHandgunAmmo = 7; 
-    public int TotalHandgunAmmo = 70;
+    public int MagazineHandgunAmmo = 9; 
+    public int TotalHandgunAmmo = 18;
     public int MagazineRifleAmmo = 30; 
-    public int TotalRifleAmmo = 300; 
+    public int TotalRifleAmmo = 0; 
     public int MagazineShotgunAmmo = 8;
-    public int TotalShotgunAmmo = 80; 
+    public int TotalShotgunAmmo = 0; 
     public int seconds = 0; 
     public int score = 0; 
     
@@ -97,7 +97,8 @@ public class GameWorld extends World
         spawnPowerUp();
         generalTimer.mark(); 
         nZombies = 5;
-        nCurrentZombies = 5; 
+        nCurrentZombies = 5;
+        zombieSpawnInterval = 30; 
         kills = 0; 
         zombieSpawn(nZombies); 
         
@@ -502,11 +503,19 @@ public class GameWorld extends World
         {
             controlDown = false; 
         }
-        if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % 10 == 0)
+        if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % zombieSpawnInterval == 0)
         {
             zombieBoss zombieboss = new zombieBoss();
             moving.add(zombieboss); 
             addObject(zombieboss, 0, 0);
+        }
+        if(seconds == 60)
+        {
+            zombieSpawnInterval = 20; 
+        }
+        if(seconds == 130)
+        {
+            zombieSpawnInterval = 10; 
         }
         if(hitbox.active)
         {

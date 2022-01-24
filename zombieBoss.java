@@ -69,7 +69,7 @@ public class zombieBoss extends Actor
        }
        if(this.isTouching(Projectile.class) && startingSurvivor.rifleSelected)
        {
-           health = health - 2;  
+           health = health--;  
        }
        if(this.isTouching(hitBox.class) && hitBox.active == true)
        {

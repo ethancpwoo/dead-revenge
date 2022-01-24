@@ -41,9 +41,9 @@ public class startingSurvivor extends Actor
         wait = 0; 
         knifeWait = 0; 
         health = 100; 
-        cooldownShootingHandgun = 11;
-        cooldownShootingShotgun = 95; 
-        cooldownShootingRifle = 6;
+        cooldownShootingHandgun = 15;
+        cooldownShootingShotgun = 75; 
+        cooldownShootingRifle = 9;
         timer.mark(); 
         timer1.mark();
         timer2.mark();
@@ -60,6 +60,10 @@ public class startingSurvivor extends Actor
             attack[i].scale(125,125); 
         }
         setImage(idle[0]); 
+        
+        pistolSelected = false; 
+        rifleSelected = false; 
+        shotgunSelected = false; 
     }
     
     /**
@@ -427,7 +431,7 @@ public class startingSurvivor extends Actor
         {
             if(this.isTouching(Zombie.class))
             {
-                health = health - 10; 
+                health = health - 5; 
             }
             timer.mark(); 
         }
