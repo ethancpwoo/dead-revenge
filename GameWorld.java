@@ -31,7 +31,19 @@ public class GameWorld extends World
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
-    HUDExtraDetails powerUpsDetail = new HUDExtraDetails("powerUps Hud.png", 1200, 800); 
+    
+    HUDPowerUps pistolAmmo = new HUDPowerUps("pistol.png", 100, 100); 
+    HUDPowerUps rifleAmmo = new HUDPowerUps("rifle.png", 100, 80); 
+    HUDPowerUps shotgunAmmo = new HUDPowerUps("shotgun.png", 100, 100); 
+    ArrayList<HUDPowerUps> powerUpsAmmoTracker = new ArrayList<HUDPowerUps>(); 
+    
+    //PowerUps huds assets 
+    HUDPowerUpsExtraDetails powerUpsDetail = new HUDPowerUpsExtraDetails("powerUps Hud.png", 1200, 800); 
+    HUDPowerUpsExtraDetails powerUpsDetailAmmoSelected = new HUDPowerUpsExtraDetails("powerUps Hud Ammo Selected.png", 1200, 800); 
+    HUDPowerUpsExtraDetails powerUpsDetailAmmoSelectedConfirmed = new HUDPowerUpsExtraDetails("powerUps Hud Ammo Selected comfirmed.png", 1200, 800); 
+    public boolean confirmed = true; 
+    public boolean subSection = false; 
+    
     HUDExtraDetails skull = new HUDExtraDetails("zombieKills.png", 30,40);
     HUDExtraDetails timeLeft = new HUDExtraDetails("timeLeft.png", 75, 40); 
     //temporary, just here to easily update
@@ -52,9 +64,15 @@ public class GameWorld extends World
     int pos3 = 2;
     int pos4 = 3;
     int pos5 = 4;
+    int ammoPos1 = 0;
+    int ammoPos2 = 1; 
+    int ammoPos3 = 2; 
     private boolean eDown; 
     private boolean qDown; 
     private boolean controlDown; 
+    private boolean zDown; 
+    private boolean xDown; 
+ 
     HUDAmmoLabels AmmoCounterMagazine;
     HUDAmmoLabels AmmoCounterTotal; 
     HUDAmmoLabels AmmoCounterMagazineRifle;
@@ -102,7 +120,6 @@ public class GameWorld extends World
         zombieSpawn(nZombies); 
         
         //HUD ELEMENTS
-        addObject(powerUpsDetail, 600, 400); 
         addObject(skull, 1150, 130); 
         addObject(timeLeft, 670, 50); 
         addObject(sprintHud,80, 50); 
@@ -119,6 +136,11 @@ public class GameWorld extends World
         addObject(powerUpsTracker.get(pos3), 300,650); 
         addObject(powerUpsTracker.get(pos4), 265,745);
         addObject(powerUpsTracker.get(pos5), 140,745);  
+        
+        powerUpsAmmoTracker.add(rifleAmmo);
+        powerUpsAmmoTracker.add(pistolAmmo); 
+        powerUpsAmmoTracker.add(shotgunAmmo); 
+                
         
         //temporary
         powerUpsTrackerLabel.add(invincibleLabel);
@@ -292,7 +314,7 @@ public class GameWorld extends World
         }
         
         //powerUp switching 
-        if(!eDown && Greenfoot.isKeyDown("e"))
+        if(!eDown && Greenfoot.isKeyDown("e") && subSection == false)
         {
             //powerUpsSwitchSoundEffect.play(); 
             eDown = true;
@@ -363,11 +385,11 @@ public class GameWorld extends World
             addObject(powerUpsTrackerLabel.get(pos5Label), 165,770); 
             //
         }
-        if(eDown && !Greenfoot.isKeyDown("e"))
+        if(eDown && !Greenfoot.isKeyDown("e") && subSection == false)
         {
             eDown = false; 
         }
-        if(!qDown && Greenfoot.isKeyDown("q"))
+        if(!qDown && Greenfoot.isKeyDown("q") && subSection == false)
         {
             //powerUpsSwitchSoundEffect.play(); 
             qDown = true;
@@ -437,7 +459,7 @@ public class GameWorld extends World
             addObject(powerUpsTrackerLabel.get(pos5Label), 165,770); 
             //
         }
-        if(qDown && !Greenfoot.isKeyDown("q"))
+        if(qDown && !Greenfoot.isKeyDown("q") && subSection == false)
         {
             qDown = false; 
         }
@@ -478,12 +500,6 @@ public class GameWorld extends World
         if(!controlDown && Greenfoot.isKeyDown("control"))
         {
             controlDown = true; 
-            //bullet 
-            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(moreAmmo) && kills >= 25)
-            {
-                System.out.println("bigBullet");
-                kills = kills - 25; 
-            }
             //invincibility 
             if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
             {
@@ -513,6 +529,134 @@ public class GameWorld extends World
         {
             controlDown = false; 
         }
+        
+        //bullet sub section
+        if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(moreAmmo))
+        {
+         
+            if(confirmed == true)
+            {
+                removeObjects(getObjects(HUDPowerUpsExtraDetails.class)); 
+                addObject(powerUpsAmmoTracker.get(ammoPos1), 100, 480); 
+                addObject(powerUpsAmmoTracker.get(ammoPos2), 200,430); 
+                addObject(powerUpsAmmoTracker.get(ammoPos3), 300,480); 
+                addObject(powerUpsDetailAmmoSelected, 600, 400); 
+                setActOrder(HUDPowerUpsExtraDetails.class); 
+            }
+             
+            
+             
+            if(!zDown && Greenfoot.isKeyDown("z"))
+            {
+                confirmed = false; 
+                zDown = true; 
+                subSection = true;
+                removeObjects(getObjects(HUDPowerUpsExtraDetails.class)); 
+                addObject(powerUpsDetailAmmoSelectedConfirmed, 600, 400); 
+                setActOrder(HUDPowerUpsExtraDetails.class); 
+                
+                
+            }
+            if(zDown && !Greenfoot.isKeyDown("z"))
+            {
+                zDown = false; 
+            }
+            
+            if(!eDown && Greenfoot.isKeyDown("e") && subSection == true)
+                {
+                    //powerUpsSwitchSoundEffect.play(); 
+                    eDown = true;
+                    removeObject(powerUpsAmmoTracker.get(ammoPos1));
+                    removeObject(powerUpsAmmoTracker.get(ammoPos2)); 
+                    removeObject(powerUpsAmmoTracker.get(ammoPos3)); 
+                    ammoPos1++;
+                    ammoPos2++;
+                    ammoPos3++;
+                   
+                    if(ammoPos1 > 2)
+                    {
+                        ammoPos1 = 0; 
+                    }
+                    if(ammoPos2 > 2)
+                    {
+                        ammoPos2 = 0; 
+                    }
+                    if(ammoPos3 > 2)
+                    {
+                        ammoPos3 = 0; 
+                    }
+                    addObject(powerUpsAmmoTracker.get(ammoPos1), 100, 480); 
+                    addObject(powerUpsAmmoTracker.get(ammoPos2), 200,430); 
+                    addObject(powerUpsAmmoTracker.get(ammoPos3), 300,480); 
+                }
+            if(eDown && !Greenfoot.isKeyDown("e" ) && subSection == true)
+            {
+                eDown = false; 
+            }
+            
+            if(!qDown && Greenfoot.isKeyDown("q") && subSection == true)
+            {
+                    //powerUpsSwitchSoundEffect.play(); 
+                    qDown = true;
+                    removeObject(powerUpsAmmoTracker.get(ammoPos1));
+                    removeObject(powerUpsAmmoTracker.get(ammoPos2)); 
+                    removeObject(powerUpsAmmoTracker.get(ammoPos3)); 
+                    ammoPos1--;
+                    ammoPos2--;
+                    ammoPos3--;
+                   
+                    if(ammoPos1 < 0)
+                    {
+                        ammoPos1 = 2; 
+                    }
+                    if(ammoPos2 < 0)
+                    {
+                        ammoPos2 = 2; 
+                    }
+                    if(ammoPos3 < 0)
+                    {
+                        ammoPos3 = 2; 
+                    }
+                    addObject(powerUpsAmmoTracker.get(ammoPos1), 100, 480); 
+                    addObject(powerUpsAmmoTracker.get(ammoPos2), 200,430); 
+                    addObject(powerUpsAmmoTracker.get(ammoPos3), 300,480); 
+            }
+            if(qDown && !Greenfoot.isKeyDown("q" ) && subSection == true)
+            {
+                qDown = false; 
+            }        
+            
+            if(!xDown && Greenfoot.isKeyDown("x"))
+            {
+                confirmed = true; 
+                xDown = true; 
+                subSection = false; 
+            }
+            if(xDown && !Greenfoot.isKeyDown("x"))
+            {
+                xDown = false; 
+            }
+            
+            
+    
+        }
+        else
+        {
+            removeObjects(getObjects(HUDPowerUpsExtraDetails.class)); 
+            removeObject(powerUpsAmmoTracker.get(ammoPos1));
+            removeObject(powerUpsAmmoTracker.get(ammoPos2)); 
+            removeObject(powerUpsAmmoTracker.get(ammoPos3)); 
+            addObject(powerUpsDetail, 600, 400); 
+            setActOrder(HUDPowerUpsExtraDetails.class); 
+
+        }
+      
+        
+        
+        
+        
+        
+        
         if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % zombieSpawnInterval == 0)
         {
             zombieBoss zombieboss = new zombieBoss();
