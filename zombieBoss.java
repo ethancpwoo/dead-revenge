@@ -77,9 +77,11 @@ public class zombieBoss extends Actor
        }
        if(health <= 0)
        {
-           getWorld().removeObject(this);
-           GameWorld.moving.remove(this);  
-           GameWorld.kills++; 
+            GameWorld playerWorld = (GameWorld) getWorld(); 
+            getWorld().removeObject(this);
+            GameWorld.moving.remove(this);  
+            GameWorld.kills++; 
+            playerWorld.IncreaseScore(500); 
        }
     }
 }

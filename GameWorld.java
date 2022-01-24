@@ -77,9 +77,8 @@ public class GameWorld extends World
     public int TotalRifleAmmo = 0; 
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 0; 
-    public int seconds = 0; 
-    public int score = 0; 
-    
+    public static int seconds; 
+    public static int score;    
     
     public static int kills; 
     /**
@@ -159,6 +158,17 @@ public class GameWorld extends World
         //start the waves here and continue through those methods
         
     }
+    //score methods 
+    public void IncreaseScore(int increaseScoreBy)
+    {
+        score = score + increaseScoreBy; 
+        scoreCounter.setValue(score); 
+    }
+    public int getScore()
+    {
+        return score; 
+    }
+    //
     public void updateTimer()
     {
         if(generalTimer.millisElapsed() > 1000)

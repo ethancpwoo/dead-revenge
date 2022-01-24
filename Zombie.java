@@ -87,10 +87,12 @@ public class Zombie extends Actor
        }
        if(health <= 0)
        {
-           getWorld().removeObject(this);
-           GameWorld.moving.remove(this);  
-           GameWorld.kills++; 
-           GameWorld.nCurrentZombies--; 
+            GameWorld playerWorld = (GameWorld) getWorld(); 
+            getWorld().removeObject(this);
+            GameWorld.moving.remove(this);  
+            GameWorld.kills++; 
+            GameWorld.nCurrentZombies--; 
+            playerWorld.IncreaseScore(100); 
        }
         
     }
