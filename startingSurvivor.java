@@ -496,7 +496,7 @@ public class startingSurvivor extends Actor
         }
     }
     
-    public void healthSet()
+    public void healthUp()
     {
         health = 100; 
     }
