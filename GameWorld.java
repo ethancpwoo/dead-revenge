@@ -9,8 +9,8 @@ import java.util.*;
 public class GameWorld extends World
 {
     
-    GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    //GreenfootImage grey = new GreenfootImage("map2.png");
+    //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
+    GreenfootImage grey = new GreenfootImage("map2.png");
     public static int nCurrentZombies, nZombies, gunDistance, killCounter, zombieSpawnInterval; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
@@ -24,8 +24,11 @@ public class GameWorld extends World
 
     //HUD CLASSES
     HUDExtraDetails powerUpsDetail = new HUDExtraDetails("powerUps Hud.png", 1200, 800);
+    HUDExtraDetails healthBarDetail = new HUDExtraDetails("healthicon.png", 60, 60);
+    HUDExtraDetails sprintBarDetail = new HUDExtraDetails("sprint.png", 60, 60);
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
+    
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     HUDPowerUps invincible = new HUDPowerUps("satr.png", 1000, 1000);
     HUDPowerUps pistolAmmo = new HUDPowerUps("pistolicon.png", 1000, 1000);
@@ -110,8 +113,10 @@ public class GameWorld extends World
         //HUD ELEMENTS
         addObject(skull, 1150, 130); 
         addObject(timeLeft, 670, 50); 
-        addObject(sprintHud, 80 ,80); 
-        addObject(healthHud, 80 ,50); 
+        addObject(sprintHud, 150 ,120); 
+        addObject(healthBarDetail, 50, 50 );
+        addObject(sprintBarDetail, 50, 120);
+        addObject(healthHud, 150 ,50); 
         addObject(weapon, 950,750); 
         addObject(powerUpsDetail, 600, 400); 
         //powerUps
@@ -160,11 +165,10 @@ public class GameWorld extends World
         addObject(generalTime, 600, 50); 
         addObject(countKills, 1100, 130); 
         addObject(scoreCounter, 1100, 50); 
-<<<<<<< HEAD
+
         //start the waves here and continue through those methods
-=======
+
         
->>>>>>> af2ef8cf23ffcced5b83522f3ad0a0e422250e01
     }
     //score methods 
     public void IncreaseScore(int increaseScoreBy)

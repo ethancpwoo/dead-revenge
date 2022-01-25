@@ -26,7 +26,7 @@ public class startingSurvivor extends Actor
       
     //
     SimpleTimer infiniteStamina = new SimpleTimer();
-    public boolean infStamina; 
+    public static boolean infStamina; 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
