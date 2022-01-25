@@ -433,29 +433,48 @@ public class GameWorld extends World
             addObject(generalTime, 1000, 100);
         }
         
+        //powerUps select 
         if(!controlDown && Greenfoot.isKeyDown("control"))
         {
             controlDown = true; 
+            //PistolAmmo
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            {
+                System.out.println("invincible");
+                kills = kills - 50; 
+            }
+            //rifleAmmo
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            {
+                System.out.println("invincible");
+                kills = kills - 50; 
+            }
+            //shotgunAmmo
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            {
+                System.out.println("invincible");
+                kills = kills - 50; 
+            }
             //invincibility 
-            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
             {
                 System.out.println("invincible");
                 kills = kills - 50; 
             }
             //healthUp
-            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(healthUp) && kills >= 35)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(healthUp) && kills >= 35)
             {
                 System.out.println("healthUp");
                 kills = kills - 35; 
             }
             //speedUp
-            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 15)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 15)
             {
                 System.out.println("speedUp");
                 kills = kills - 15; 
             }
             //fastFireRate
-            if(getObjectsAt(200, 575, HUDPowerUps.class).get(0).equals(fastFireRate) && kills >= 15)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(fastFireRate) && kills >= 15)
             {
                 System.out.println("fastFireRate");
                 kills = kills - 15; 
