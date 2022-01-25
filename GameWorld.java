@@ -480,7 +480,7 @@ public class GameWorld extends World
             //invincibility 
             if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 1)
             {
-                player.invincibility(); 
+                //
                 kills = kills - 1; 
             }
             //healthUp
@@ -492,7 +492,8 @@ public class GameWorld extends World
             //speedUp
             if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 1)
             {
-                System.out.println("speedUp");
+                player.staminaPowerUp();
+                //sprintHud.staminaBarReset(); 
                 kills = kills - 1; 
             }
             //fastFireRate

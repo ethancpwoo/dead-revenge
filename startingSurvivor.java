@@ -270,6 +270,11 @@ public class startingSurvivor extends Actor
     {
         health = 100; 
     }
+    public void staminaPowerUp()
+    {
+        stamina = 100; 
+    }
+    
     
     public void invincibility()
     {

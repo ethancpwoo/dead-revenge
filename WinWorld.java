@@ -24,7 +24,7 @@ public class WinWorld extends World
     Label currentHighScore;
     Label currentScore; 
     
-    
+    GreenfootImage background;
     public WinWorld()
     {    
         super(1200, 800, 1); 
@@ -32,7 +32,7 @@ public class WinWorld extends World
         //timeBonus = String.valueOf((GameWorld.seconds / 10) * 100); 
         //finalScore = ((GameWorld.seconds / 10) * 100) + GameWorld.score;
         //finalScoreString = String.valueOf(finalScore); 
-        GreenfootImage background = new GreenfootImage("EndScreen.png");
+        background = new GreenfootImage("EndScreen.png");
         playAgain = new Button();
         quit = new Button(); //make objects
         playAgain.getImage().scale(185, 78);
@@ -94,14 +94,14 @@ public class WinWorld extends World
             Greenfoot.setWorld(new WelcomeWorld()); //restart back to welcome world 
         }
         
-        /*
+        
         if (UserInfo.isStorageAvailable())
         {
-            List<UserInfo> users = GameWorld.myInfo.getTop(3); // Big number to try to get all
+            List<UserInfo> users = UserInfo.getTop(3); // Big number to try to get all
             for (UserInfo user : users)
                 System.out.println(user.getScore());
         }
-        */
+        
         
     }
     

@@ -56,5 +56,4 @@ public class HUDsprintBar extends Actor
     {
         return sprint; 
     }
-    //
 }
