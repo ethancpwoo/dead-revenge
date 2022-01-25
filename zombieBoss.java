@@ -5,7 +5,6 @@ public class zombieBoss extends Actor
     public int health; 
     public int size = 200;
     StatBar zombieHealthBar; 
-    SimpleTimer timer= new SimpleTimer();
     /**
      * Act - do whatever the Zombie wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -22,7 +21,6 @@ public class zombieBoss extends Actor
         health = 40;
         zombieHealthBar = new StatBar(health, health, this, 40, 8, -80);
         GameWorld.moving.add(zombieHealthBar);
-        timer.mark();
     }
     
     public void addedToWorld (World w)
@@ -71,7 +69,7 @@ public class zombieBoss extends Actor
        }
        if(this.isTouching(Projectile.class) && gun.rifleSelected)
        {
-           health = health--;  
+           health = health - 2;  
        }
        if(this.isTouching(hitBox.class) && hitBox.active == true)
        {
@@ -85,20 +83,6 @@ public class zombieBoss extends Actor
             GameWorld.kills++; 
             playerWorld.IncreaseScore(500); 
        }
-       if (timer.millisElapsed() > 250)
-        {
-            GreenfootSound zombieDamage = new GreenfootSound("Horror Zombie Bite Sound Effect (No copyright sound effects) _ Sounds.wav");
-            zombieDamage.setVolume(50);
-            if(this.isTouching(startingSurvivor.class))
-            {
-                if (!zombieDamage.isPlaying()) 
-                {
-                    zombieDamage.play(); 
-                }
-                
-                health = health - 5; 
-            }
-            timer.mark(); 
-        }
+
     }
 }

@@ -25,7 +25,7 @@ public class gun extends Actor
         setImage(blank);
         weapon = blank; 
         wait = 0; 
-        cooldownShootingHandgun = 15;
+        cooldownShootingHandgun = 12;
         cooldownShootingShotgun = 75; 
         cooldownShootingRifle = 9;
     }
