@@ -35,7 +35,10 @@ public class WinWorld extends World
         GreenfootImage background = new GreenfootImage("EndScreen.png");
         playAgain = new Button();
         quit = new Button(); //make objects
-           
+        playAgain.getImage().scale(185, 78);
+        quit.getImage().scale(185, 78);
+        Gear leftGear = new Gear(true); 
+        Gear rightGear = new Gear(false);  
         
         //UserInfo topUser = (UserInfo)GameWorld.myInfo.getTop(3).get(0);
         //UserInfo topUser2 = (UserInfo)GameWorld.myInfo.getTop(3).get(2);
@@ -65,9 +68,11 @@ public class WinWorld extends World
         background.drawString("Play Again", 820, 580); 
         background.drawString("Quit", 200, 580); 
         background.drawString("Leaderboards", 440, 580);*/ 
-        addObject(playAgain, 460, 650);
-        addObject(quit, 770, 650); 
-        addObject(currentScore, 600, 230); 
+        addObject(playAgain, 475, 650);
+        addObject(quit, 760, 650); 
+        addObject(currentScore, 600, 230);
+        addObject(leftGear, 0, 800);
+        addObject(rightGear, 1200, 800); 
         //addObject(scoreLabel, 300, 650);
         //addObject(scoreLabel2, 350, 650);
         setBackground(background); //set background
@@ -78,6 +83,8 @@ public class WinWorld extends World
     
      public void act()
     {
+        playAgain.getImage().scale(185, 78);
+        quit.getImage().scale(185, 78);
         if(quit.touchingCursor() == true)
         {
             Greenfoot.stop(); //quit
