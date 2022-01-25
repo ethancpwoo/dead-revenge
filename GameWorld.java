@@ -14,6 +14,7 @@ public class GameWorld extends World
     public static int nCurrentZombies, nZombies, gunDistance, killCounter, zombieSpawnInterval; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
+    public startingSurvivor player = new startingSurvivor(); 
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
     int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
     int[] positionY = {0, 4000};
@@ -438,46 +439,49 @@ public class GameWorld extends World
         {
             controlDown = true; 
             //PistolAmmo
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(pistolAmmo) && kills >= 1)
             {
-                System.out.println("invincible");
-                kills = kills - 50; 
+                TotalHandgunAmmo = ammoTotalIndicator() + (70 - ammoTotalIndicator()); 
+                AmmoCounterTotal.setValue(TotalHandgunAmmo);
+                kills = kills - 1; 
             }
             //rifleAmmo
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(arAmmo) && kills >= 1)
             {
-                System.out.println("invincible");
-                kills = kills - 50; 
+                TotalRifleAmmo = ammoTotalIndicatorRifle() + (300 - ammoTotalIndicatorRifle()); 
+                AmmoCounterTotalRifle.setValue(TotalRifleAmmo);
+                kills = kills - 1; 
             }
             //shotgunAmmo
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(shotgunAmmo) && kills >= 1)
             {
-                System.out.println("invincible");
-                kills = kills - 50; 
+                TotalShotgunAmmo = ammoTotalIndicatorShotgun() + (80 - ammoTotalIndicatorShotgun()); 
+                AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
+                kills = kills - 1; 
             }
             //invincibility 
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 50)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 1)
             {
-                System.out.println("invincible");
-                kills = kills - 50; 
+                player.invincibility(); 
+                kills = kills - 1; 
             }
             //healthUp
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(healthUp) && kills >= 35)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(healthUp) && kills >= 1)
             {
-                System.out.println("healthUp");
-                kills = kills - 35; 
+                player.healthUp(); 
+                kills = kills - 1; 
             }
             //speedUp
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 15)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 1)
             {
                 System.out.println("speedUp");
-                kills = kills - 15; 
+                kills = kills - 1; 
             }
             //fastFireRate
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(fastFireRate) && kills >= 15)
+            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(fastFireRate) && kills >= 1)
             {
                 System.out.println("fastFireRate");
-                kills = kills - 15; 
+                kills = kills - 1; 
             }
         }
         if(controlDown && !Greenfoot.isKeyDown("control"))

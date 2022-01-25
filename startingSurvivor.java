@@ -24,10 +24,9 @@ public class startingSurvivor extends Actor
     public Color darkGrass = new Color(0, 67, 55);
     public Color hole = new Color(0, 0, 0);  
       
-    
-       
-    //variable to keep track which gun is selected 
-    
+    //
+    SimpleTimer infiniteStamina = new SimpleTimer();
+    public boolean infStamina; 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -182,34 +181,6 @@ public class startingSurvivor extends Actor
         {
             hitBox.active = false; 
         }
-        
-        /*
-        if(Greenfoot.isKeyDown("1"))
-        {
-            health = 100;            
-        }
-        if(Greenfoot.isKeyDown("2"))
-        {
-            cooldownShootingHandgun = 5;
-        }
-        if(Greenfoot.isKeyDown("3"))
-        {
-            stamina = 1000;
-        }
-        if(Greenfoot.isKeyDown("4"))
-        {
-            GreenfootImage monkey = new GreenfootImage(5, 5); 
-            Projectile.bullet = monkey; 
-            Projectile.bullet = Projectile.bigBullet; 
-        }
-        if(Greenfoot.isKeyDown("5"))
-        {
-            while(true)
-            {
-                health = 100; 
-            }
-        }
-         */
     }
    
     //
@@ -283,8 +254,22 @@ public class startingSurvivor extends Actor
         health = 100; 
     }
     
+    public void invincibility()
+    {
+        infiniteStamina.mark(); 
+        infStamina = true; 
+    }
+    
     public void act() 
     {
+        if(infiniteStamina.millisElapsed() < 5000 && infStamina == true)
+        {
+            health--; 
+        }
+        else
+        {
+            infStamina = false; 
+        }
         knifeWait++;
         survivorX = getX();
         survivorY = getY();
@@ -301,8 +286,8 @@ public class startingSurvivor extends Actor
         Sprint();   //sprint 
         worldEffects();
          
-        
-        
+    
+       
         checkKeys(); //move 
 
     }  
