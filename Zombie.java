@@ -13,6 +13,7 @@ public class Zombie extends Actor
     public int health; 
     public int size = 100;
     StatBar zombieHealthBar; 
+    SimpleTimer timer= new SimpleTimer();
     /**
      * Act - do whatever the Zombie wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -28,7 +29,7 @@ public class Zombie extends Actor
         setImage(move[0]); 
         health = 5;
         zombieHealthBar = new StatBar(health, health, this, 40, 8, -40);
-         
+        timer.mark(); 
         GameWorld.moving.add(zombieHealthBar);
     }
     
@@ -69,15 +70,15 @@ public class Zombie extends Actor
        moveAround();
        chasePlayer();
        zombieHealthBar.update(health); 
-       if(this.isTouching(Projectile.class) && startingSurvivor.pistolSelected)
+       if(this.isTouching(Projectile.class) && gun.pistolSelected)
        {
            health--;  
        }
-       if(this.isTouching(Projectile.class) && startingSurvivor.shotgunSelected)
+       if(this.isTouching(Projectile.class) && gun.shotgunSelected)
        {
            health = health - 5;  
        }
-       if(this.isTouching(Projectile.class) && startingSurvivor.rifleSelected)
+       if(this.isTouching(Projectile.class) && gun.rifleSelected)
        {
            health = health - 2;  
        }
@@ -94,6 +95,20 @@ public class Zombie extends Actor
             GameWorld.nCurrentZombies--; 
             playerWorld.IncreaseScore(100); 
        }
-        
+       if (timer.millisElapsed() > 250)
+        {
+            GreenfootSound zombieDamage = new GreenfootSound("Horror Zombie Bite Sound Effect (No copyright sound effects) _ Sounds.wav");
+            zombieDamage.setVolume(50);
+            if(this.isTouching(startingSurvivor.class))
+            {
+                if (!zombieDamage.isPlaying()) 
+                {
+                    zombieDamage.play(); 
+                }
+                
+                health = health - 5; 
+            }
+            timer.mark(); 
+        }
     }
 }

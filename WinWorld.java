@@ -22,10 +22,11 @@ public class WinWorld extends World
         score = String.valueOf(GameWorld.score); 
         timeBonus = String.valueOf((GameWorld.seconds / 10) * 100); 
         finalScore = String.valueOf(((GameWorld.seconds / 10) * 100) + GameWorld.score); 
-        GreenfootImage background = new GreenfootImage(1200, 800);
+        GreenfootImage background = new GreenfootImage("EndScreen.png");
         playAgain = new Button();
         quit = new Button(); //make objects
-        leaderboards = new Button(); 
+        leaderboards = new Button();
+        /*
         background.setColor(gray);  
         background.fill();  //pure beige background
         background.setFont(titleFont); 
@@ -43,7 +44,7 @@ public class WinWorld extends World
         background.drawString(finalScore + " (Final Score)", 530, 490);
         background.drawString("Play Again", 820, 580); 
         background.drawString("Quit", 200, 580); 
-        background.drawString("Leaderboards", 440, 580); 
+        background.drawString("Leaderboards", 440, 580);*/ 
         addObject(playAgain, 950, 650);
         addObject(quit, 250, 650); 
         addObject(leaderboards, 600, 650);
