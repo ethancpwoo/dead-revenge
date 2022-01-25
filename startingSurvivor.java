@@ -214,12 +214,17 @@ public class startingSurvivor extends Actor
     //
     public void worldEffects()
     {
-        
+        GreenfootSound lavaSound = new GreenfootSound("Player Fire Hurt (Nr. 3 _ Minecraft Sound) - Sound Effect for editing.wav");
+        lavaSound.setVolume(75); 
         if(getWorld().getColorAt(getX(), getY()).equals(lava))
         {
             
             if (timer1.millisElapsed() > 750)
             {
+                if (!lavaSound.isPlaying()) 
+                {
+                    lavaSound.play(); 
+                }
                 health = health - 10; 
                 timer1.mark(); 
             }
@@ -228,6 +233,10 @@ public class startingSurvivor extends Actor
         {
             if (timer1.millisElapsed() > 750)
             {
+                if (!lavaSound.isPlaying()) 
+                {
+                    lavaSound.play(); 
+                }
                 health = health - 10; 
                 timer1.mark(); 
             }
@@ -236,6 +245,10 @@ public class startingSurvivor extends Actor
         {
             if (timer1.millisElapsed() > 750)
             {
+                if (!lavaSound.isPlaying()) 
+                {
+                    lavaSound.play(); 
+                }
                 health = health - 10; 
                 timer1.mark(); 
             }
