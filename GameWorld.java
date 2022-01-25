@@ -24,8 +24,11 @@ public class GameWorld extends World
 
     //HUD CLASSES
     HUDExtraDetails powerUpsDetail = new HUDExtraDetails("powerUps Hud.png", 1200, 800);
+    HUDExtraDetails healthBarDetail = new HUDExtraDetails("healthicon.png", 60, 60);
+    HUDExtraDetails sprintBarDetail = new HUDExtraDetails("sprint.png", 60, 60);
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
+    
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     HUDPowerUps invincible = new HUDPowerUps("satr.png", 1000, 1000);
     HUDPowerUps pistolAmmo = new HUDPowerUps("pistolicon.png", 1000, 1000);
@@ -75,10 +78,16 @@ public class GameWorld extends World
     public int TotalRifleAmmo = 0; 
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 0; 
-    public static int seconds; 
-    public static int score;    
     
-    public static int kills; 
+    
+    public static int seconds = 0; 
+    public static int score = 0;    
+    public static int kills = 0 ; 
+    
+    
+    public static int finalScore = 0;
+    //high score and leaderboards
+    public static UserInfo myInfo;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -104,8 +113,10 @@ public class GameWorld extends World
         //HUD ELEMENTS
         addObject(skull, 1150, 130); 
         addObject(timeLeft, 670, 50); 
-        addObject(sprintHud, 80 ,80); 
-        addObject(healthHud, 80 ,50); 
+        addObject(sprintHud, 150 ,120); 
+        addObject(healthBarDetail, 50, 50 );
+        addObject(sprintBarDetail, 50, 120);
+        addObject(healthHud, 150 ,50); 
         addObject(weapon, 950,750); 
         addObject(powerUpsDetail, 600, 400); 
         //powerUps
@@ -154,6 +165,9 @@ public class GameWorld extends World
         addObject(generalTime, 600, 50); 
         addObject(countKills, 1100, 130); 
         addObject(scoreCounter, 1100, 50); 
+
+        //start the waves here and continue through those methods
+
         
     }
     //score methods 
@@ -288,6 +302,9 @@ public class GameWorld extends World
             nCurrentZombies = nZombies; 
             zombieSpawn(nZombies); 
         }
+        
+        //score calculator 
+        finalScore = ((seconds / 10) * 100) + score;
         
         //powerUp switching 
         if(!eDown && Greenfoot.isKeyDown("e"))
@@ -524,6 +541,16 @@ public class GameWorld extends World
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
         updateTimer(); 
         
+        
+        if (UserInfo.isStorageAvailable()) //this is for high score. 
+        {
+            myInfo = UserInfo.getMyInfo(); //get the server info
+            if (myInfo != null)
+            {
+                    myInfo.setScore(finalScore);
+                    myInfo.store();
+            }
+        }
     }
     private void scroll()
     {

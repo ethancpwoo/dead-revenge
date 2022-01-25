@@ -1,4 +1,5 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
+import java.util.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * @Ethan Woo and Kenny Zhao
  * @Fall 2021
@@ -12,20 +13,39 @@ public class WinWorld extends World
     Font textFont = new Font("Calibri", false, false, 25);
     Button playAgain;
     Button quit; //make objects
-    Button leaderboards; 
     String score; 
     String timeBonus; 
-    String finalScore; 
+    String finalScoreString;
+    int finalScore; 
+    
+    Label scoreLabel; 
+    Label scoreLabel1; 
+    Label scoreLabel2; 
+    Label currentHighScore;
+    Label currentScore; 
+    
+    
     public WinWorld()
     {    
         super(1200, 800, 1); 
         score = String.valueOf(GameWorld.score); 
-        timeBonus = String.valueOf((GameWorld.seconds / 10) * 100); 
-        finalScore = String.valueOf(((GameWorld.seconds / 10) * 100) + GameWorld.score); 
+        //timeBonus = String.valueOf((GameWorld.seconds / 10) * 100); 
+        //finalScore = ((GameWorld.seconds / 10) * 100) + GameWorld.score;
+        //finalScoreString = String.valueOf(finalScore); 
         GreenfootImage background = new GreenfootImage("EndScreen.png");
         playAgain = new Button();
         quit = new Button(); //make objects
-        leaderboards = new Button();
+           
+        
+        //UserInfo topUser = (UserInfo)GameWorld.myInfo.getTop(3).get(0);
+        //UserInfo topUser2 = (UserInfo)GameWorld.myInfo.getTop(3).get(2);
+        currentScore = new Label(GameWorld.finalScore, 80); 
+        //scoreLabel = new Label(topUser.getScore(), 80);
+        //scoreLabel1 = new Label(topUser.getScore(), 80);
+        //scoreLabel2 = new Label(topUser.getScore(), 80);
+       
+       
+        //scoreLabel = new Label(GameWorld.myInfo.getTop(1).get(0).getScore(), 80);
         /*
         background.setColor(gray);  
         background.fill();  //pure beige background
@@ -45,17 +65,15 @@ public class WinWorld extends World
         background.drawString("Play Again", 820, 580); 
         background.drawString("Quit", 200, 580); 
         background.drawString("Leaderboards", 440, 580);*/ 
-        addObject(playAgain, 950, 650);
-        addObject(quit, 250, 650); 
-        addObject(leaderboards, 600, 650);
+        addObject(playAgain, 460, 650);
+        addObject(quit, 770, 650); 
+        addObject(currentScore, 600, 230); 
+        //addObject(scoreLabel, 300, 650);
+        //addObject(scoreLabel2, 350, 650);
         setBackground(background); //set background
         //background.drawImage(score, 525, 300); //draw the high score and current score
     }
-    //
-    public int getScore()
-    {
-      return 0;   
-    }
+    
     
     
      public void act()
@@ -68,10 +86,66 @@ public class WinWorld extends World
         {
             Greenfoot.setWorld(new WelcomeWorld()); //restart back to welcome world 
         }
-        if(leaderboards.touchingCursor() == true)
+        
+        /*
+        if (UserInfo.isStorageAvailable())
         {
-            Greenfoot.setWorld(new Leaderboards()); //restart back to welcome world 
+            List<UserInfo> users = GameWorld.myInfo.getTop(3); // Big number to try to get all
+            for (UserInfo user : users)
+                System.out.println(user.getScore());
+        }
+        */
+        
+    }
+    
+    
+    //quick sort method to sort the leaderboards 
+    public int partition(int[] arr, int lo, int hi) 
+    {
+            int i = lo; 
+            int j = hi + 1;
+            while (true) {
+                while (arr[++i] < arr[lo])  // Find item on left to swap  
+                    if (i == hi) break; 
+                while (arr[--j] > arr[lo]) 
+                    if (j == lo) break;
+                
+                if (i >= j) break;  // Check if pointers cross 
+                swap(arr, i, j);  // Swap
+            } 
+            swap(arr, lo, j);  // Swap partitioning element  
+            return j;  // Return index of item now know to be in place
+    }
+    
+    private static void shuffle(int[] arr)
+    {
+        Random r = new Random();
+        for(int i = arr.length - 1; i > 0; i--)
+        {
+            int j = r.nextInt(i+1); 
+            
+            swap(arr, i, j); 
         }
     }
     
+    private static void swap(int[] arr, int i, int j)
+    {
+        int placeHolder = arr[i]; 
+        arr[i] = arr[j]; 
+        arr[j] = placeHolder; 
+    }
+    
+    public void quickSort(int[] arr) 
+    {
+     shuffle(arr); 
+     quicksort(arr, 0, arr.length - 1); 
+    }
+ 
+    private void quicksort(int[] arr, int lo, int hi) 
+    {
+         if (hi <= lo) return;
+         int j = partition(arr, lo, hi); 
+         quicksort(arr, lo, j-1); 
+         quicksort(arr, j+1, hi); 
+    }
 }
