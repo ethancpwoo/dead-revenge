@@ -18,7 +18,7 @@ public class GameWorld extends World
     public static ArrayList<Actor> moving = new ArrayList<Actor>(); 
     int[] positionX = {0, 500,1000,1500, 2000, 2500, 3000, 3500, 4000}; 
     int[] positionY = {0, 4000};
-
+    
     gun CurrentWeapon = new gun(); 
     hitBox hitbox = new hitBox(); 
 
@@ -27,13 +27,13 @@ public class GameWorld extends World
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
-    HUDPowerUps invincible = new HUDPowerUps("satr.png", 50, 50);
-    HUDPowerUps pistolAmmo = new HUDPowerUps("pistolicon.png", 110, 70);
-    HUDPowerUps arAmmo = new HUDPowerUps("assaultRifleAmmo.png", 110, 70);
-    HUDPowerUps shotgunAmmo = new HUDPowerUps("shotgunicon.png", 110, 70);
-    HUDPowerUps fastFireRate = new HUDPowerUps("fastfirerate.png", 50, 50);
-    HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 50, 50);
-    HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 50, 50);
+    HUDPowerUps invincible = new HUDPowerUps("satr.png", 1000, 1000);
+    HUDPowerUps pistolAmmo = new HUDPowerUps("pistolicon.png", 1000, 1000);
+    HUDPowerUps arAmmo = new HUDPowerUps("assaultRifleAmmo.png", 1000, 1000);
+    HUDPowerUps shotgunAmmo = new HUDPowerUps("shotgunicon.png", 1000, 1000);
+    HUDPowerUps fastFireRate = new HUDPowerUps("fastfirerate.png", 1000, 1000);
+    HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 1000, 1000);
+    HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 1000, 1000);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
     
     
@@ -103,13 +103,15 @@ public class GameWorld extends World
         nCurrentZombies = 5;
         zombieSpawnInterval = 30; 
         kills = 0; 
+        seconds = 0; 
+        score = 0; 
         zombieSpawn(nZombies); 
         
         //HUD ELEMENTS
         addObject(skull, 1150, 130); 
         addObject(timeLeft, 670, 50); 
-        addObject(sprintHud,80, 50); 
-        addObject(healthHud, 80,30); 
+        addObject(sprintHud, 80 ,80); 
+        addObject(healthHud, 80 ,50); 
         addObject(weapon, 950,750); 
         addObject(powerUpsDetail, 600, 400); 
         //powerUps
@@ -158,7 +160,11 @@ public class GameWorld extends World
         addObject(generalTime, 600, 50); 
         addObject(countKills, 1100, 130); 
         addObject(scoreCounter, 1100, 50); 
+<<<<<<< HEAD
         //start the waves here and continue through those methods
+=======
+        
+>>>>>>> af2ef8cf23ffcced5b83522f3ad0a0e422250e01
     }
     //score methods 
     public void IncreaseScore(int increaseScoreBy)

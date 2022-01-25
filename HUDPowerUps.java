@@ -12,8 +12,9 @@ public class HUDPowerUps extends Actor
     public HUDPowerUps(String x, int scaleX, int scaleY)
     {
         GreenfootImage CurrentPowerUp = new GreenfootImage(x);
+        CurrentPowerUp.scale(scaleX,scaleY);
         setImage(CurrentPowerUp ); 
-        CurrentPowerUp.scale(scaleX,scaleY); 
+         
     }
     
     public void act()

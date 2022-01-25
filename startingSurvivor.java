@@ -12,7 +12,7 @@ public class startingSurvivor extends Actor
     public static int survivorX, survivorY, wait, knifeWait, health; 
     public double stamina = 100; 
     public int movementSpeed = 5; 
-    
+    SimpleTimer timer= new SimpleTimer();
     SimpleTimer timer1= new SimpleTimer();
     SimpleTimer timer2= new SimpleTimer();
     GreenfootImage[] idle = new GreenfootImage[19];
@@ -37,7 +37,7 @@ public class startingSurvivor extends Actor
         knifeWait = 0; 
         health = 100; 
 
-        
+        timer.mark();
         timer1.mark();
         timer2.mark();
           
@@ -247,7 +247,24 @@ public class startingSurvivor extends Actor
             }
         }
     }
-    
+    public void checkDamage()
+    {
+        if (timer.millisElapsed() > 250 )
+        {
+            GreenfootSound zombieDamage = new GreenfootSound("Horror Zombie Bite Sound Effect (No copyright sound effects) _ Sounds.wav");
+            zombieDamage.setVolume(50);
+            if(this.isTouching(Zombie.class) || this.isTouching(zombieBoss.class))
+            {
+                if (!zombieDamage.isPlaying()) 
+                {
+                    zombieDamage.play(); 
+                }
+                
+                startingSurvivor.health = startingSurvivor.health - 5; 
+            }
+            timer.mark(); 
+        }
+    }
     //for power ups
     public void healthUp()
     {
@@ -284,6 +301,7 @@ public class startingSurvivor extends Actor
         }
 
         Sprint();   //sprint 
+        checkDamage(); 
         worldEffects();
          
     
