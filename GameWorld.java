@@ -9,8 +9,8 @@ import java.util.*;
 public class GameWorld extends World
 {
     
-    //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    GreenfootImage grey = new GreenfootImage("map2.png");
+    GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
+    //GreenfootImage grey = new GreenfootImage("map2.png");
     public static int nCurrentZombies, nZombies, gunDistance, killCounter, zombieSpawnInterval; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
@@ -75,10 +75,16 @@ public class GameWorld extends World
     public int TotalRifleAmmo = 0; 
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 0; 
-    public static int seconds; 
-    public static int score;    
     
-    public static int kills; 
+    
+    public static int seconds = 0; 
+    public static int score = 0;    
+    public static int kills = 0 ; 
+    
+    
+    public static int finalScore = 0;
+    //high score and leaderboards
+    public static UserInfo myInfo;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -153,7 +159,6 @@ public class GameWorld extends World
         addObject(countKills, 1100, 130); 
         addObject(scoreCounter, 1100, 50); 
         //start the waves here and continue through those methods
-        
     }
     //score methods 
     public void IncreaseScore(int increaseScoreBy)
@@ -287,6 +292,9 @@ public class GameWorld extends World
             nCurrentZombies = nZombies; 
             zombieSpawn(nZombies); 
         }
+        
+        //score calculator 
+        finalScore = ((seconds / 10) * 100) + score;
         
         //powerUp switching 
         if(!eDown && Greenfoot.isKeyDown("e"))
@@ -523,6 +531,16 @@ public class GameWorld extends World
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
         updateTimer(); 
         
+        
+        if (UserInfo.isStorageAvailable()) //this is for high score. 
+        {
+            myInfo = UserInfo.getMyInfo(); //get the server info
+            if (myInfo != null)
+            {
+                    myInfo.setScore(finalScore);
+                    myInfo.store();
+            }
+        }
     }
     private void scroll()
     {
