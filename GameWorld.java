@@ -82,12 +82,16 @@ public class GameWorld extends World
     
     public static int seconds = 0; 
     public static int score = 0;    
-    public static int kills = 0 ; 
+    public static int kills = 0; 
     
     
     public static int finalScore = 0;
     //high score and leaderboards
-    public static UserInfo myInfo;
+    public static UserInfo myInfoScore1;
+    public static UserInfo myInfoScore2;
+    public static UserInfo myInfoScore3;
+    public static int secondScore; 
+    public static int thirdScore; 
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -466,16 +470,33 @@ public class GameWorld extends World
             }
             //rifleAmmo
             if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(arAmmo) && kills >= 1)
-            {
-                TotalRifleAmmo = ammoTotalIndicatorRifle() + (300 - ammoTotalIndicatorRifle()); 
-                AmmoCounterTotalRifle.setValue(TotalRifleAmmo);
+            {   
+                if(ammoTotalIndicatorRifle() <= 240)
+                {
+                    TotalRifleAmmo = ammoTotalIndicatorRifle() + 60; 
+                    AmmoCounterTotalRifle.setValue(TotalRifleAmmo);
+                }
+                else
+                {
+                    TotalRifleAmmo = ammoTotalIndicatorRifle() + (300 - ammoTotalIndicatorRifle()); 
+                    AmmoCounterTotalRifle.setValue(TotalRifleAmmo);
+                }
+                
                 kills = kills - 1; 
             }
             //shotgunAmmo
             if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(shotgunAmmo) && kills >= 1)
             {
-                TotalShotgunAmmo = ammoTotalIndicatorShotgun() + (80 - ammoTotalIndicatorShotgun()); 
-                AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
+                if(ammoTotalIndicatorShotgun() <= 72)
+                {
+                     TotalShotgunAmmo = ammoTotalIndicatorShotgun() + 8; 
+                    AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
+                }
+                else
+                {
+                    TotalShotgunAmmo = ammoTotalIndicatorShotgun() + (80 - ammoTotalIndicatorShotgun()); 
+                    AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
+                }
                 kills = kills - 1; 
             }
             //invincibility 
@@ -546,14 +567,30 @@ public class GameWorld extends World
         
         if (UserInfo.isStorageAvailable()) //this is for high score. 
         {
-            myInfo = UserInfo.getMyInfo(); //get the server info
-            if (myInfo != null)
+            myInfoScore1 = UserInfo.getMyInfo();
+            myInfoScore2 = UserInfo.getMyInfo();
+            myInfoScore3 = UserInfo.getMyInfo();//get the server info
+            if(finalScore > myInfoScore1.getScore()) 
             {
-                    myInfo.setScore(finalScore);
-                    myInfo.store();
+                    myInfoScore1.setScore(finalScore);
+                    myInfoScore1.store();
             }
+            /*
+            if(finalScore < myInfoScore1.getScore())
+            {
+                myInfoScore2.setScore(finalScore);
+                myInfoScore2.store();
+            }
+            if(finalScore < myInfoScore1.getScore() && finalScore < myInfoScore2.getScore() && finalScore > myInfoScore3.getScore())
+            {
+                myInfoScore3.setScore(finalScore);
+                myInfoScore3.store();
+            }
+            */
         }
     }
+    
+    
     private void scroll()
     {
         int loX = 550; 
