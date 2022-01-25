@@ -18,9 +18,9 @@ public class WinWorld extends World
     String finalScoreString;
     int finalScore; 
     
-    Label scoreLabel; 
     Label scoreLabel1; 
     Label scoreLabel2; 
+    Label scoreLabel3; 
     Label currentHighScore;
     Label currentScore; 
     
@@ -42,12 +42,12 @@ public class WinWorld extends World
         Gear leftGear = new Gear(true); 
         Gear rightGear = new Gear(false);  
         
-        //UserInfo topUser = (UserInfo)GameWorld.myInfo.getTop(3).get(0);
+        //GameWorld.myInfoScore1.getScore()
         //UserInfo topUser2 = (UserInfo)GameWorld.myInfo.getTop(3).get(2);
         currentScore = new Label(GameWorld.finalScore, 80); 
-        //scoreLabel = new Label(topUser.getScore(), 80);
-        //scoreLabel1 = new Label(topUser.getScore(), 80);
-        //scoreLabel2 = new Label(topUser.getScore(), 80);
+        scoreLabel1 = new Label(GameWorld.myInfoScore1.getScore(), 80);
+        //scoreLabel2 = new Label(GameWorld.myInfoScore2.getScore(), 80);
+        //scoreLabel3 = new Label(GameWorld.myInfoScore3.getScore(), 80);
        
        
         //scoreLabel = new Label(GameWorld.myInfo.getTop(1).get(0).getScore(), 80);
@@ -72,11 +72,12 @@ public class WinWorld extends World
         background.drawString("Leaderboards", 440, 580);*/ 
         addObject(playAgain, 475, 650);
         addObject(quit, 760, 650); 
-        addObject(currentScore, 600, 230);
         addObject(leftGear, 0, 800);
         addObject(rightGear, 1200, 800); 
-        //addObject(scoreLabel, 300, 650);
-        //addObject(scoreLabel2, 350, 650);
+        addObject(currentScore, 600, 230);
+        addObject(scoreLabel1, 220, 400);
+        //addObject(scoreLabel2, 600, 400);
+        //addObject(scoreLabel3, 970, 400);
         setBackground(background); //set background
         //background.drawImage(score, 525, 300); //draw the high score and current score
     }
@@ -95,16 +96,6 @@ public class WinWorld extends World
         {
             Greenfoot.setWorld(new WelcomeWorld()); //restart back to welcome world 
         }
-        
-        
-        if (UserInfo.isStorageAvailable())
-        {
-            List<UserInfo> users = UserInfo.getTop(3); // Big number to try to get all
-            for (UserInfo user : users)
-                System.out.println(user.getScore());
-        }
-        
-        
     }
     
     
