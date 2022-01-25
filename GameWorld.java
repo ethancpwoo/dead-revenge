@@ -38,32 +38,19 @@ public class GameWorld extends World
     
     HUDExtraDetails skull = new HUDExtraDetails("zombieKills.png", 30,40);
     HUDExtraDetails timeLeft = new HUDExtraDetails("timeLeft.png", 75, 40); 
-    //temporary, just here to easily update
-    ArrayList<HUDPowerUpsLabelTEMPORARY> powerUpsTrackerLabel = new ArrayList<HUDPowerUpsLabelTEMPORARY>(); 
-    HUDPowerUpsLabelTEMPORARY invincibleLabel = new HUDPowerUpsLabelTEMPORARY(50, 25); 
-    HUDPowerUpsLabelTEMPORARY moreAmmoLabel = new HUDPowerUpsLabelTEMPORARY(25, 25); 
-    HUDPowerUpsLabelTEMPORARY fastFireRateLabel = new HUDPowerUpsLabelTEMPORARY(15, 25); 
-    HUDPowerUpsLabelTEMPORARY healthUpLabel = new HUDPowerUpsLabelTEMPORARY(35, 25); 
-    HUDPowerUpsLabelTEMPORARY speedUpLabel = new HUDPowerUpsLabelTEMPORARY(15, 25); 
-    int pos1Label = 0; 
-    int pos2Label = 1; 
-    int pos3Label = 2; 
-    int pos4Label = 3; 
-    int pos5Label = 4; 
-    //
+    
     int pos1 = 0;
     int pos2 = 1;
     int pos3 = 2;
     int pos4 = 3;
     int pos5 = 4;
-    int ammoPos1 = 0;
-    int ammoPos2 = 1; 
-    int ammoPos3 = 2; 
+    int pos6 = 5; 
+    int pos7 = 6; 
+    
     private boolean eDown; 
     private boolean qDown; 
     private boolean controlDown; 
-    private boolean zDown; 
-    private boolean xDown; 
+    
  
     HUDAmmoLabels AmmoCounterMagazine;
     HUDAmmoLabels AmmoCounterTotal; 
@@ -133,27 +120,15 @@ public class GameWorld extends World
         powerUpsTracker.add(fastFireRate); 
         powerUpsTracker.add(healthUp); 
         powerUpsTracker.add(speedUp); 
-        addObject(powerUpsTracker.get(pos1),100, 650); 
-        addObject(powerUpsTracker.get(pos2), 200,575); 
-        addObject(powerUpsTracker.get(pos3), 300,650); 
-        addObject(powerUpsTracker.get(pos4), 265,745);
-        addObject(powerUpsTracker.get(pos5), 140,745);  
+        addObject(powerUpsTracker.get(pos1),85, 585); 
+        addObject(powerUpsTracker.get(pos2), 180,530); 
+        addObject(powerUpsTracker.get(pos3), 280,585); 
+        addObject(powerUpsTracker.get(pos4), 300,680);
+        addObject(powerUpsTracker.get(pos5), 238,753);  
+        addObject(powerUpsTracker.get(pos6), 117,753);
+        addObject(powerUpsTracker.get(pos7), 65,680);  
         
-                
-        
-        //temporary
-        powerUpsTrackerLabel.add(invincibleLabel);
-        powerUpsTrackerLabel.add(moreAmmoLabel); 
-        powerUpsTrackerLabel.add(fastFireRateLabel); 
-        powerUpsTrackerLabel.add(healthUpLabel); 
-        powerUpsTrackerLabel.add(speedUpLabel); 
-        addObject(powerUpsTrackerLabel.get(pos1Label), 130,675); 
-        addObject(powerUpsTrackerLabel.get(pos2Label), 230,600); 
-        addObject(powerUpsTrackerLabel.get(pos3Label), 330,675); 
-        addObject(powerUpsTrackerLabel.get(pos4Label), 295,770); 
-        addObject(powerUpsTrackerLabel.get(pos5Label), 165,770); 
-        //
-        
+                    
         //pistol
         AmmoCounterMagazine = new HUDAmmoLabels(MagazineHandgunAmmo, 50); 
         AmmoCounterTotal = new HUDAmmoLabels(TotalHandgunAmmo, 50); 
@@ -323,66 +298,47 @@ public class GameWorld extends World
             pos3++;
             pos4++;
             pos5++;
-            if(pos1 > 4)
+            pos6++;
+            pos7++;
+            if(pos1 > 6)
             {
                 pos1 = 0; 
             }
-            if(pos2 > 4)
+            if(pos2 > 6)
             {
                 pos2 = 0; 
             }
-            if(pos3 > 4)
+            if(pos3 > 6)
             {
                 pos3 = 0; 
             }
-            if(pos4 > 4)
+            if(pos4 > 6)
             {
                 pos4 = 0; 
             }
-            if(pos5 > 4)
+            if(pos5 > 6)
             {
                 pos5 = 0; 
             }
-            addObject(powerUpsTracker.get(pos1),100, 650); 
-            addObject(powerUpsTracker.get(pos2), 200,575); 
-            addObject(powerUpsTracker.get(pos3), 300,650); 
-            addObject(powerUpsTracker.get(pos4), 265,745);
-            addObject(powerUpsTracker.get(pos5), 140,745);  
+            if(pos6 > 6)
+            {
+                pos6 = 0; 
+            }
+            if(pos7 > 6)
+            {
+                pos7 = 0; 
+            }
+             addObject(powerUpsTracker.get(pos1),85, 585); 
+            addObject(powerUpsTracker.get(pos2), 180,530); 
+            addObject(powerUpsTracker.get(pos3), 280,585); 
+            addObject(powerUpsTracker.get(pos4), 300,680);
+            addObject(powerUpsTracker.get(pos5), 238,753);  
+            addObject(powerUpsTracker.get(pos6), 117,753);
+            addObject(powerUpsTracker.get(pos7), 65,680);  
+             
             
             
-            //temporary 
-            removeObjects(getObjects(HUDPowerUpsLabelTEMPORARY.class)); 
-            pos1Label++;
-            pos2Label++;
-            pos3Label++;
-            pos4Label++;
-            pos5Label++;
-            if(pos1Label > 4)
-            {
-                pos1Label = 0; 
-            }
-            if(pos2Label > 4)
-            {
-                pos2Label = 0; 
-            }
-            if(pos3Label > 4)
-            {
-                pos3Label = 0; 
-            }
-            if(pos4Label > 4)
-            {
-                pos4Label = 0; 
-            }
-            if(pos5Label > 4)
-            {
-                pos5Label = 0; 
-            }
-            addObject(powerUpsTrackerLabel.get(pos1Label), 130,675); 
-            addObject(powerUpsTrackerLabel.get(pos2Label), 230,600); 
-            addObject(powerUpsTrackerLabel.get(pos3Label), 330,675); 
-            addObject(powerUpsTrackerLabel.get(pos4Label), 295,770); 
-            addObject(powerUpsTrackerLabel.get(pos5Label), 165,770); 
-            //
+           
         }
         if(eDown && !Greenfoot.isKeyDown("e"))
         {
@@ -398,65 +354,46 @@ public class GameWorld extends World
             pos3--;
             pos4--;
             pos5--;
+            pos6--;
+            pos7--;
             if(pos1 < 0)
             {
-                pos1 = 4; 
+                pos1 = 6; 
             }
             if(pos2 < 0)
             {
-                pos2 = 4; 
+                pos2 = 6; 
             }
             if(pos3 < 0)
             {
-                pos3 = 4; 
+                pos3 = 6; 
             }
             if(pos4 < 0)
             {
-                pos4 = 4; 
+                pos4 = 6; 
             }
             if(pos5 < 0)
             {
-                pos5 = 4; 
+                pos5 = 6; 
             }
-            addObject(powerUpsTracker.get(pos1),100, 650); 
-            addObject(powerUpsTracker.get(pos2), 200,575); 
-            addObject(powerUpsTracker.get(pos3), 300,650); 
-            addObject(powerUpsTracker.get(pos4), 265,745);
-            addObject(powerUpsTracker.get(pos5), 140,745);  
+             if(pos6 < 0)
+            {
+                pos6 = 6; 
+            }
+             if(pos7 < 0)
+            {
+                pos7 = 6; 
+            }
+            addObject(powerUpsTracker.get(pos1),85, 585); 
+            addObject(powerUpsTracker.get(pos2), 180,530); 
+            addObject(powerUpsTracker.get(pos3), 280,585); 
+            addObject(powerUpsTracker.get(pos4), 300,680);
+            addObject(powerUpsTracker.get(pos5), 238,753);  
+            addObject(powerUpsTracker.get(pos6), 117,753);
+            addObject(powerUpsTracker.get(pos7), 65,680);  
             
-            //temporary
-            removeObjects(getObjects(HUDPowerUpsLabelTEMPORARY.class)); 
-            pos1Label--;
-            pos2Label--;
-            pos3Label--;
-            pos4Label--;
-            pos5Label--;
-            if(pos1Label < 0)
-            {
-                pos1Label = 4; 
-            }
-            if(pos2Label < 0)
-            {
-                pos2Label = 4; 
-            }
-            if(pos3Label < 0)
-            {
-                pos3Label = 4; 
-            }
-            if(pos4Label < 0)
-            {
-                pos4Label = 4; 
-            }
-            if(pos5Label < 0)
-            {
-                pos5Label = 4; 
-            }
-            addObject(powerUpsTrackerLabel.get(pos1Label), 130,675); 
-            addObject(powerUpsTrackerLabel.get(pos2Label), 230,600); 
-            addObject(powerUpsTrackerLabel.get(pos3Label), 330,675); 
-            addObject(powerUpsTrackerLabel.get(pos4Label), 295,770); 
-            addObject(powerUpsTrackerLabel.get(pos5Label), 165,770); 
-            //
+            
+           
         }
         if(qDown && !Greenfoot.isKeyDown("q"))
         {
