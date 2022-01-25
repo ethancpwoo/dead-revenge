@@ -95,6 +95,7 @@ public class GameWorld extends World
     public GameWorld()
     {    
         super(1200, 800, 1, false); 
+        WelcomeWorld.bgm.stop(); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
         scrollActor = new startingSurvivor(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);

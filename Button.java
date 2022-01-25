@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Button extends Actor
 {
     boolean touchingImage = false;
-     GreenfootImage init = new GreenfootImage("GreySTARTbutton.png"); 
-     GreenfootImage after = new GreenfootImage("GreySTARTbuttonon.png");
+    public GreenfootImage init = new GreenfootImage("GreySTARTbutton.png"); 
+    public GreenfootImage after = new GreenfootImage("GreySTARTbuttonon.png");
     public Button()
     {        
        init.scale(222, 78);

@@ -23,7 +23,7 @@ public class startingSurvivor extends Actor
     public Color lightGrass = new Color(47, 129, 54);
     public Color darkGrass = new Color(0, 67, 55);
     public Color hole = new Color(0, 0, 0);  
-      
+    public static boolean moving, slowMoving;  
     //
     SimpleTimer infiniteStamina = new SimpleTimer();
     public static boolean infStamina; 
@@ -125,50 +125,78 @@ public class startingSurvivor extends Actor
     }
     //
     
-    
+    public void soundCheck()
+    {
+        
+        GreenfootSound slowRunning = new GreenfootSound("Minecraft Footsteps - Sound Effect (HD).wav"); 
+        slowRunning.setVolume(50); 
+    }
     //
     
     //move
     public void checkKeys()
     {
         //GreenfootSound running
-        
-             
+        GreenfootSound running = new GreenfootSound("Valorant - Steps & Stepping - Gaming Sound Effect Valorant (HD) _ Sound Effects.wav");
+        running.setVolume(50);
         if(Greenfoot.isKeyDown("w"))
         {
-            
+            /*if(!running.isPlaying())
+            {
+                running.play();
+            }*/ //this method doesnt work!
             if(this.getY() > 50)
             {
                 this.setLocation(this.getX(), this.getY() - movementSpeed);
             }
             animate(); 
         }
+        else
+        {
+            moving = false; 
+        }
        
         if(Greenfoot.isKeyDown("a"))
         {
+            moving = true;
             if(this.getX() > 50)
             {
                 this.setLocation(this.getX() - movementSpeed, this.getY()); 
             }
+            
             animate(); 
+        }
+        else
+        {
+            moving = false; 
         }
         
         if(Greenfoot.isKeyDown("s"))
         {
+            moving = true;
             if(this.getY() < 670)
             {
                 this.setLocation(this.getX(), this.getY() + movementSpeed);    
             }
             animate(); 
         }
+        else
+        {
+            moving = false; 
+        }
         
         if(Greenfoot.isKeyDown("d"))
         {
+            moving = true;
             if(this.getX() < 1150)
             {
                 this.setLocation(this.getX() + movementSpeed, this.getY()); 
             } 
             animate(); 
+        }
+        else
+        {
+            moving = false; 
         }
         
         if(Greenfoot.isKeyDown("f") && knifeWait < 15)
@@ -189,6 +217,7 @@ public class startingSurvivor extends Actor
         
         if(getWorld().getColorAt(getX(), getY()).equals(lava))
         {
+            
             if (timer1.millisElapsed() > 750)
             {
                 health = health - 10; 
@@ -220,6 +249,8 @@ public class startingSurvivor extends Actor
                 movementSpeed = 5; 
                 timer2.mark(); 
             }
+            moving = false;
+            slowMoving = true; 
         }
         if(getWorld().getColorAt(getX(), getY()).equals(darkGrass))
         {
@@ -235,6 +266,8 @@ public class startingSurvivor extends Actor
                 movementSpeed = 5; 
                 timer2.mark(); 
             }
+            moving = false;
+            slowMoving = true; 
         }
         if(getWorld().getColorAt(getX(), getY()).equals(hole))
         {
@@ -245,6 +278,8 @@ public class startingSurvivor extends Actor
                 movementSpeed = 5; 
                 timer2.mark(); 
             }
+            moving = false;
+            slowMoving = true; 
         }
     }
     public void checkDamage()
@@ -304,7 +339,7 @@ public class startingSurvivor extends Actor
         {
             knifeWait = 0; 
         }
-
+        soundCheck(); 
         Sprint();   //sprint 
         checkDamage(); 
         worldEffects();

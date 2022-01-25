@@ -37,6 +37,8 @@ public class WinWorld extends World
         quit = new Button(); //make objects
         playAgain.getImage().scale(185, 78);
         quit.getImage().scale(185, 78);
+        playAgain.after.scale(185, 78);
+        quit.after.scale(185, 78);
         Gear leftGear = new Gear(true); 
         Gear rightGear = new Gear(false);  
         

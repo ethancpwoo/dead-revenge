@@ -24,6 +24,9 @@ public class MapWorld extends World
         easy.getImage().scale(148, 52); 
         medium.getImage().scale(148, 52); 
         hard.getImage().scale(148, 52); 
+        easy.after.scale(148, 52); 
+        medium.after.scale(148, 52); 
+        hard.after.scale(148, 52);
         GreenfootImage map1 = new GreenfootImage("map.png");
         GreenfootImage map2 = new GreenfootImage("map2.png");
         GreenfootImage map3 = new GreenfootImage("map3.png");

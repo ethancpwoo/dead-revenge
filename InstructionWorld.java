@@ -19,6 +19,7 @@ public class InstructionWorld extends World
         GreenfootImage background = new GreenfootImage("instructions.png");
         back = new Button(); //make the button object
         back.getImage().scale(111, 39);
+        back.after.scale(111, 39); 
         //the actual instructions
         background.drawImage(text, 45, 650);   
         addObject(back, 90, 715); 
