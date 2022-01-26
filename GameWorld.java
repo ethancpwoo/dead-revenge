@@ -10,7 +10,6 @@ public class GameWorld extends World
 {
     
     GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    //GreenfootImage grey = new GreenfootImage("map2.png");
     public static int nCurrentZombies, nZombies, gunDistance, killCounter, zombieSpawnInterval; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
@@ -29,7 +28,6 @@ public class GameWorld extends World
     HUDExtraDetails sprintBarDetail = new HUDExtraDetails("sprint.png", 60, 60);
     HUDsprintBar sprintHud = new HUDsprintBar();
     HUDHealthBar healthHud = new HUDHealthBar();
-    
     HUDChoosenWeapon weapon = new HUDChoosenWeapon(); 
     HUDPowerUps invincible = new HUDPowerUps("satr.png", 1000, 1000);
     HUDPowerUps pistolAmmo = new HUDPowerUps("pistolicon.png", 1000, 1000);
@@ -39,11 +37,10 @@ public class GameWorld extends World
     HUDPowerUps healthUp = new HUDPowerUps("healthsign.png", 1000, 1000);
     HUDPowerUps speedUp = new HUDPowerUps("shoe.png", 1000, 1000);
     ArrayList<HUDPowerUps> powerUpsTracker = new ArrayList<HUDPowerUps>(); 
-    
-    
     HUDExtraDetails skull = new HUDExtraDetails("zombieKills.png", 30,40);
     HUDExtraDetails timeLeft = new HUDExtraDetails("timeLeft.png", 75, 40); 
     
+    // variables to keep track for chaning power ups
     int pos1 = 0;
     int pos2 = 1;
     int pos3 = 2;
@@ -51,12 +48,12 @@ public class GameWorld extends World
     int pos5 = 4;
     int pos6 = 5; 
     int pos7 = 6; 
-    
+    //for logging in individual key strokes 
     private boolean eDown; 
     private boolean qDown; 
     
     
- 
+    //all ammo labels 
     HUDAmmoLabels AmmoCounterMagazine;
     HUDAmmoLabels AmmoCounterTotal; 
     HUDAmmoLabels AmmoCounterMagazineRifle;
@@ -64,6 +61,9 @@ public class GameWorld extends World
     HUDAmmoLabels AmmoCounterMagazineShotgun;
     HUDAmmoLabels AmmoCounterTotalShotgun; 
     HUDAmmoLabels AmmoCounterKnife; 
+    
+    
+    //timer, score and kill counter labels 
     Label generalTime; 
     Label countKills; 
     Label scoreCounter; 
@@ -71,7 +71,8 @@ public class GameWorld extends World
     
     //sound effects 
     GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
-    //ammo variables - will add to seperate class later 
+    
+    //ammo variables
     public int MagazineHandgunAmmo = 9; 
     public int TotalHandgunAmmo = 18;
     public int MagazineRifleAmmo = 30; 
@@ -79,15 +80,15 @@ public class GameWorld extends World
     public int MagazineShotgunAmmo = 8;
     public int TotalShotgunAmmo = 0; 
     
-    
+    //variables to track timer, score and kill 
     public static int seconds = 0; 
     public static int score = 0;    
     public static int kills = 0; 
     
-    
+    //variable to keep track of the final score of the user, includes time bonus
     public static int finalScore = 0;
     
-    //high score
+    //userInfo for the high score 
     public static UserInfo myInfoScore1;
     /**
      * Constructor for objects of class MyWorld.
@@ -181,7 +182,7 @@ public class GameWorld extends World
     {
         return score; 
     }
-    //
+    //timer method
     public void updateTimer()
     {
         if(generalTimer.millisElapsed() > 1000)
@@ -193,6 +194,7 @@ public class GameWorld extends World
         countKills.setValue(kills); 
     }
     //Ammo methods 
+    //handgun
     public void ammoMagazine()
     {
         MagazineHandgunAmmo--; 
@@ -221,7 +223,6 @@ public class GameWorld extends World
     {
         return TotalHandgunAmmo; 
     }
-    
     //shotgun
     public void ammoMagazineShotgun()
     {
@@ -251,7 +252,6 @@ public class GameWorld extends World
     {
         return TotalShotgunAmmo; 
     }
-    
     //rifle
     public void ammoMagazineRifle()
     {
@@ -427,14 +427,14 @@ public class GameWorld extends World
         }
         //
         
-        //knife
+        //display lables for knife
         if(Greenfoot.isKeyDown("1"))
         {
             removeObjects(getObjects(HUDAmmoLabels.class)); 
             addObject(AmmoCounterKnife, 1100, 750);
             addObject(generalTime, 1000, 100);
         }
-        //pistol
+        //display lables for pistol
         if(Greenfoot.isKeyDown("2"))
         {
             removeObjects(getObjects(HUDAmmoLabels.class)); 
@@ -442,7 +442,7 @@ public class GameWorld extends World
             addObject(AmmoCounterTotal, 1150, 750); 
             addObject(generalTime, 1000, 100);
         }
-        //rifle 
+        // display lables for rifle 
         if(Greenfoot.isKeyDown("3"))
         {
             removeObjects(getObjects(HUDAmmoLabels.class)); 
@@ -450,7 +450,7 @@ public class GameWorld extends World
             addObject(AmmoCounterTotalRifle, 1150, 750);
             addObject(generalTime, 1000, 100);
         }
-        //shotgun
+        // display lables for shotgun
         if(Greenfoot.isKeyDown("4"))
         {
             removeObjects(getObjects(HUDAmmoLabels.class)); 
@@ -465,6 +465,8 @@ public class GameWorld extends World
             moving.add(zombieboss); 
             addObject(zombieboss, 0, 0);
         }
+        
+        //zombie spawning 
         if(seconds == 60)
         {
             zombieSpawnInterval = 20; 
@@ -487,7 +489,7 @@ public class GameWorld extends World
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
         updateTimer(); 
         
-        
+        //for the high score 
         if (UserInfo.isStorageAvailable()) //this is for high score. 
         {
             myInfoScore1 = UserInfo.getMyInfo();
@@ -544,7 +546,7 @@ public class GameWorld extends World
         double angle = Math.toRadians(360 - scrollActor.getRotation()); 
         CurrentWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * gun.dsGun), scrollActor.getY() - (int)(Math.sin(angle) * gun.dsGun)); 
     }
-    
+    //returning sprint bar for the survivor actor class to use
     public HUDsprintBar sprintBar()
     {
         return sprintHud; 
