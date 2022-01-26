@@ -40,7 +40,7 @@ public class GameWorld extends World
     HUDExtraDetails skull = new HUDExtraDetails("zombieKills.png", 30,40);
     HUDExtraDetails timeLeft = new HUDExtraDetails("timeLeft.png", 75, 40); 
     
-    // variables to keep track for chaning power ups
+    // variables to keep track for changing power ups
     int pos1 = 0;
     int pos2 = 1;
     int pos3 = 2;
@@ -48,10 +48,6 @@ public class GameWorld extends World
     int pos5 = 4;
     int pos6 = 5; 
     int pos7 = 6; 
-    //for logging in individual key strokes 
-    private boolean eDown; 
-    private boolean qDown; 
-    
     
     //all ammo labels 
     HUDAmmoLabels AmmoCounterMagazine;
@@ -68,9 +64,6 @@ public class GameWorld extends World
     Label countKills; 
     Label scoreCounter; 
     SimpleTimer generalTimer = new SimpleTimer(); 
-    
-    //sound effects 
-    GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
     
     //ammo variables
     public int MagazineHandgunAmmo = 7; 
@@ -318,158 +311,7 @@ public class GameWorld extends World
         //score calculator 
         finalScore = ((seconds / 10) * 100) + score;
         
-        //powerUp switching 
-        if(!qDown && Greenfoot.isKeyDown("q"))
-        {
-            powerUpsSwitchSoundEffect.setVolume(100);
-            powerUpsSwitchSoundEffect.play(); 
-            qDown = true;
-            removeObjects(getObjects(HUDPowerUps.class)); 
-            pos1++;
-            pos2++;
-            pos3++;
-            pos4++;
-            pos5++;
-            pos6++;
-            pos7++;
-            if(pos1 > 6)
-            {
-                pos1 = 0; 
-            }
-            if(pos2 > 6)
-            {
-                pos2 = 0; 
-            }
-            if(pos3 > 6)
-            {
-                pos3 = 0; 
-            }
-            if(pos4 > 6)
-            {
-                pos4 = 0; 
-            }
-            if(pos5 > 6)
-            {
-                pos5 = 0; 
-            }
-            if(pos6 > 6)
-            {
-                pos6 = 0; 
-            }
-            if(pos7 > 6)
-            {
-                pos7 = 0; 
-            }
-            addObject(powerUpsTracker.get(pos1),85, 585); 
-            addObject(powerUpsTracker.get(pos2), 180,530); 
-            addObject(powerUpsTracker.get(pos3), 280,585); 
-            addObject(powerUpsTracker.get(pos4), 300,680);
-            addObject(powerUpsTracker.get(pos5), 238,753);  
-            addObject(powerUpsTracker.get(pos6), 117,753);
-            addObject(powerUpsTracker.get(pos7), 65,680);  
-             
-            
-            
-           
-        }
-        if(qDown && !Greenfoot.isKeyDown("q"))
-        {
-            powerUpsSwitchSoundEffect.setVolume(100);
-            powerUpsSwitchSoundEffect.play();
-            qDown = false; 
-        }
-        if(!eDown && Greenfoot.isKeyDown("e"))
-        {
-            powerUpsSwitchSoundEffect.setVolume(100);
-            powerUpsSwitchSoundEffect.play(); 
-            eDown = true;
-            removeObjects(getObjects(HUDPowerUps.class)); 
-            pos1--;
-            pos2--;
-            pos3--;
-            pos4--;
-            pos5--;
-            pos6--;
-            pos7--;
-            if(pos1 < 0)
-            {
-                pos1 = 6; 
-            }
-            if(pos2 < 0)
-            {
-                pos2 = 6; 
-            }
-            if(pos3 < 0)
-            {
-                pos3 = 6; 
-            }
-            if(pos4 < 0)
-            {
-                pos4 = 6; 
-            }
-            if(pos5 < 0)
-            {
-                pos5 = 6; 
-            }
-             if(pos6 < 0)
-            {
-                pos6 = 6; 
-            }
-             if(pos7 < 0)
-            {
-                pos7 = 6; 
-            }
-            addObject(powerUpsTracker.get(pos1),85, 585); 
-            addObject(powerUpsTracker.get(pos2), 180,530); 
-            addObject(powerUpsTracker.get(pos3), 280,585); 
-            addObject(powerUpsTracker.get(pos4), 300,680);
-            addObject(powerUpsTracker.get(pos5), 238,753);  
-            addObject(powerUpsTracker.get(pos6), 117,753);
-            addObject(powerUpsTracker.get(pos7), 65,680);  
-            
-            
-           
-        }
-        if(eDown && !Greenfoot.isKeyDown("e"))
-        {
-            powerUpsSwitchSoundEffect.setVolume(100);
-            powerUpsSwitchSoundEffect.play(); 
-            eDown = false; 
-        }
-        //
-        
-        //display lables for knife
-        if(Greenfoot.isKeyDown("1"))
-        {
-            removeObjects(getObjects(HUDAmmoLabels.class)); 
-            addObject(AmmoCounterKnife, 1100, 750);
-            addObject(generalTime, 1000, 100);
-        }
-        //display lables for pistol
-        if(Greenfoot.isKeyDown("2"))
-        {
-            removeObjects(getObjects(HUDAmmoLabels.class)); 
-            addObject(AmmoCounterMagazine, 1100, 750); 
-            addObject(AmmoCounterTotal, 1150, 750); 
-            addObject(generalTime, 1000, 100);
-        }
-        // display lables for rifle 
-        if(Greenfoot.isKeyDown("3"))
-        {
-            removeObjects(getObjects(HUDAmmoLabels.class)); 
-            addObject(AmmoCounterMagazineRifle, 1075, 750); 
-            addObject(AmmoCounterTotalRifle, 1150, 750);
-            addObject(generalTime, 1000, 100);
-        }
-        // display lables for shotgun
-        if(Greenfoot.isKeyDown("4"))
-        {
-            removeObjects(getObjects(HUDAmmoLabels.class)); 
-            addObject(AmmoCounterMagazineShotgun, 1100, 750); 
-            addObject(AmmoCounterTotalShotgun, 1150, 750); 
-            addObject(generalTime, 1000, 100);
-        }
-        
+        //spawning zombie boss 
         if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % zombieSpawnInterval == 0)
         {
             zombieBoss zombieboss = new zombieBoss();
@@ -495,6 +337,7 @@ public class GameWorld extends World
             CurrentWeapon.setImage(gun.weapon); 
         }
         
+        //detect hitbox 
         hitbox.setRotation(scrollActor.getRotation());
         double angle = Math.toRadians(360 - scrollActor.getRotation()); 
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 

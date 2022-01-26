@@ -217,6 +217,7 @@ public class gun extends Actor
     }
     public void act() 
     {
+        GameWorld playerWorld = (GameWorld) getWorld(); 
         wait++; 
         if(Greenfoot.isKeyDown("1"))
         {
@@ -225,6 +226,10 @@ public class gun extends Actor
             pistolSelected = false; 
             rifleSelected = false; 
             shotgunSelected = false; 
+            //displaying specific gun image 
+            playerWorld.removeObjects(playerWorld.getObjects(HUDAmmoLabels.class)); 
+            playerWorld.addObject(playerWorld.AmmoCounterKnife, 1100, 750);
+            playerWorld.addObject(playerWorld.generalTime, 1000, 100);
         }
          if(Greenfoot.isKeyDown("2"))
         {
@@ -235,6 +240,11 @@ public class gun extends Actor
             pistolSelected = true; 
             rifleSelected = false; 
             shotgunSelected = false; 
+            //displaying specific gun image 
+            playerWorld.removeObjects( playerWorld.getObjects(HUDAmmoLabels.class)); 
+            playerWorld.addObject( playerWorld.AmmoCounterMagazine, 1100, 750); 
+            playerWorld.addObject( playerWorld.AmmoCounterTotal, 1150, 750); 
+            playerWorld.addObject( playerWorld.generalTime, 1000, 100);
         }
         
          if(Greenfoot.isKeyDown("3"))
@@ -246,6 +256,11 @@ public class gun extends Actor
             pistolSelected = false; 
             rifleSelected = true; 
             shotgunSelected = false; 
+            //displaying specific gun image 
+            playerWorld.removeObjects(playerWorld.getObjects(HUDAmmoLabels.class)); 
+            playerWorld.addObject(playerWorld.AmmoCounterMagazineRifle, 1075, 750); 
+            playerWorld.addObject(playerWorld.AmmoCounterTotalRifle, 1150, 750);
+            playerWorld.addObject(playerWorld.generalTime, 1000, 100);
         }
         
         if(Greenfoot.isKeyDown("4"))
@@ -257,7 +272,13 @@ public class gun extends Actor
             pistolSelected = false; 
             rifleSelected = false; 
             shotgunSelected = true; 
+            //displaying specific gun image 
+            playerWorld.removeObjects(playerWorld.getObjects(HUDAmmoLabels.class)); 
+            playerWorld.addObject(playerWorld.AmmoCounterMagazineShotgun, 1100, 750); 
+            playerWorld.addObject(playerWorld.AmmoCounterTotalShotgun, 1150, 750); 
+            playerWorld.addObject(playerWorld.generalTime, 1000, 100);
         }
+        
         if(pistolSelected == true)
         {
             HandgunShoot(); 

@@ -28,6 +28,7 @@ public class startingSurvivor extends Actor
     //logging keystrokes
     private boolean controlDown;  
     private boolean qDown;
+    private boolean eDown; 
     
     //powerUps
     SimpleTimer invincibilityTimer = new SimpleTimer();
@@ -42,6 +43,7 @@ public class startingSurvivor extends Actor
     GreenfootSound speedUpSoundEffect = new GreenfootSound("speedUp Sound Effect.mp3");
     GreenfootSound fastFireRateSoundEffect = new GreenfootSound("fast fire rate sound effect.mp3");
     GreenfootSound ammoPurchased = new GreenfootSound("ammopurchased.mp3");
+    GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -226,6 +228,119 @@ public class startingSurvivor extends Actor
         if(knifeWait > 40)
         {
             knifeWait = 0; 
+        }
+        
+        //powerUp switching 
+        if(!qDown && Greenfoot.isKeyDown("q"))
+        {
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play(); 
+            qDown = true;
+            playerWorld.removeObjects(playerWorld.getObjects(HUDPowerUps.class)); 
+            playerWorld.pos1++;
+            playerWorld.pos2++;
+            playerWorld.pos3++;
+            playerWorld.pos4++;
+            playerWorld.pos5++;
+            playerWorld.pos6++;
+            playerWorld.pos7++;
+            if(playerWorld.pos1 > 6)
+            {
+                playerWorld.pos1 = 0; 
+            }
+            if(playerWorld.pos2 > 6)
+            {
+                playerWorld.pos2 = 0; 
+            }
+            if(playerWorld.pos3 > 6)
+            {
+                playerWorld.pos3 = 0; 
+            }
+            if(playerWorld.pos4 > 6)
+            {
+                playerWorld.pos4 = 0; 
+            }
+            if(playerWorld.pos5 > 6)
+            {
+                playerWorld.pos5 = 0; 
+            }
+            if(playerWorld.pos6 > 6)
+            {
+                playerWorld.pos6 = 0; 
+            }
+            if(playerWorld.pos7 > 6)
+            {
+                playerWorld.pos7 = 0; 
+            }
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos1),85, 585); 
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos2), 180,530); 
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos3), 280,585); 
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos4), 300,680);
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos5), 238,753);  
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos6), 117,753);
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos7), 65,680);  
+        }
+        if(qDown && !Greenfoot.isKeyDown("q"))
+        {
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play();
+            qDown = false; 
+        }
+        
+         if(!eDown && Greenfoot.isKeyDown("e"))
+        {
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play(); 
+            eDown = true;
+            playerWorld.removeObjects(playerWorld.getObjects(HUDPowerUps.class)); 
+            playerWorld.pos1--;
+            playerWorld.pos2--;
+            playerWorld.pos3--;
+            playerWorld.pos4--;
+            playerWorld.pos5--;
+            playerWorld.pos6--;
+            playerWorld.pos7--;
+            if(playerWorld.pos1 < 0)
+            {
+                playerWorld.pos1 = 6; 
+            }
+            if(playerWorld.pos2 < 0)
+            {
+                playerWorld.pos2 = 6; 
+            }
+            if(playerWorld.pos3 < 0)
+            {
+                playerWorld.pos3 = 6; 
+            }
+            if(playerWorld.pos4 < 0)
+            {
+                playerWorld.pos4 = 6; 
+            }
+            if(playerWorld.pos5 < 0)
+            {
+                playerWorld.pos5 = 6; 
+            }
+             if(playerWorld.pos6 < 0)
+            {
+                playerWorld.pos6 = 6; 
+            }
+             if(playerWorld.pos7 < 0)
+            {
+                playerWorld.pos7 = 6; 
+            }
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos1),85, 585); 
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos2), 180,530); 
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos3), 280,585); 
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos4), 300,680);
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos5), 238,753);  
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos6), 117,753);
+            playerWorld.addObject(playerWorld.powerUpsTracker.get(playerWorld.pos7), 65,680);  
+        }
+        if(eDown && !Greenfoot.isKeyDown("e"))
+        {
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play(); 
+            eDown = false; 
         }
         
         //powerUps
