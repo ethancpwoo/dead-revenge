@@ -23,15 +23,12 @@ public class WinWorld extends World
     Label scoreLabel3; 
     Label currentHighScore;
     Label currentScore; 
-    
+    GreenfootSound bgm = new GreenfootSound("Tom Clancy's Siege (Original Game Soundtrack) _ Ben Frost - First Strike (Track 02).wav"); 
     GreenfootImage background;
     public WinWorld()
     {    
         super(1200, 800, 1); 
-        score = String.valueOf(GameWorld.score); 
-        //timeBonus = String.valueOf((GameWorld.seconds / 10) * 100); 
-        //finalScore = ((GameWorld.seconds / 10) * 100) + GameWorld.score;
-        //finalScoreString = String.valueOf(finalScore); 
+        score = String.valueOf(GameWorld.score);  
         background = new GreenfootImage("EndScreen.png");
         playAgain = new Button();
         quit = new Button(); //make objects
@@ -41,41 +38,25 @@ public class WinWorld extends World
         quit.after.scale(185, 78);
         Gear leftGear = new Gear(true); 
         Gear rightGear = new Gear(false);  
+        bgm.setVolume(10); 
+        //bgm.playLoop(); 
         
         //GameWorld.myInfoScore1.getScore()
         //UserInfo topUser2 = (UserInfo)GameWorld.myInfo.getTop(3).get(2);
-        currentScore = new Label(GameWorld.finalScore, 80); 
-        scoreLabel1 = new Label(GameWorld.myInfoScore1.getScore(), 80);
+        //currentScore = new Label(GameWorld.finalScore, 80); 
+        //scoreLabel1 = new Label(GameWorld.myInfoScore1.getScore(), 80);
         //scoreLabel2 = new Label(GameWorld.myInfoScore2.getScore(), 80);
         //scoreLabel3 = new Label(GameWorld.myInfoScore3.getScore(), 80);
        
        
         //scoreLabel = new Label(GameWorld.myInfo.getTop(1).get(0).getScore(), 80);
-        /*
-        background.setColor(gray);  
-        background.fill();  //pure beige background
-        background.setFont(titleFont); 
-        background.setColor(Color.BLACK); 
-        background.drawRect(100, 100, 1000, 600);
-        background.setColor(Color.WHITE); 
-        background.fillRect(101, 101, 999, 599);
-        background.setColor(Color.BLACK); //white rectangle with black outline
-        background.drawString("Game Over!", 450, 180);
-        background.drawString("Score", 530, 250);
-        background.drawString(score + " (Initial Score)", 530, 310);
-        background.drawString("+", 480, 340);
-        background.drawString(timeBonus + " (Time Bonus)", 530, 380);
-        background.drawString("------------------", 530, 450);
-        background.drawString(finalScore + " (Final Score)", 530, 490);
-        background.drawString("Play Again", 820, 580); 
-        background.drawString("Quit", 200, 580); 
-        background.drawString("Leaderboards", 440, 580);*/ 
+    
         addObject(playAgain, 475, 650);
         addObject(quit, 760, 650); 
         addObject(leftGear, 0, 800);
         addObject(rightGear, 1200, 800); 
-        addObject(currentScore, 600, 230);
-        addObject(scoreLabel1, 220, 400);
+        //addObject(currentScore, 600, 230);
+        //addObject(scoreLabel1, 220, 400);
         //addObject(scoreLabel2, 600, 400);
         //addObject(scoreLabel3, 970, 400);
         setBackground(background); //set background
@@ -90,10 +71,12 @@ public class WinWorld extends World
         quit.getImage().scale(185, 78);
         if(quit.touchingCursor() == true)
         {
+            bgm.stop(); 
             Greenfoot.stop(); //quit
         }
         if(playAgain.touchingCursor() == true)
         {
+            bgm.stop(); 
             Greenfoot.setWorld(new WelcomeWorld()); //restart back to welcome world 
         }
     }
