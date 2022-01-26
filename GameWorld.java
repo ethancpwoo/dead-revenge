@@ -9,8 +9,8 @@ import java.util.*;
 public class GameWorld extends World
 {
     
-    //GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
-    GreenfootImage grey = new GreenfootImage("map2.png");
+    GreenfootImage grey = new GreenfootImage(MapWorld.mapChoice); 
+    //GreenfootImage grey = new GreenfootImage("map2.png");
     public static int nCurrentZombies, nZombies, gunDistance, killCounter, zombieSpawnInterval; 
     private Scroller Scroller = null; 
     public static Actor scrollActor; 
