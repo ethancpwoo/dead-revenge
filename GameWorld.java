@@ -121,13 +121,13 @@ public class GameWorld extends World
         addObject(weapon, 950,750); 
         addObject(powerUpsDetail, 600, 400); 
         //powerUps
-        invincible.getImage().scale(40, 40);
-        pistolAmmo.getImage().scale(40, 40);
-        arAmmo.getImage().scale(40, 40); 
-        shotgunAmmo.getImage().scale(40, 40); 
-        fastFireRate.getImage().scale(40, 40);
-        healthUp.getImage().scale(40, 40);
-        speedUp.getImage().scale(40, 40);
+        invincible.getImage().scale(50, 50);
+        pistolAmmo.getImage().scale(50, 50);
+        arAmmo.getImage().scale(50, 50); 
+        shotgunAmmo.getImage().scale(50, 50); 
+        fastFireRate.getImage().scale(50, 50);
+        healthUp.getImage().scale(50, 50);
+        speedUp.getImage().scale(50, 50);
         powerUpsTracker.add(invincible);
         powerUpsTracker.add(pistolAmmo);
         powerUpsTracker.add(arAmmo);
