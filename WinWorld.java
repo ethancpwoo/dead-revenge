@@ -45,7 +45,7 @@ public class WinWorld extends World
         //GameWorld.myInfoScore1.getScore()
         //UserInfo topUser2 = (UserInfo)GameWorld.myInfo.getTop(3).get(2);
         currentScore = new Label(GameWorld.finalScore, 80); 
-        scoreLabel1 = new Label(GameWorld.myInfoScore1.getScore(), 80);
+        //scoreLabel1 = new Label(GameWorld.myInfoScore1.getScore(), 80);
         //scoreLabel2 = new Label(GameWorld.myInfoScore2.getScore(), 80);
         //scoreLabel3 = new Label(GameWorld.myInfoScore3.getScore(), 80);
        
@@ -75,7 +75,7 @@ public class WinWorld extends World
         addObject(leftGear, 0, 800);
         addObject(rightGear, 1200, 800); 
         addObject(currentScore, 600, 230);
-        addObject(scoreLabel1, 220, 400);
+        //addObject(scoreLabel1, 220, 400);
         //addObject(scoreLabel2, 600, 400);
         //addObject(scoreLabel3, 970, 400);
         setBackground(background); //set background

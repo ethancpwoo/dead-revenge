@@ -86,12 +86,9 @@ public class GameWorld extends World
     
     
     public static int finalScore = 0;
-    //high score and leaderboards
+    
+    //high score
     public static UserInfo myInfoScore1;
-    public static UserInfo myInfoScore2;
-    public static UserInfo myInfoScore3;
-    public static int secondScore; 
-    public static int thirdScore; 
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -105,7 +102,6 @@ public class GameWorld extends World
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
         moving.add(scrollActor); 
         scroll(); 
-        spawnPowerUp();
         generalTimer.mark(); 
         nZombies = 5;
         nCurrentZombies = 5;
@@ -196,7 +192,7 @@ public class GameWorld extends World
         }
         countKills.setValue(kills); 
     }
-    //Ammo methods - need to find a way to put them in a class; turn into interface?
+    //Ammo methods 
     public void ammoMagazine()
     {
         MagazineHandgunAmmo--; 
@@ -502,7 +498,7 @@ public class GameWorld extends World
             //invincibility 
             if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 1)
             {
-                //
+                player.invincibility(); 
                 kills = kills - 1; 
             }
             //healthUp
@@ -568,29 +564,16 @@ public class GameWorld extends World
         if (UserInfo.isStorageAvailable()) //this is for high score. 
         {
             myInfoScore1 = UserInfo.getMyInfo();
-            myInfoScore2 = UserInfo.getMyInfo();
-            myInfoScore3 = UserInfo.getMyInfo();//get the server info
             if(finalScore > myInfoScore1.getScore()) 
             {
                     myInfoScore1.setScore(finalScore);
                     myInfoScore1.store();
             }
-            /*
-            if(finalScore < myInfoScore1.getScore())
-            {
-                myInfoScore2.setScore(finalScore);
-                myInfoScore2.store();
-            }
-            if(finalScore < myInfoScore1.getScore() && finalScore < myInfoScore2.getScore() && finalScore > myInfoScore3.getScore())
-            {
-                myInfoScore3.setScore(finalScore);
-                myInfoScore3.store();
-            }
-            */
+            
         }
     }
     
-    
+    //zombie spawning methods
     private void scroll()
     {
         int loX = 550; 
@@ -640,17 +623,7 @@ public class GameWorld extends World
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
-    public void spawnPowerUp()
-    { 
-        healthUp healthUp = new healthUp(); 
-        Invincible invincible = new Invincible(); 
-        moreAmmo moreAmmo = new moreAmmo(); 
-        speedUp speedUp = new speedUp(); 
-        fastfirerate fastfirerate = new fastfirerate(); 
-        
-        
- 
-    }
+   
     public HUDsprintBar sprintBar()
     {
         return sprintHud; 
