@@ -30,7 +30,6 @@ comment20.params=
 comment20.target=void\ CurrentWeaponFollow()
 comment21.params=
 comment21.target=HUDsprintBar\ sprintBar()
-comment21.text=\r\n\ \ \ \ public\ static\ int\ getRandom(int[]\ array)\ \r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ int\ rnd\ \=\ new\ Random().nextInt(array.length);\r\n\ \ \ \ \ \ \ \ return\ array[rnd];\r\n\ \ \ \ }\r\n
 comment3.params=
 comment3.target=int\ getScore()
 comment4.params=
