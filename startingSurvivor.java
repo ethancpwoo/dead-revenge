@@ -25,8 +25,11 @@ public class startingSurvivor extends Actor
     public Color hole = new Color(0, 0, 0);  
     public static boolean moving, slowMoving;  
     
-    //powerUps
+    //logging keystrokes
     private boolean controlDown;  
+    private boolean qDown;
+    
+    //powerUps
     SimpleTimer invincibilityTimer = new SimpleTimer();
     SimpleTimer speedUpTimer = new SimpleTimer(); 
     SimpleTimer fastFireRateTimer = new SimpleTimer();  
@@ -73,16 +76,14 @@ public class startingSurvivor extends Actor
         gun.shotgunSelected = false; 
     }
     
-    /**
-       Animate the character
-       */
+    //animations 
     int imageIndex = 0;
     public void animate()
     {
         setImage(idle[imageIndex]); 
         imageIndex = (imageIndex + 1) % idle.length; 
     }
-    
+    //knife animations 
     int attackIndex = 0; 
     public void knifeAttack()
     {
@@ -137,15 +138,13 @@ public class startingSurvivor extends Actor
             
         }
     }
-    //
-    
+    //sound check method 
     public void soundCheck()
     {
         
         GreenfootSound slowRunning = new GreenfootSound("Minecraft Footsteps - Sound Effect (HD).wav"); 
         slowRunning.setVolume(50); 
     }
-    //
     
     //key methods for the player
     public void checkKeys()
@@ -322,7 +321,7 @@ public class startingSurvivor extends Actor
         }
     }
    
-    //
+    //world effects method 
     public void worldEffects()
     {
         GreenfootSound lavaSound = new GreenfootSound("Player Fire Hurt (Nr. 3 _ Minecraft Sound) - Sound Effect for editing.wav");
@@ -406,6 +405,7 @@ public class startingSurvivor extends Actor
             slowMoving = true; 
         }
     }
+    // checking for zombie damage against the survivor 
     public void checkDamage(int healthDamage)
     {
         if (timer.millisElapsed() > 250 )
@@ -424,6 +424,7 @@ public class startingSurvivor extends Actor
             timer.mark(); 
         }
     }
+    //toggling power up method 
     public void checkPowerUps()
     {
         //invincibility toggle 
@@ -461,21 +462,27 @@ public class startingSurvivor extends Actor
             Sprint(1);
         }
     }
-    public void act() 
-    {   
-        knifeWait++;
-        survivorX = getX();
-        survivorY = getY();
-        checkPowerUps(); 
-        MouseInfo m = Greenfoot.getMouseInfo();   
+    //mouse info method 
+    public void mouseInfo()
+    {
+        MouseInfo m = Greenfoot.getMouseInfo(); 
         if(m != null)
         {
             mouseData(m);
         }
-        
-        soundCheck();
-        worldEffects();
-        checkKeys(); //move 
+    }
+
+    
+    public void act() 
+    {   
+        mouseInfo(); //mouseInfo for the turning 
+        knifeWait++;  // knife delay 
+        survivorX = getX(); // getting x location of survivor for zombies
+        survivorY = getY(); // getting y location of survivor for zombies
+        checkPowerUps();  //toggling the power Ups on and off 
+        soundCheck();     // enabling sound 
+        worldEffects();   // enabling world effects
+        checkKeys(); //move character, use power ups, switch weapons and etc
 
     }  
     

@@ -73,8 +73,8 @@ public class GameWorld extends World
     GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
     
     //ammo variables
-    public int MagazineHandgunAmmo = 9; 
-    public int TotalHandgunAmmo = 18;
+    public int MagazineHandgunAmmo = 7; 
+    public int TotalHandgunAmmo = 14;
     public int MagazineRifleAmmo = 30; 
     public int TotalRifleAmmo = 0; 
     public int MagazineShotgunAmmo = 8;
@@ -294,24 +294,27 @@ public class GameWorld extends World
     
     public void act()
     {
+        //making sure weapon follows survivor 
         CurrentWeaponFollow(); 
+        //enabling scroll 
         if(scrollActor != null)
         {
             scroll(); 
         }
+        //survivor dies 
         if(startingSurvivor.health <= 0)
         {
             wind.stop(); 
             ambience.stop(); 
             Greenfoot.setWorld(new WinWorld()); 
         }
+        //spawn zombies 
         if(nCurrentZombies <= 0)
         {
             nZombies++;
             nCurrentZombies = nZombies; 
             zombieSpawn(nZombies); 
         }
-        
         //score calculator 
         finalScore = ((seconds / 10) * 100) + score;
         
