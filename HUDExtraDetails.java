@@ -1,10 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HUDPowerUpsDetail here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * extra details on the hud (skull, timer and etc)
  */
 public class HUDExtraDetails extends Actor
 {

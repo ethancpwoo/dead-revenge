@@ -1,15 +1,14 @@
 import greenfoot.*;    
 import java.util.*;
-
- /**
-     * Write a description of class Utilities here.
-     * 
-     * @author (your name) 
-     * @version (a version number or a date)
-     */
+/*
+   utility class 
+   consists all algorithms 
+   
+   */
+ 
     public class Utilities  
     {
-    
+
     public Utilities()
     {
     }

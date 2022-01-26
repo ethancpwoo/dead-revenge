@@ -8,6 +8,7 @@ import java.util.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * @Ethan Woo and Kenny Zhao
  * @Fall 2021
+ * winning the game, display high scores
  */
 
 public class WinWorld extends World

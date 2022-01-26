@@ -1,10 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HUDHealthBar here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * health bar display 
  */
 public class HUDHealthBar extends Actor
 {

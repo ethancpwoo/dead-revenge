@@ -1,20 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ChoosenWeapon here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * display what weapon the character has 
  */
 
 
 
 public class HUDChoosenWeapon extends Actor
 {
-    /**
-     * Act - do whatever the ChoosenWeapon wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+  
     GreenfootImage pistol = new GreenfootImage("pistol.png");
     GreenfootImage rifle = new GreenfootImage("rifle.png");
     GreenfootImage shotgun = new GreenfootImage("shotgun.png"); 

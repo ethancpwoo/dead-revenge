@@ -1,5 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+//labels for ammo (same as label class) this is so we can remove the ammo labels
+// without affecting the labels of the timer and etc.
+
+
 public class HUDAmmoLabels extends Actor
 {
     private String value;

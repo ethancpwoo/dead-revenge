@@ -1,11 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class mapWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+ * map world for setting up the maps
+ **/
 public class MapWorld extends World
 {
     Button easy, medium, hard; 
