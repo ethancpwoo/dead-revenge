@@ -224,7 +224,10 @@ public class startingSurvivor extends Actor
         {
             hitBox.active = false; 
         }
-        
+        if(knifeWait > 40)
+        {
+            knifeWait = 0; 
+        }
         
         //powerUps
          if(!controlDown && Greenfoot.isKeyDown("control"))
@@ -421,11 +424,10 @@ public class startingSurvivor extends Actor
             timer.mark(); 
         }
     }
-    
-    public void act() 
-    {   
+    public void checkPowerUps()
+    {
         //invincibility toggle 
-        if(invincibilityTimer.millisElapsed() < 3000 && invincibilityToggle == true)
+        if(invincibilityTimer.millisElapsed() < 7000 && invincibilityToggle == true)
         {
             checkDamage(0);
         }
@@ -435,7 +437,7 @@ public class startingSurvivor extends Actor
             checkDamage(5); 
         }
         //fastFireRateToggle 
-        if(fastFireRateTimer.millisElapsed() < 5000 &&  fastFireRateToggle == true)
+        if(fastFireRateTimer.millisElapsed() < 7000 &&  fastFireRateToggle == true)
         {
             gunFireRateChange.cooldownShootingRifle = 5; 
             gunFireRateChange.cooldownShootingHandgun = 7;
@@ -458,19 +460,19 @@ public class startingSurvivor extends Actor
             speedUpToggle = false; 
             Sprint(1);
         }
-        
+    }
+    public void act() 
+    {   
         knifeWait++;
         survivorX = getX();
         survivorY = getY();
+        checkPowerUps(); 
         MouseInfo m = Greenfoot.getMouseInfo();   
         if(m != null)
         {
             mouseData(m);
         }
-        if(knifeWait > 40)
-        {
-            knifeWait = 0; 
-        }
+        
         soundCheck();
         worldEffects();
         checkKeys(); //move 

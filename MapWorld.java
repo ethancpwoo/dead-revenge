@@ -27,9 +27,9 @@ public class MapWorld extends World
         easy.after.scale(148, 52); 
         medium.after.scale(148, 52); 
         hard.after.scale(148, 52);
-        GreenfootImage map1 = new GreenfootImage("map.png");
-        GreenfootImage map2 = new GreenfootImage("map2.png");
-        GreenfootImage map3 = new GreenfootImage("map3.png");
+        GreenfootImage map1 = new GreenfootImage("map1icon.png");
+        GreenfootImage map2 = new GreenfootImage("map2icon.png");
+        GreenfootImage map3 = new GreenfootImage("map3icon.png");
         GreenfootImage easyTitle = new GreenfootImage("easy.png"); 
         GreenfootImage mediumTitle = new GreenfootImage("medium.png"); 
         GreenfootImage hardTitle = new GreenfootImage("hard.png"); 
@@ -38,8 +38,8 @@ public class MapWorld extends World
         map2.scale(300, 300);
         map3.scale(300, 300);
         background.drawImage(map1, 100, 400); 
-        background.drawImage(map2, 800, 400);
-        background.drawImage(map3, 450, 400);
+        background.drawImage(map2, 450, 400);
+        background.drawImage(map3, 800, 400);
         background.drawImage(easyTitle, 150, 225); 
         background.drawImage(mediumTitle, 450, 225);
         background.drawImage(hardTitle, 850, 225);
@@ -66,13 +66,13 @@ public class MapWorld extends World
         }
         if(medium.touchingCursor()) 
         {
-            mapChoice = "map3.png"; 
+            mapChoice = "map2.png"; 
             Greenfoot.setWorld(new GameWorld()); //go to choosing difficulty 
             
         }
         if(hard.touchingCursor()) 
         {
-            mapChoice = "map2.png"; 
+            mapChoice = "map3.png"; 
             Greenfoot.setWorld(new GameWorld()); //go to choosing difficulty 
             
         }

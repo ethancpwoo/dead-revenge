@@ -87,7 +87,7 @@ public class GameWorld extends World
     
     //variable to keep track of the final score of the user, includes time bonus
     public static int finalScore = 0;
-    
+    GreenfootSound ambience, wind; 
     //userInfo for the high score 
     public static UserInfo myInfoScore1;
     /**
@@ -98,6 +98,12 @@ public class GameWorld extends World
     {    
         super(1200, 800, 1, false); 
         WelcomeWorld.bgm.stop(); 
+        wind = new GreenfootSound("Strong Wind Blowing Sound (Background Sound Effect).wav"); 
+        ambience = new GreenfootSound("Minecraft Zombie - Sound Effect.wav"); 
+        ambience.setVolume(60);
+        wind.setVolume(30); 
+        ambience.playLoop(); 
+        wind.playLoop(); 
         Scroller = new Scroller(this, grey, grey.getWidth(), grey.getHeight()); 
         scrollActor = new startingSurvivor(); 
         addObject(scrollActor, grey.getWidth()/2, grey.getHeight()/2);
@@ -295,6 +301,8 @@ public class GameWorld extends World
         }
         if(startingSurvivor.health <= 0)
         {
+            wind.stop(); 
+            ambience.stop(); 
             Greenfoot.setWorld(new WinWorld()); 
         }
         if(nCurrentZombies <= 0)
@@ -489,17 +497,6 @@ public class GameWorld extends World
         hitbox.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * 30), scrollActor.getY() - (int)(Math.sin(angle) * 30)); 
         updateTimer(); 
         
-        //for the high score 
-        if (UserInfo.isStorageAvailable()) //this is for high score. 
-        {
-            myInfoScore1 = UserInfo.getMyInfo();
-            if(finalScore > myInfoScore1.getScore()) 
-            {
-                    myInfoScore1.setScore(finalScore);
-                    myInfoScore1.store();
-            }
-            
-        }
     }
     
     //zombie spawning methods

@@ -45,7 +45,7 @@ public class WinWorld extends World
         Gear leftGear = new Gear(true); 
         Gear rightGear = new Gear(false);  
         bgm.setVolume(10); 
-        //bgm.playLoop(); 
+        bgm.playLoop(); 
         currentScore = new Label(GameWorld.finalScore, 80);
         File scoresheet = new File("highScores.txt"); 
         try
