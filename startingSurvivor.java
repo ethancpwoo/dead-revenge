@@ -24,9 +24,16 @@ public class startingSurvivor extends Actor
     public Color darkGrass = new Color(0, 67, 55);
     public Color hole = new Color(0, 0, 0);  
     public static boolean moving, slowMoving;  
-    //
-    SimpleTimer infiniteStamina = new SimpleTimer();
-    public static boolean infStamina; 
+    
+    //powerUps
+    private boolean controlDown;  
+    SimpleTimer invincibilityTimer = new SimpleTimer();
+    SimpleTimer speedUpTimer = new SimpleTimer(); 
+    SimpleTimer fastFireRateTimer = new SimpleTimer();  
+    public static boolean invincibilityToggle; 
+    public static boolean speedUpToggle; 
+    public static boolean fastFireRateToggle; 
+    gun gunFireRateChange = new gun(); 
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -40,7 +47,9 @@ public class startingSurvivor extends Actor
         timer.mark();
         timer1.mark();
         timer2.mark();
-          
+        
+    
+        
         for(int i = 0; i < idle.length; i++)
         {
             idle[i] = new GreenfootImage("images/Top_Down_Survivor/knife/move/survivor-move_knife_" + i + ".png");
@@ -93,7 +102,7 @@ public class startingSurvivor extends Actor
     //
     
     //sprinting method 
-    public void Sprint()
+    public void Sprint(int sprintChange)
     {
         GameWorld playerWorld = (GameWorld) getWorld(); 
         
@@ -102,8 +111,8 @@ public class startingSurvivor extends Actor
         if(Greenfoot.isKeyDown("Shift") && stamina > 5)
         {
              movementSpeed = 10;    
-             stamina = stamina - 1; 
-             sprintingBar.loseStamina(); 
+             stamina = stamina - sprintChange; 
+             sprintingBar.loseStamina(sprintChange); 
              if(stamina <= 5)
              {
                 stamina = 0;
@@ -114,8 +123,8 @@ public class startingSurvivor extends Actor
         else
         {
             movementSpeed = 5; 
-            stamina = stamina + 1;
-            sprintingBar.gainStamina(); 
+            stamina = stamina + sprintChange;
+            sprintingBar.gainStamina(sprintChange); 
             if(stamina >= 100){
                 stamina = 100; 
                 stamina = stamina + 0;
@@ -295,7 +304,7 @@ public class startingSurvivor extends Actor
             slowMoving = true; 
         }
     }
-    public void checkDamage()
+    public void checkDamage(int healthDamage)
     {
         if (timer.millisElapsed() > 250 )
         {
@@ -308,38 +317,88 @@ public class startingSurvivor extends Actor
                     zombieDamage.play(); 
                 }
                 
-                startingSurvivor.health = startingSurvivor.health - 5; 
+                startingSurvivor.health = startingSurvivor.health - healthDamage; 
             }
             timer.mark(); 
         }
     }
-    //for power ups
-    public void healthUp()
-    {
-        health = 100; 
-    }
-    public void staminaPowerUp()
-    {
-        stamina = 100; 
-    }
-    
-    
-    public void invincibility()
-    {
-        infiniteStamina.mark(); 
-        infStamina = true; 
-    }
     
     public void act() 
-    {
-        if(infiniteStamina.millisElapsed() < 5000 && infStamina == true)
+    {   
+        GameWorld playerWorld = (GameWorld) getWorld(); 
+        
+        if(!controlDown && Greenfoot.isKeyDown("control"))
         {
-            health--; 
+            controlDown = true; 
+            //invincibility 
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.invincible) && playerWorld.kills >= 1)
+            {
+                playerWorld.kills = playerWorld.kills - 1; 
+                invincibilityTimer.mark(); 
+                invincibilityToggle = true; 
+            }
+            //healthUp
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.healthUp) && playerWorld.kills >= 1)
+            {
+                playerWorld.kills = playerWorld.kills - 1; 
+                health = 100;
+            }
+            //speedUp
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.speedUp) && playerWorld.kills >= 1)
+            {
+                playerWorld.kills = playerWorld.kills - 1; 
+                speedUpTimer.mark(); 
+                speedUpToggle = true; 
+            }
+            //fast fire rate
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.fastFireRate) && playerWorld.kills >= 1)
+            {
+                playerWorld.kills = playerWorld.kills - 1; 
+                fastFireRateTimer.mark(); 
+                fastFireRateToggle = true; 
+                
+            }
+        }
+        if(controlDown && !Greenfoot.isKeyDown("control"))
+        {
+            controlDown = false; 
+        }
+        
+        //invincibility toggle 
+        if(invincibilityTimer.millisElapsed() < 3000 && invincibilityToggle == true)
+        {
+            checkDamage(0);
         }
         else
         {
-            infStamina = false; 
+            invincibilityToggle = false; 
+            checkDamage(5); 
         }
+        //fastFireRateToggle 
+        if(fastFireRateTimer.millisElapsed() < 3000 &&  fastFireRateToggle == true)
+        {
+            gunFireRateChange.cooldownShootingRifle = 5; 
+            gunFireRateChange.cooldownShootingHandgun = 7;
+            gunFireRateChange.cooldownShootingShotgun = 50; 
+        }
+        else
+        {
+            gunFireRateChange.cooldownShootingRifle = 9; 
+            gunFireRateChange.cooldownShootingHandgun = 12; 
+            gunFireRateChange.cooldownShootingShotgun = 75; 
+            fastFireRateToggle = false; 
+        }
+        //speedUp
+        if(speedUpTimer.millisElapsed() < 3000 &&  speedUpToggle == true)
+        {
+            Sprint(0);
+        }
+        else
+        {
+            speedUpToggle = false; 
+            Sprint(1);
+        }
+        
         knifeWait++;
         survivorX = getX();
         survivorY = getY();
@@ -353,8 +412,7 @@ public class startingSurvivor extends Actor
             knifeWait = 0; 
         }
         soundCheck(); 
-        Sprint();   //sprint 
-        checkDamage(); 
+    
         worldEffects();
          
     

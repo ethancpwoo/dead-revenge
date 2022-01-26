@@ -68,7 +68,7 @@ public class GameWorld extends World
     Label scoreCounter; 
     SimpleTimer generalTimer = new SimpleTimer(); 
     
-    //sound effects - need to trim clip 
+    //sound effects 
     GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
     
     //ammo variables - will add to seperate class later 
@@ -308,10 +308,11 @@ public class GameWorld extends World
         finalScore = ((seconds / 10) * 100) + score;
         
         //powerUp switching 
-        if(!eDown && Greenfoot.isKeyDown("e"))
+        if(!qDown && Greenfoot.isKeyDown("q"))
         {
-            //powerUpsSwitchSoundEffect.play(); 
-            eDown = true;
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play(); 
+            qDown = true;
             removeObjects(getObjects(HUDPowerUps.class)); 
             pos1++;
             pos2++;
@@ -348,7 +349,7 @@ public class GameWorld extends World
             {
                 pos7 = 0; 
             }
-             addObject(powerUpsTracker.get(pos1),85, 585); 
+            addObject(powerUpsTracker.get(pos1),85, 585); 
             addObject(powerUpsTracker.get(pos2), 180,530); 
             addObject(powerUpsTracker.get(pos3), 280,585); 
             addObject(powerUpsTracker.get(pos4), 300,680);
@@ -360,14 +361,17 @@ public class GameWorld extends World
             
            
         }
-        if(eDown && !Greenfoot.isKeyDown("e"))
+        if(qDown && !Greenfoot.isKeyDown("q"))
         {
-            eDown = false; 
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play();
+            qDown = false; 
         }
-        if(!qDown && Greenfoot.isKeyDown("q"))
+        if(!eDown && Greenfoot.isKeyDown("e"))
         {
-            //powerUpsSwitchSoundEffect.play(); 
-            qDown = true;
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play(); 
+            eDown = true;
             removeObjects(getObjects(HUDPowerUps.class)); 
             pos1--;
             pos2--;
@@ -415,9 +419,11 @@ public class GameWorld extends World
             
            
         }
-        if(qDown && !Greenfoot.isKeyDown("q"))
+        if(eDown && !Greenfoot.isKeyDown("e"))
         {
-            qDown = false; 
+            powerUpsSwitchSoundEffect.setVolume(100);
+            powerUpsSwitchSoundEffect.play(); 
+            eDown = false; 
         }
         //
         
@@ -483,9 +489,9 @@ public class GameWorld extends World
             //shotgunAmmo
             if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(shotgunAmmo) && kills >= 1)
             {
-                if(ammoTotalIndicatorShotgun() <= 72)
+                if(ammoTotalIndicatorShotgun() <= 64)
                 {
-                     TotalShotgunAmmo = ammoTotalIndicatorShotgun() + 8; 
+                     TotalShotgunAmmo = ammoTotalIndicatorShotgun() + 16; 
                     AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
                 }
                 else
@@ -495,31 +501,8 @@ public class GameWorld extends World
                 }
                 kills = kills - 1; 
             }
-            //invincibility 
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(invincible) && kills >= 1)
-            {
-                player.invincibility(); 
-                kills = kills - 1; 
-            }
-            //healthUp
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(healthUp) && kills >= 1)
-            {
-                player.healthUp(); 
-                kills = kills - 1; 
-            }
-            //speedUp
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(speedUp) && kills >= 1)
-            {
-                player.staminaPowerUp();
-                //sprintHud.staminaBarReset(); 
-                kills = kills - 1; 
-            }
-            //fastFireRate
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(fastFireRate) && kills >= 1)
-            {
-                System.out.println("fastFireRate");
-                kills = kills - 1; 
-            }
+            //invincibility, healthup and infiniteStamina and fastFireRate 
+            // all in startingSurvivor class             
         }
         if(controlDown && !Greenfoot.isKeyDown("control"))
         {

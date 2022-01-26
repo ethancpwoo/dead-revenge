@@ -10,7 +10,8 @@ public class WelcomeWorld extends World
     Button play; 
     Button instructions;
     SimpleTimer timer = new SimpleTimer(); 
-    public static GreenfootSound bgm = new GreenfootSound("Operation Phantom Sight - Theme Song OST - Rainbow Six Siege.wav"); 
+    public static GreenfootSound bgm = new GreenfootSound("Operation Phantom Sight - Theme Song OST - Rainbow Six Siege.wav");
+    
     public WelcomeWorld()
     {            
         super(1200,800, 1);
@@ -30,13 +31,16 @@ public class WelcomeWorld extends World
         addObject(play, 400, 500); 
         addObject(instructions,800, 500); //add objects to the world
         addObject(leftGear, 0, 800);
-        addObject(rightGear, 1200, 800); 
+        addObject(rightGear, 1200, 800);
         setBackground(background);
         bgm.playLoop(); 
     }
+    
+   
+    
     public void act()
     {
-        
+       
         if(play.touchingCursor()) 
         {
             Greenfoot.setWorld(new MapWorld()); //go to choosing difficulty 

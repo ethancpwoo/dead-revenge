@@ -217,7 +217,7 @@ public class gun extends Actor
     }
     public void act() 
     {
-                wait++; 
+        wait++; 
         if(Greenfoot.isKeyDown("1"))
         {
             setImage(blank); 

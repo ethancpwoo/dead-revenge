@@ -34,18 +34,18 @@ public class HUDsprintBar extends Actor
         myImage.setColor(Color.BLUE);
         myImage.fillRect(1, 1, sprint*pixelsPerSprintPoint, sprintBarHeight);
     }
-    public void loseStamina()
+    public void loseStamina(int lose)
     {
-        sprint--;
+        sprint = sprint - lose;
         if(sprint <= 5)
         {
             sprint = 0; 
             sprint = sprint - 0; 
         }
     }
-    public void gainStamina()
+    public void gainStamina(int gain)
     {
-        sprint++; 
+        sprint = sprint + gain; 
         if(sprint >= 100)
         {
             sprint = 100; 
