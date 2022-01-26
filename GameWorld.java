@@ -21,6 +21,7 @@ public class GameWorld extends World
     
     gun CurrentWeapon = new gun(); 
     hitBox hitbox = new hitBox(); 
+    Utilities ut = new Utilities(); 
 
     //HUD CLASSES
     HUDExtraDetails powerUpsDetail = new HUDExtraDetails("powerUps Hud.png", 1200, 800);
@@ -534,7 +535,7 @@ public class GameWorld extends World
         }
         Zombie zombs = new Zombie(); 
         moving.add(zombs); 
-        addObject(zombs, getRandom(positionX), getRandom(positionY)); 
+        addObject(zombs, ut.getRandom(positionX), ut.getRandom(positionY)); 
         zombieSpawn(countDown - 1); 
     }
     public void CurrentWeaponFollow()
@@ -544,14 +545,17 @@ public class GameWorld extends World
         CurrentWeapon.setLocation(scrollActor.getX() + (int)(Math.cos(angle) * gun.dsGun), scrollActor.getY() - (int)(Math.sin(angle) * gun.dsGun)); 
     }
     
+    /*
     public static int getRandom(int[] array) 
     {
         int rnd = new Random().nextInt(array.length);
         return array[rnd];
     }
-   
+    */
+    
     public HUDsprintBar sprintBar()
     {
         return sprintHud; 
     }
+    
 }

@@ -15,4 +15,6 @@ comment6.params=arr
 comment6.target=void\ quickSort(int[])
 comment7.params=arr\ lo\ hi
 comment7.target=void\ quicksort(int[],\ int,\ int)
-numComments=8
+comment8.params=array
+comment8.target=int\ getRandom(int[])
+numComments=9

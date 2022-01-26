@@ -1,4 +1,6 @@
 import greenfoot.*;    
+import java.util.*;
+
  /**
      * Write a description of class Utilities here.
      * 
@@ -69,5 +71,12 @@ import greenfoot.*;
          quicksort(arr, lo, j-1); 
          quicksort(arr, j+1, hi); 
     }
-
+    
+    public static int getRandom(int[] array) 
+    {
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
+    }
+     
+    
 }
