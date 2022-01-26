@@ -232,16 +232,16 @@ public class startingSurvivor extends Actor
             controlDown = true; 
             
             //pistol
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.pistolAmmo) && playerWorld.kills >= 1)
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.pistolAmmo) && playerWorld.kills >= 5)
             {
                 ammoPurchased.setVolume(50); 
                 ammoPurchased.play(); 
                 playerWorld.TotalHandgunAmmo = playerWorld.ammoTotalIndicator() + (70 - playerWorld.ammoTotalIndicator()); 
                 playerWorld.AmmoCounterTotal.setValue(playerWorld.TotalHandgunAmmo);
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 5; 
             }
             //rifle
-             if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.arAmmo) && playerWorld.kills >= 1)
+             if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.arAmmo) && playerWorld.kills >= 20)
             {   
                 ammoPurchased.setVolume(50); 
                 ammoPurchased.play(); 
@@ -256,10 +256,10 @@ public class startingSurvivor extends Actor
                     playerWorld.AmmoCounterTotalRifle.setValue(playerWorld.TotalRifleAmmo);
                 }
                 
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 20; 
             }
             //shotgunAmmo
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.shotgunAmmo) && playerWorld.kills >= 1)
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.shotgunAmmo) && playerWorld.kills >= 10)
             {   
                 ammoPurchased.setVolume(50); 
                 ammoPurchased.play(); 
@@ -273,41 +273,41 @@ public class startingSurvivor extends Actor
                     playerWorld.TotalShotgunAmmo = playerWorld.ammoTotalIndicatorShotgun() + (80 - playerWorld.ammoTotalIndicatorShotgun()); 
                     playerWorld.AmmoCounterTotalShotgun.setValue(playerWorld.TotalShotgunAmmo);
                 }
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 10; 
             }
             
             //invincibility 
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.invincible) && playerWorld.kills >= 1)
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.invincible) && playerWorld.kills >= 50)
             {
                 invinciblilitySoundEffect.setVolume(50); 
                 invinciblilitySoundEffect.play();
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 50; 
                 invincibilityTimer.mark(); 
                 invincibilityToggle = true; 
             }
             //healthUp
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.healthUp) && playerWorld.kills >= 1)
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.healthUp) && playerWorld.kills >= 15)
             {
                 HealthSoundEffect.setVolume(50); 
                 HealthSoundEffect.play(); 
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 15; 
                 health = 100;
             }
             //speedUp
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.speedUp) && playerWorld.kills >= 1)
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.speedUp) && playerWorld.kills >= 15)
             {
                 speedUpSoundEffect.setVolume(30); 
                 speedUpSoundEffect.play(); 
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 15; 
                 speedUpTimer.mark(); 
                 speedUpToggle = true; 
             }
             //fast fire rate
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.fastFireRate) && playerWorld.kills >= 1)
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.fastFireRate) && playerWorld.kills >= 20)
             {
                 fastFireRateSoundEffect.setVolume(40); 
                 fastFireRateSoundEffect.play(); 
-                playerWorld.kills = playerWorld.kills - 1; 
+                playerWorld.kills = playerWorld.kills - 20; 
                 fastFireRateTimer.mark(); 
                 fastFireRateToggle = true; 
                 
@@ -435,7 +435,7 @@ public class startingSurvivor extends Actor
             checkDamage(5); 
         }
         //fastFireRateToggle 
-        if(fastFireRateTimer.millisElapsed() < 3000 &&  fastFireRateToggle == true)
+        if(fastFireRateTimer.millisElapsed() < 5000 &&  fastFireRateToggle == true)
         {
             gunFireRateChange.cooldownShootingRifle = 5; 
             gunFireRateChange.cooldownShootingHandgun = 7;
@@ -449,7 +449,7 @@ public class startingSurvivor extends Actor
             fastFireRateToggle = false; 
         }
         //speedUpToggle
-        if(speedUpTimer.millisElapsed() < 3000 &&  speedUpToggle == true)
+        if(speedUpTimer.millisElapsed() < 7000 &&  speedUpToggle == true)
         {
             Sprint(0);
         }
