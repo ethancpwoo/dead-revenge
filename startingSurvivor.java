@@ -34,6 +34,11 @@ public class startingSurvivor extends Actor
     public static boolean speedUpToggle; 
     public static boolean fastFireRateToggle; 
     gun gunFireRateChange = new gun(); 
+    GreenfootSound invinciblilitySoundEffect = new GreenfootSound("invincible power up sound effect.mp3");
+    GreenfootSound HealthSoundEffect = new GreenfootSound("applying medkit.mp3");
+    GreenfootSound speedUpSoundEffect = new GreenfootSound("speedUp Sound Effect.mp3");
+    GreenfootSound fastFireRateSoundEffect = new GreenfootSound("fast fire rate sound effect.mp3");
+    GreenfootSound ammoPurchased = new GreenfootSound("ammopurchased.mp3");
     /**
      * Act - do whatever the survivorIdleKnife wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -142,9 +147,10 @@ public class startingSurvivor extends Actor
     }
     //
     
-    //move
+    //key methods for the player
     public void checkKeys()
     {
+        GameWorld playerWorld = (GameWorld) getWorld(); 
         //GreenfootSound running
         GreenfootSound running = new GreenfootSound("Valorant - Steps & Stepping - Gaming Sound Effect Valorant (HD) _ Sound Effects.wav");
         running.setVolume(50);
@@ -217,6 +223,99 @@ public class startingSurvivor extends Actor
         else
         {
             hitBox.active = false; 
+        }
+        
+        
+        //powerUps
+         if(!controlDown && Greenfoot.isKeyDown("control"))
+        {
+            controlDown = true; 
+            
+            //pistol
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.pistolAmmo) && playerWorld.kills >= 1)
+            {
+                ammoPurchased.setVolume(50); 
+                ammoPurchased.play(); 
+                playerWorld.TotalHandgunAmmo = playerWorld.ammoTotalIndicator() + (70 - playerWorld.ammoTotalIndicator()); 
+                playerWorld.AmmoCounterTotal.setValue(playerWorld.TotalHandgunAmmo);
+                playerWorld.kills = playerWorld.kills - 1; 
+            }
+            //rifle
+             if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.arAmmo) && playerWorld.kills >= 1)
+            {   
+                ammoPurchased.setVolume(50); 
+                ammoPurchased.play(); 
+                if(playerWorld.ammoTotalIndicatorRifle() <= 240)
+                {
+                    playerWorld.TotalRifleAmmo = playerWorld.ammoTotalIndicatorRifle() + 60; 
+                    playerWorld.AmmoCounterTotalRifle.setValue(playerWorld.TotalRifleAmmo);
+                }
+                else
+                {
+                    playerWorld.TotalRifleAmmo = playerWorld.ammoTotalIndicatorRifle() + (300 - playerWorld.ammoTotalIndicatorRifle()); 
+                    playerWorld.AmmoCounterTotalRifle.setValue(playerWorld.TotalRifleAmmo);
+                }
+                
+                playerWorld.kills = playerWorld.kills - 1; 
+            }
+            //shotgunAmmo
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.shotgunAmmo) && playerWorld.kills >= 1)
+            {   
+                ammoPurchased.setVolume(50); 
+                ammoPurchased.play(); 
+                if(playerWorld.ammoTotalIndicatorShotgun() <= 64)
+                {
+                    playerWorld.TotalShotgunAmmo = playerWorld.ammoTotalIndicatorShotgun() + 16; 
+                    playerWorld.AmmoCounterTotalShotgun.setValue(playerWorld.TotalShotgunAmmo);
+                }
+                else
+                {
+                    playerWorld.TotalShotgunAmmo = playerWorld.ammoTotalIndicatorShotgun() + (80 - playerWorld.ammoTotalIndicatorShotgun()); 
+                    playerWorld.AmmoCounterTotalShotgun.setValue(playerWorld.TotalShotgunAmmo);
+                }
+                playerWorld.kills = playerWorld.kills - 1; 
+            }
+            
+            //invincibility 
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.invincible) && playerWorld.kills >= 1)
+            {
+                invinciblilitySoundEffect.setVolume(50); 
+                invinciblilitySoundEffect.play();
+                playerWorld.kills = playerWorld.kills - 1; 
+                invincibilityTimer.mark(); 
+                invincibilityToggle = true; 
+            }
+            //healthUp
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.healthUp) && playerWorld.kills >= 1)
+            {
+                HealthSoundEffect.setVolume(50); 
+                HealthSoundEffect.play(); 
+                playerWorld.kills = playerWorld.kills - 1; 
+                health = 100;
+            }
+            //speedUp
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.speedUp) && playerWorld.kills >= 1)
+            {
+                speedUpSoundEffect.setVolume(30); 
+                speedUpSoundEffect.play(); 
+                playerWorld.kills = playerWorld.kills - 1; 
+                speedUpTimer.mark(); 
+                speedUpToggle = true; 
+            }
+            //fast fire rate
+            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.fastFireRate) && playerWorld.kills >= 1)
+            {
+                fastFireRateSoundEffect.setVolume(40); 
+                fastFireRateSoundEffect.play(); 
+                playerWorld.kills = playerWorld.kills - 1; 
+                fastFireRateTimer.mark(); 
+                fastFireRateToggle = true; 
+                
+            }
+        }
+        if(controlDown && !Greenfoot.isKeyDown("control"))
+        {
+            controlDown = false; 
         }
     }
    
@@ -325,45 +424,6 @@ public class startingSurvivor extends Actor
     
     public void act() 
     {   
-        GameWorld playerWorld = (GameWorld) getWorld(); 
-        
-        if(!controlDown && Greenfoot.isKeyDown("control"))
-        {
-            controlDown = true; 
-            //invincibility 
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.invincible) && playerWorld.kills >= 1)
-            {
-                playerWorld.kills = playerWorld.kills - 1; 
-                invincibilityTimer.mark(); 
-                invincibilityToggle = true; 
-            }
-            //healthUp
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.healthUp) && playerWorld.kills >= 1)
-            {
-                playerWorld.kills = playerWorld.kills - 1; 
-                health = 100;
-            }
-            //speedUp
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.speedUp) && playerWorld.kills >= 1)
-            {
-                playerWorld.kills = playerWorld.kills - 1; 
-                speedUpTimer.mark(); 
-                speedUpToggle = true; 
-            }
-            //fast fire rate
-            if(playerWorld.getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(playerWorld.fastFireRate) && playerWorld.kills >= 1)
-            {
-                playerWorld.kills = playerWorld.kills - 1; 
-                fastFireRateTimer.mark(); 
-                fastFireRateToggle = true; 
-                
-            }
-        }
-        if(controlDown && !Greenfoot.isKeyDown("control"))
-        {
-            controlDown = false; 
-        }
-        
         //invincibility toggle 
         if(invincibilityTimer.millisElapsed() < 3000 && invincibilityToggle == true)
         {
@@ -388,7 +448,7 @@ public class startingSurvivor extends Actor
             gunFireRateChange.cooldownShootingShotgun = 75; 
             fastFireRateToggle = false; 
         }
-        //speedUp
+        //speedUpToggle
         if(speedUpTimer.millisElapsed() < 3000 &&  speedUpToggle == true)
         {
             Sprint(0);
@@ -411,12 +471,8 @@ public class startingSurvivor extends Actor
         {
             knifeWait = 0; 
         }
-        soundCheck(); 
-    
+        soundCheck();
         worldEffects();
-         
-    
-       
         checkKeys(); //move 
 
     }  

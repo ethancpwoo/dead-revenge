@@ -53,7 +53,7 @@ public class GameWorld extends World
     
     private boolean eDown; 
     private boolean qDown; 
-    private boolean controlDown; 
+    
     
  
     HUDAmmoLabels AmmoCounterMagazine;
@@ -70,7 +70,6 @@ public class GameWorld extends World
     
     //sound effects 
     GreenfootSound powerUpsSwitchSoundEffect = new GreenfootSound("powerup selecting sound.mp3");
-    
     //ammo variables - will add to seperate class later 
     public int MagazineHandgunAmmo = 9; 
     public int TotalHandgunAmmo = 18;
@@ -458,62 +457,6 @@ public class GameWorld extends World
             addObject(AmmoCounterTotalShotgun, 1150, 750); 
             addObject(generalTime, 1000, 100);
         }
-        
-        //powerUps select 
-        if(!controlDown && Greenfoot.isKeyDown("control"))
-        {
-            controlDown = true; 
-            //PistolAmmo
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(pistolAmmo) && kills >= 1)
-            {
-                TotalHandgunAmmo = ammoTotalIndicator() + (70 - ammoTotalIndicator()); 
-                AmmoCounterTotal.setValue(TotalHandgunAmmo);
-                kills = kills - 1; 
-            }
-            //rifleAmmo
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(arAmmo) && kills >= 1)
-            {   
-                if(ammoTotalIndicatorRifle() <= 240)
-                {
-                    TotalRifleAmmo = ammoTotalIndicatorRifle() + 60; 
-                    AmmoCounterTotalRifle.setValue(TotalRifleAmmo);
-                }
-                else
-                {
-                    TotalRifleAmmo = ammoTotalIndicatorRifle() + (300 - ammoTotalIndicatorRifle()); 
-                    AmmoCounterTotalRifle.setValue(TotalRifleAmmo);
-                }
-                
-                kills = kills - 1; 
-            }
-            //shotgunAmmo
-            if(getObjectsAt( 180,530, HUDPowerUps.class).get(0).equals(shotgunAmmo) && kills >= 1)
-            {
-                if(ammoTotalIndicatorShotgun() <= 64)
-                {
-                     TotalShotgunAmmo = ammoTotalIndicatorShotgun() + 16; 
-                    AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
-                }
-                else
-                {
-                    TotalShotgunAmmo = ammoTotalIndicatorShotgun() + (80 - ammoTotalIndicatorShotgun()); 
-                    AmmoCounterTotalShotgun.setValue(TotalShotgunAmmo);
-                }
-                kills = kills - 1; 
-            }
-            //invincibility, healthup and infiniteStamina and fastFireRate 
-            // all in startingSurvivor class             
-        }
-        if(controlDown && !Greenfoot.isKeyDown("control"))
-        {
-            controlDown = false; 
-        }
-        
-        
-        
-        
-        
-        
         
         if(generalTimer.millisElapsed() > 90 && generalTimer.millisElapsed() < 110 && seconds % zombieSpawnInterval == 0)
         {
